@@ -1,0 +1,59 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import locationsData from "../../data/locations.json";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { LocationRecord } from "../../types/location";
+
+const locations = locationsData as LocationRecord[];
+---
+
+<BaseLayout
+  title="Project Zomboid Locations Database"
+  description="Explore Project Zomboid locations including difficulty, survival rating and recommended play styles."
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid Locations Database
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Explore towns, locations and survival opportunities across Project Zomboid.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-semibold text-zsd-orange">All Locations</p>
+        <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Compare survival starting points</h2>
+      </div>
+      <p class="max-w-xl text-sm leading-6 text-zsd-muted">
+        This database helps players compare locations and choose the best survival starting point.
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        locations.map((location) => (
+          <Card
+            title={location.name}
+            description={location.description}
+            href={`/locations/${location.slug}`}
+            label="View Guide"
+            eyebrow="Location Record"
+            badge={location.difficulty}
+            stats={[
+              { label: "Recommended For", value: location.recommendedFor },
+              { label: "Base Rating", value: `${location.baseRating}/5` },
+              { label: "Loot Rating", value: `${location.lootRating}/5` },
+              { label: "Risk Rating", value: `${location.riskRating}/5` },
+            ]}
+          />
+        ))
+      }
+    </div>
+  </PageContainer>
+</BaseLayout>

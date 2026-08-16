@@ -1,0 +1,12 @@
+---
+import PageContainer from "./PageContainer.astro";
+import { siteConfig } from "../config/site";
+---
+
+<footer class="border-t border-zsd-line/80 bg-zsd-black/90">
+  <PageContainer class="flex flex-col gap-4 py-8 text-sm text-zsd-muted md:flex-row md:items-center md:justify-between">
+    <p>{siteConfig.name} is a survival planning database for Project Zomboid players.</p>
+    <p>Built for maps, locations and decision-focused guides.</p>
+  </PageContainer>
+</footer>
+

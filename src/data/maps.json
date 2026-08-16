@@ -1,0 +1,21 @@
+[
+  {
+    "slug": "rosewood",
+    "name": "Rosewood",
+    "tier": "Beginner",
+    "difficulty": "Easy",
+    "recommendedFor": "New Players",
+    "challenge": "Compact town planning with fewer major escape complications than larger urban areas.",
+    "guideLink": "/locations/rosewood"
+  },
+  {
+    "slug": "louisville",
+    "name": "Louisville",
+    "tier": "Hardcore",
+    "difficulty": "Hard",
+    "recommendedFor": "Veteran Players",
+    "challenge": "Dense city survival with higher pressure, longer routes and more demanding exit planning.",
+    "guideLink": "/locations/louisville"
+  }
+]
+

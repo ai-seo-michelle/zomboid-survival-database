@@ -1,0 +1,30 @@
+---
+import { siteConfig } from "../config/site";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<nav aria-label="Primary navigation" class="hidden items-center gap-1 lg:flex">
+  {
+    siteConfig.navItems.map((item) => {
+      const normalizedHref = item.href.replace(/\/$/, "") || "/";
+      const isActive = currentPath === normalizedHref;
+
+      return (
+        <a
+          href={item.href}
+          aria-current={isActive ? "page" : undefined}
+          class:list={[
+            "rounded border px-3 py-2 text-sm transition",
+            isActive
+              ? "border-zsd-green bg-zsd-green/20 text-zsd-green-soft"
+              : "border-transparent text-zsd-muted hover:border-zsd-line hover:bg-zsd-panel hover:text-zsd-ash",
+          ]}
+        >
+          {item.label}
+        </a>
+      );
+    })
+  }
+</nav>
+

@@ -1,0 +1,28 @@
+---
+import Navigation from "./Navigation.astro";
+import PageContainer from "./PageContainer.astro";
+---
+
+<header class="sticky top-0 z-40 border-b border-zsd-line/80 bg-zsd-black/85 backdrop-blur">
+  <PageContainer class="flex min-h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3" aria-label="Zomboid Survival Database home">
+      <span class="grid size-9 place-items-center border border-zsd-green bg-zsd-green/15 text-sm font-bold text-zsd-green-soft">
+        Z
+      </span>
+      <span class="flex flex-col leading-none">
+        <span class="text-sm font-semibold text-zsd-ash">Zomboid Survival</span>
+        <span class="mt-1 text-xs text-zsd-muted">Database</span>
+      </span>
+    </a>
+
+    <Navigation />
+
+    <a
+      href="/maps/interactive-map"
+      class="rounded border border-zsd-orange/70 bg-zsd-orange/10 px-4 py-2 text-sm font-semibold text-zsd-orange transition hover:bg-zsd-orange hover:text-zsd-black"
+    >
+      Explore Map
+    </a>
+  </PageContainer>
+</header>
+

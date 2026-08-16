@@ -1,0 +1,25 @@
+[
+  {
+    "slug": "rosewood-fire-station",
+    "name": "Rosewood Fire Station",
+    "location": "Rosewood",
+    "safety": "High",
+    "resources": "High",
+    "difficulty": "Easy",
+    "recommendedFor": "Beginners",
+    "description": "A practical early base candidate in Rosewood with strong defensive potential and useful emergency-service access nearby.",
+    "guideLink": "/locations/rosewood"
+  },
+  {
+    "slug": "louisville-warehouse-base",
+    "name": "Louisville Warehouse Base",
+    "location": "Louisville",
+    "safety": "Medium",
+    "resources": "High",
+    "difficulty": "Hard",
+    "recommendedFor": "Veteran Players",
+    "description": "A representative Louisville base option for players who want access to city resources while managing heavy surrounding pressure.",
+    "guideLink": "/locations/louisville"
+  }
+]
+

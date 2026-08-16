@@ -1,0 +1,144 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import locationsData from "../../data/locations.json";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { LocationRecord } from "../../types/location";
+
+type LocationStat =
+  | {
+      label: string;
+      value: string;
+      type: "text";
+    }
+  | {
+      label: string;
+      value: number;
+      type: "rating";
+    };
+
+export function getStaticPaths() {
+  const locations = locationsData as LocationRecord[];
+
+  return locations.map((location) => ({
+    params: { slug: location.slug },
+    props: { location },
+  }));
+}
+
+const { location } = Astro.props as { location: LocationRecord };
+
+const pageTitle = `${location.name} Map Guide`;
+const pageDescription = `Explore ${location.name} in Project Zomboid including difficulty, base potential and survival tips.`;
+
+const stats: LocationStat[] = [
+  { label: "Difficulty", value: location.difficulty, type: "text" },
+  { label: "Base Rating", value: location.baseRating, type: "rating" },
+  { label: "Loot Rating", value: location.lootRating, type: "rating" },
+  { label: "Risk Rating", value: location.riskRating, type: "rating" },
+];
+
+const ratingLevelClass = (level: number, rating: number) =>
+  level <= rating ? "bg-zsd-orange" : "bg-zsd-black/60";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_320px] lg:items-end">
+        <div>
+          <h1 class="text-4xl font-bold text-zsd-ash sm:text-5xl">{location.name}</h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            {pageDescription}
+          </p>
+        </div>
+        <div class="grid gap-3 border border-zsd-line bg-zsd-panel/80 p-5">
+          <div>
+            <p class="text-xs font-semibold uppercase text-zsd-muted">Difficulty</p>
+            <p class="mt-1 text-lg font-semibold text-zsd-green-soft">{location.difficulty}</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase text-zsd-muted">Recommended Player</p>
+            <p class="mt-1 text-lg font-semibold text-zsd-ash">{location.recommendedFor}</p>
+          </div>
+        </div>
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Survival profile
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">{location.description}</p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="key-locations-title">
+          <p class="text-sm font-semibold text-zsd-orange">Key Locations</p>
+          <h2 id="key-locations-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Places to evaluate
+          </h2>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            {
+              location.keyLocations.map((keyLocation) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4">
+                  <p class="text-sm font-semibold text-zsd-ash">{keyLocation}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="border border-zsd-line bg-zsd-panel/80 p-5" aria-labelledby="stats-title">
+        <p class="text-sm font-semibold text-zsd-orange">Location Stats</p>
+        <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+        <dl class="mt-5 grid gap-5">
+          {
+            stats.map((stat) => (
+              <div>
+                <dt class="text-xs font-semibold uppercase text-zsd-muted">{stat.label}</dt>
+                <dd class="mt-2">
+                  {stat.type === "rating" && typeof stat.value === "number" ? (
+                    <div class="flex items-center gap-2">
+                      <span class="text-lg font-semibold text-zsd-ash">{stat.value}/5</span>
+                      <span class="flex gap-1" aria-hidden="true">
+                        {[1, 2, 3, 4, 5].map((level) => (
+                          <span
+                            class:list={[
+                              "block h-2 w-6 border border-zsd-line",
+                              ratingLevelClass(level, stat.value),
+                            ]}
+                          />
+                        ))}
+                      </span>
+                    </div>
+                  ) : (
+                    <span class="text-lg font-semibold text-zsd-green-soft">{stat.value}</span>
+                  )}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {location.relatedGuides.map((guide) => <Card title={guide.title} href={guide.href} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

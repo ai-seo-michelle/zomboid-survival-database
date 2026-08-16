@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageContainer from "../components/PageContainer.astro";
+
+type HomeModule =
+  | {
+      kind: "single";
+      title: string;
+      description: string;
+      href: string;
+      label: string;
+    }
+  | {
+      kind: "group";
+      title: string;
+      description: string;
+      links: { label: string; href: string }[];
+    };
+
+const modules: HomeModule[] = [
+  {
+    kind: "single",
+    title: "Interactive Map",
+    description: "Find Project Zomboid locations, resources and survival routes.",
+    href: "/maps/interactive-map",
+    label: "Open map hub",
+  },
+  {
+    kind: "single",
+    title: "Map Difficulty Ranking",
+    description: "Compare locations by difficulty and choose your next survival challenge.",
+    href: "/maps/difficulty-ranking",
+    label: "Compare maps",
+  },
+  {
+    kind: "group",
+    title: "Popular Locations",
+    description: "Start with two high-interest location guides built for quick survival planning.",
+    links: [
+      { label: "Rosewood", href: "/locations/rosewood" },
+      { label: "Louisville", href: "/locations/louisville" },
+    ],
+  },
+  {
+    kind: "group",
+    title: "Survival Guides",
+    description: "Use practical guide pages for base decisions and Build 42 planning.",
+    links: [
+      { label: "Best Base Locations", href: "/survival/best-base-locations" },
+      { label: "Build 42 Guide", href: "/build-42" },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Zomboid Survival Database"
+  description="A Project Zomboid survival database for maps, location choices and practical survival planning."
+>
+  <section class="relative isolate overflow-hidden border-b border-zsd-line">
+    <div
+      class="absolute inset-0 -z-10 bg-cover bg-center opacity-55"
+      style="background-image: linear-gradient(90deg, rgba(7, 10, 8, 0.96), rgba(7, 10, 8, 0.72) 46%, rgba(7, 10, 8, 0.92)), url('/og-image.png');"
+    ></div>
+    <PageContainer class="py-20 sm:py-24 lg:py-28">
+      <div class="max-w-3xl">
+        <p class="mb-4 inline-flex border border-zsd-green bg-zsd-green/15 px-3 py-1 text-sm font-semibold text-zsd-green-soft">
+          Project Zomboid survival planning
+        </p>
+        <h1 class="text-4xl font-bold leading-tight text-zsd-ash sm:text-6xl">
+          Zomboid Survival Database
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-zsd-muted">
+          Maps, locations and survival guides for Project Zomboid players.
+        </p>
+        <p class="mt-4 max-w-2xl text-sm leading-6 text-zsd-muted">
+          A tool-focused survival database for choosing where to spawn, where to build and how to plan
+          the next run.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="/maps/interactive-map"
+            class="inline-flex justify-center rounded border border-zsd-orange bg-zsd-orange px-5 py-3 text-sm font-bold text-zsd-black transition hover:bg-zsd-orange/90"
+          >
+            Explore Map
+          </a>
+          <a
+            href="/maps/difficulty-ranking"
+            class="inline-flex justify-center rounded border border-zsd-line bg-zsd-panel/80 px-5 py-3 text-sm font-semibold text-zsd-ash transition hover:border-zsd-green"
+          >
+            View Difficulty Ranking
+          </a>
+        </div>
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-semibold text-zsd-orange">Core Modules</p>
+        <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Choose the right survival path</h2>
+      </div>
+      <p class="max-w-xl text-sm leading-6 text-zsd-muted">
+        Not a wiki and not a blog archive. This site is organized around the decisions Project Zomboid
+        players make before and during a run.
+      </p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        modules.map((module) => (
+          <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+            <p class="mb-3 text-xs font-semibold uppercase text-zsd-orange">Database Module</p>
+            <h2 class="text-xl font-semibold text-zsd-ash">{module.title}</h2>
+            <p class="mt-3 text-sm leading-6 text-zsd-muted">{module.description}</p>
+
+            {module.kind === "single" ? (
+              <a
+                href={module.href}
+                class="mt-5 inline-flex text-sm font-semibold text-zsd-green-soft hover:text-zsd-orange"
+              >
+                {module.label}
+                <span aria-hidden="true" class="ml-2">-&gt;</span>
+              </a>
+            ) : (
+              <div class="mt-5 flex flex-wrap gap-2">
+                {module.links.map((link) => (
+                  <a
+                    href={link.href}
+                    class="border border-zsd-line bg-zsd-black/45 px-3 py-2 text-sm font-semibold text-zsd-green-soft transition hover:border-zsd-green hover:text-zsd-orange"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </PageContainer>
+</BaseLayout>

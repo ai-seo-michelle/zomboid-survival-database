@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import PageContainer from "../components/PageContainer.astro";
+
+const majorChanges = [
+  {
+    title: "New Features",
+    description: "Track the systems and additions that change how players prepare, explore and survive.",
+  },
+  {
+    title: "Gameplay Changes",
+    description: "Review update areas that may affect combat pressure, route planning and daily survival choices.",
+  },
+  {
+    title: "Survival Changes",
+    description: "Follow changes connected to resources, long-term planning and base management.",
+  },
+];
+
+const relatedDatabase = [
+  {
+    title: "Interactive Map",
+    description: "Use the map entry hub to plan future routes and location research.",
+    href: "/maps/interactive-map",
+  },
+  {
+    title: "Location Database",
+    description: "Compare Project Zomboid towns and locations from one database entry point.",
+    href: "/locations",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Review base candidates by safety, resources and recommended play style.",
+    href: "/survival/best-base-locations",
+  },
+];
+---
+
+<BaseLayout
+  title="Project Zomboid Build 42 Guide"
+  description="Explore Project Zomboid Build 42 changes, features, map updates and survival information."
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Build 42</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid Build 42 Guide
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Explore the latest changes, features and survival updates.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="what-is-build-42">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">What is Build 42?</p>
+        <h2 id="what-is-build-42" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          A major update path for survival planning
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          Build 42 is a major Project Zomboid update line that affects how players evaluate maps,
+          survival systems and long-term planning. This page acts as a stable entry point for Build 42
+          topics without becoming a news feed.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="major-changes">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Major Changes</p>
+        <h2 id="major-changes" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Update areas to watch
+        </h2>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-3">
+        {majorChanges.map((change) => <Card {...change} eyebrow="Build 42 Module" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="map-changes">
+      <div class="grid gap-6 border border-zsd-line bg-zsd-panel/80 p-6 lg:grid-cols-[1fr_320px] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Map Changes</p>
+          <h2 id="map-changes" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Map updates belong in the database
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Build 42 map-related updates can affect travel routes, base decisions and location value.
+            Zomboid Survival Database will connect those changes back to map rankings, location pages
+            and base planning instead of publishing scattered notes.
+          </p>
+        </div>
+        <div class="grid gap-3 text-sm">
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Route planning impact</div>
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Location value changes</div>
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Base selection context</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-database">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Database</p>
+        <h2 id="related-database" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survival research
+        </h2>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-3">
+        {relatedDatabase.map((page) => <Card {...page} label="Open database" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

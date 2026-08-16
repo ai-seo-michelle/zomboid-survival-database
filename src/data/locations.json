@@ -1,0 +1,60 @@
+[
+  {
+    "slug": "rosewood",
+    "name": "Rosewood",
+    "difficulty": "Easy",
+    "recommendedFor": "Beginners",
+    "baseRating": 5,
+    "lootRating": 4,
+    "riskRating": 2,
+    "description": "Rosewood is a compact starting town with clear roads, manageable early pressure and practical base options. It is a strong location for players who want to learn survival planning without starting in a dense city.",
+    "keyLocations": [
+      "Rosewood Fire Department",
+      "Rosewood Police Station",
+      "Residential neighborhoods"
+    ],
+    "relatedGuides": [
+      {
+        "title": "Interactive Map",
+        "href": "/maps/interactive-map"
+      },
+      {
+        "title": "Map Difficulty Ranking",
+        "href": "/maps/difficulty-ranking"
+      },
+      {
+        "title": "Best Base Locations",
+        "href": "/survival/best-base-locations"
+      }
+    ]
+  },
+  {
+    "slug": "louisville",
+    "name": "Louisville",
+    "difficulty": "Hard",
+    "recommendedFor": "Experienced Players",
+    "baseRating": 4,
+    "lootRating": 5,
+    "riskRating": 5,
+    "description": "Louisville is the largest urban area in Project Zomboid, with strong loot potential and much higher survival pressure. It fits players who already understand route planning, noise control and emergency escapes.",
+    "keyLocations": [
+      "Downtown commercial blocks",
+      "Grand Ohio Mall area",
+      "Outer access roads"
+    ],
+    "relatedGuides": [
+      {
+        "title": "Interactive Map",
+        "href": "/maps/interactive-map"
+      },
+      {
+        "title": "Map Difficulty Ranking",
+        "href": "/maps/difficulty-ranking"
+      },
+      {
+        "title": "Best Base Locations",
+        "href": "/survival/best-base-locations"
+      }
+    ]
+  }
+]

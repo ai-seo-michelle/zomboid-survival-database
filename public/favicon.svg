@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Zomboid Survival Database">
+  <rect width="64" height="64" rx="12" fill="#070a08"/>
+  <path d="M8 17h48M8 32h48M8 47h48M17 8v48M32 8v48M47 8v48" stroke="#617947" stroke-width="1" opacity=".32"/>
+  <circle cx="32" cy="32" r="22" fill="#101510" stroke="#9db277" stroke-width="2"/>
+  <circle cx="32" cy="32" r="15" fill="none" stroke="#2b3528" stroke-width="2"/>
+  <path d="M32 12l5 20-5 20-5-20 5-20z" fill="#f59e0b"/>
+  <path d="M32 12l5 20h-10l5-20z" fill="#9db277"/>
+  <circle cx="32" cy="32" r="4" fill="#070a08" stroke="#f59e0b" stroke-width="2"/>
+  <text x="32" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#d4d8cb">ZSDB</text>
+</svg>
