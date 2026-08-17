@@ -32,6 +32,15 @@ const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
     <meta name="google-site-verification" content="YZ6U3gdo8fse3QzQC7nQmCFdFnBwEyLht_GT8u39s4U" />
     <meta name="theme-color" content="#070a08" />
     <link rel="canonical" href={canonicalUrl} />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DLSMF8Q3HK"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-DLSMF8Q3HK");
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
