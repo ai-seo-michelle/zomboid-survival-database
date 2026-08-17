@@ -1,0 +1,53 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  href?: string;
+  label?: string;
+  meta?: {
+    label: string;
+    value: string | number;
+  }[];
+  badge?: string;
+}
+
+const { title, description, href, label = "View Guide", meta = [], badge } = Astro.props;
+const Tag = href ? "a" : "article";
+const attrs = href ? { href } : {};
+---
+
+<Tag
+  {...attrs}
+  class="group block h-full border border-zsd-line bg-zsd-panel/80 p-5 transition hover:border-zsd-green hover:bg-zsd-panel"
+>
+  <div class="flex h-full flex-col gap-4">
+    <div class="flex items-start justify-between gap-4">
+      <h3 class="text-xl font-semibold text-zsd-ash">{title}</h3>
+      {badge && (
+        <span class="shrink-0 border border-zsd-green bg-zsd-green/15 px-2 py-1 text-xs font-semibold text-zsd-green-soft">
+          {badge}
+        </span>
+      )}
+    </div>
+    <p class="text-sm leading-6 text-zsd-muted">{description}</p>
+    {
+      meta.length > 0 && (
+        <dl class="grid gap-3 sm:grid-cols-2">
+          {meta.map((item) => (
+            <div class="border border-zsd-line/80 bg-zsd-black/35 p-3">
+              <dt class="text-xs font-semibold uppercase text-zsd-muted">{item.label}</dt>
+              <dd class="mt-1 text-sm font-semibold text-zsd-ash">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+    {href && (
+      <span class="mt-auto inline-flex text-sm font-semibold text-zsd-green-soft group-hover:text-zsd-orange">
+        {label}
+        <span aria-hidden="true" class="ml-2">-&gt;</span>
+      </span>
+    )}
+  </div>
+</Tag>
+

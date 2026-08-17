@@ -1,0 +1,48 @@
+---
+export interface Props {
+  columns: {
+    key: string;
+    label: string;
+  }[];
+  rows: {
+    title: string;
+    href?: string;
+    values: Record<string, string | number>;
+  }[];
+  titleLabel?: string;
+}
+
+const { columns, rows, titleLabel = "Name" } = Astro.props;
+---
+
+<div class="overflow-hidden border border-zsd-line bg-zsd-panel/80">
+  <div class="overflow-x-auto">
+    <table class="w-full min-w-[760px] text-left text-sm">
+      <thead class="border-b border-zsd-line bg-zsd-charcoal text-zsd-green-soft">
+        <tr>
+          <th class="px-4 py-3 font-semibold">{titleLabel}</th>
+          {columns.map((column) => <th class="px-4 py-3 font-semibold">{column.label}</th>)}
+          <th class="px-4 py-3 font-semibold">Guide</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-zsd-line/80">
+        {
+          rows.map((row) => (
+            <tr class="text-zsd-muted">
+              <td class="px-4 py-4 font-semibold text-zsd-ash">{row.title}</td>
+              {columns.map((column) => <td class="px-4 py-4">{row.values[column.key]}</td>)}
+              <td class="px-4 py-4">
+                {row.href && (
+                  <a href={row.href} class="font-semibold text-zsd-green-soft hover:text-zsd-orange">
+                    View Guide
+                  </a>
+                )}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,11 +1,8 @@
 ---
 import Card from "../../components/Card.astro";
 import PageContainer from "../../components/PageContainer.astro";
-import locationsData from "../../data/locations.json";
+import { locations } from "../../data/locations";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import type { LocationRecord } from "../../types/location";
-
-const locations = locationsData as LocationRecord[];
 ---
 
 <BaseLayout

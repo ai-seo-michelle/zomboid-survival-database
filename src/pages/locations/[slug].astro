@@ -1,25 +1,13 @@
 ---
 import Card from "../../components/Card.astro";
+import LocationCard from "../../components/LocationCard.astro";
 import PageContainer from "../../components/PageContainer.astro";
-import locationsData from "../../data/locations.json";
+import StatsTable from "../../components/StatsTable.astro";
+import { locations } from "../../data/locations";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { LocationRecord } from "../../types/location";
 
-type LocationStat =
-  | {
-      label: string;
-      value: string;
-      type: "text";
-    }
-  | {
-      label: string;
-      value: number;
-      type: "rating";
-    };
-
 export function getStaticPaths() {
-  const locations = locationsData as LocationRecord[];
-
   return locations.map((location) => ({
     params: { slug: location.slug },
     props: { location },
@@ -28,41 +16,38 @@ export function getStaticPaths() {
 
 const { location } = Astro.props as { location: LocationRecord };
 
-const pageTitle = `${location.name} Map Guide`;
-const pageDescription = `Explore ${location.name} in Project Zomboid including difficulty, base potential and survival tips.`;
-
-const stats: LocationStat[] = [
-  { label: "Difficulty", value: location.difficulty, type: "text" },
-  { label: "Base Rating", value: location.baseRating, type: "rating" },
-  { label: "Loot Rating", value: location.lootRating, type: "rating" },
-  { label: "Risk Rating", value: location.riskRating, type: "rating" },
+const stats = [
+  { label: "Difficulty", value: location.difficulty },
+  { label: "Recommended For", value: location.recommendedFor },
+  { label: "Security", value: location.security },
+  { label: "Resources", value: location.resources },
+  { label: "Base Rating", value: `${location.baseRating}/5` },
+  { label: "Loot Rating", value: `${location.lootRating}/5` },
+  { label: "Risk Rating", value: `${location.riskRating}/5` },
 ];
-
-const ratingLevelClass = (level: number, rating: number) =>
-  level <= rating ? "bg-zsd-orange" : "bg-zsd-black/60";
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
+<BaseLayout title={location.seo.title} description={location.seo.description}>
   <section class="border-b border-zsd-line bg-zsd-black/45">
     <PageContainer class="py-12 sm:py-16">
       <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
-      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_320px] lg:items-end">
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_340px] lg:items-end">
         <div>
-          <h1 class="text-4xl font-bold text-zsd-ash sm:text-5xl">{location.name}</h1>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            {location.seo.title}
+          </h1>
           <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
-            {pageDescription}
+            {location.description}
           </p>
         </div>
-        <div class="grid gap-3 border border-zsd-line bg-zsd-panel/80 p-5">
-          <div>
-            <p class="text-xs font-semibold uppercase text-zsd-muted">Difficulty</p>
-            <p class="mt-1 text-lg font-semibold text-zsd-green-soft">{location.difficulty}</p>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase text-zsd-muted">Recommended Player</p>
-            <p class="mt-1 text-lg font-semibold text-zsd-ash">{location.recommendedFor}</p>
-          </div>
-        </div>
+        <StatsTable
+          rows={[
+            { label: "Difficulty", value: location.difficulty },
+            { label: "Recommended Player", value: location.recommendedFor },
+            { label: "Security", value: location.security },
+            { label: "Resources", value: location.resources },
+          ]}
+        />
       </div>
     </PageContainer>
   </section>
@@ -70,20 +55,84 @@ const ratingLevelClass = (level: number, rating: number) =>
   <PageContainer as="section" class="py-12 sm:py-16">
     <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
       <div>
-        <section aria-labelledby="overview-title">
-          <p class="text-sm font-semibold text-zsd-orange">Overview</p>
-          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Survival profile
+        <section aria-labelledby="rosewood-overview">
+          <p class="text-sm font-semibold text-zsd-orange">{location.name} Overview</p>
+          <h2 id="rosewood-overview" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why this location works
           </h2>
-          <p class="mt-4 text-base leading-7 text-zsd-muted">{location.description}</p>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">{location.overview}</p>
         </section>
 
-        <section class="mt-10" aria-labelledby="key-locations-title">
-          <p class="text-sm font-semibold text-zsd-orange">Key Locations</p>
-          <h2 id="key-locations-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Places to evaluate
+        <section class="mt-10" aria-labelledby="best-base-spots">
+          <p class="text-sm font-semibold text-zsd-orange">Best Base Spots</p>
+          <h2 id="best-base-spots" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Base candidates in {location.name}
           </h2>
-          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          <div class="mt-5 grid gap-4">
+            {
+              location.bestBases.map((base, index) => (
+                <LocationCard
+                  title={base.name}
+                  description={base.description}
+                  badge={`#${index + 1}`}
+                  meta={[
+                    { label: "Safety", value: base.safety },
+                    { label: "Resources", value: base.resources },
+                    { label: "Difficulty", value: base.difficulty },
+                    { label: "Recommended", value: base.recommendedFor },
+                  ]}
+                />
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="loot-resources">
+          <p class="text-sm font-semibold text-zsd-orange">Loot & Resources</p>
+          <h2 id="loot-resources" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Resource planning notes
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              location.lootAndResources.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="survival-strategy">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="survival-strategy" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How to approach {location.name}
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              location.survivalStrategy.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="location-stats">
+          <p class="text-sm font-semibold text-zsd-orange">Location Stats</p>
+          <h2 id="location-stats" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={stats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="key-locations">
+          <p class="text-sm font-semibold text-zsd-orange">Key Locations</p>
+          <h2 id="key-locations" class="mt-2 text-xl font-semibold text-zsd-ash">Places to check</h2>
+          <div class="mt-4 grid gap-3">
             {
               location.keyLocations.map((keyLocation) => (
                 <div class="border border-zsd-line bg-zsd-panel/80 p-4">
@@ -93,41 +142,27 @@ const ratingLevelClass = (level: number, rating: number) =>
             }
           </div>
         </section>
-      </div>
-
-      <aside class="border border-zsd-line bg-zsd-panel/80 p-5" aria-labelledby="stats-title">
-        <p class="text-sm font-semibold text-zsd-orange">Location Stats</p>
-        <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
-        <dl class="mt-5 grid gap-5">
-          {
-            stats.map((stat) => (
-              <div>
-                <dt class="text-xs font-semibold uppercase text-zsd-muted">{stat.label}</dt>
-                <dd class="mt-2">
-                  {stat.type === "rating" && typeof stat.value === "number" ? (
-                    <div class="flex items-center gap-2">
-                      <span class="text-lg font-semibold text-zsd-ash">{stat.value}/5</span>
-                      <span class="flex gap-1" aria-hidden="true">
-                        {[1, 2, 3, 4, 5].map((level) => (
-                          <span
-                            class:list={[
-                              "block h-2 w-6 border border-zsd-line",
-                              ratingLevelClass(level, stat.value),
-                            ]}
-                          />
-                        ))}
-                      </span>
-                    </div>
-                  ) : (
-                    <span class="text-lg font-semibold text-zsd-green-soft">{stat.value}</span>
-                  )}
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
       </aside>
     </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons" class="mt-2 text-2xl font-semibold text-zsd-ash">Why choose {location.name}</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {location.pros.map((pro) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{pro}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {location.cons.map((con) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{con}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <section class="mt-12" aria-labelledby="related-guides-title">
       <div class="mb-6">
@@ -137,7 +172,11 @@ const ratingLevelClass = (level: number, rating: number) =>
         </h2>
       </div>
       <div class="grid gap-4 md:grid-cols-3">
-        {location.relatedGuides.map((guide) => <Card title={guide.title} href={guide.href} label="Open guide" />)}
+        {
+          location.relatedGuides.map((guide) => (
+            <Card title={guide.title} description={guide.description} href={guide.href} label="Open guide" />
+          ))
+        }
       </div>
     </section>
   </PageContainer>

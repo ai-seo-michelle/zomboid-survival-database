@@ -1,0 +1,22 @@
+---
+export interface Props {
+  rows: {
+    label: string;
+    value: string | number;
+  }[];
+}
+
+const { rows } = Astro.props;
+---
+
+<dl class="grid gap-3 border border-zsd-line bg-zsd-panel/80 p-5 sm:grid-cols-2">
+  {
+    rows.map((row) => (
+      <div class="border border-zsd-line/80 bg-zsd-black/35 p-4">
+        <dt class="text-xs font-semibold uppercase text-zsd-muted">{row.label}</dt>
+        <dd class="mt-2 text-lg font-semibold text-zsd-ash">{row.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+

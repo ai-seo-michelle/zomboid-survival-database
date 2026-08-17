@@ -1,0 +1,197 @@
+---
+import Card from "../../components/Card.astro";
+import LocationCard from "../../components/LocationCard.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import { baseLocationRankings, locations } from "../../data/locations";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const rankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "location", label: "Location" },
+  { key: "safety", label: "Safety" },
+  { key: "resources", label: "Resources" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "recommendedFor", label: "Recommended For" },
+];
+
+const rankingRows = baseLocationRankings.map((base) => ({
+  title: base.name,
+  href: base.guideLink,
+  values: {
+    rank: `#${base.rank}`,
+    location: base.location,
+    safety: base.safety,
+    resources: base.resources,
+    difficulty: base.difficulty,
+    recommendedFor: base.recommendedFor,
+  },
+}));
+
+const criteria = [
+  { label: "Security", value: "How easy the base is to defend and control" },
+  { label: "Resources", value: "Nearby loot, tools, food and route value" },
+  { label: "Difficulty", value: "How forgiving the location is for the target player" },
+  { label: "Expansion", value: "Whether the base can support longer survival plans" },
+];
+
+const faqs = [
+  {
+    question: "What is the best beginner base in Project Zomboid?",
+    answer:
+      "For a first serious run, Rosewood Fire Station is a strong candidate because it combines a readable town layout with practical base utility.",
+  },
+  {
+    question: "Is this page a full wiki list?",
+    answer:
+      "No. This page is a database-style ranking focused on survival decisions, not a complete encyclopedia of every building.",
+  },
+  {
+    question: "Will Build 42 change base rankings?",
+    answer:
+      "Build 42 can affect survival planning over time, so this ranking is structured as data that can be updated without rebuilding the page design.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Rosewood Base Guide",
+    description: "Review Rosewood stats, base spots, loot notes and survival strategy.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Location Database",
+    description: "Browse all tracked Project Zomboid locations.",
+    href: "/locations",
+  },
+  {
+    title: "Interactive Map",
+    description: "Use the map hub for future route planning and location filters.",
+    href: "/maps/interactive-map",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Base Locations in Project Zomboid (Build 42)"
+  description="Compare the best base locations in Project Zomboid Build 42 by safety, resources, difficulty and recommended play style."
+  ogType="article"
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Base Location Database</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Base Locations in Project Zomboid (Build 42)
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        A database-style guide for choosing base locations by security, resources, difficulty and long-term
+        survival value.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Choose a base like a survival system
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The best base is not only the safest building. It also needs reliable routes, recoverable loot,
+          manageable zombie pressure and enough room to support the next stage of the run.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-table-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Base Location Ranking Table</p>
+        <h2 id="ranking-table-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked base candidates
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Base Location" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="location-cards-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Location Cards</p>
+        <h2 id="location-cards-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Database records
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        {
+          baseLocationRankings.map((base) => (
+            <LocationCard
+              title={base.name}
+              description={base.description}
+              href={base.guideLink}
+              label="View Location Guide"
+              badge={`#${base.rank}`}
+              meta={[
+                { label: "Rank", value: `#${base.rank}` },
+                { label: "Location", value: base.location },
+                { label: "Safety", value: base.safety },
+                { label: "Resources", value: base.resources },
+                { label: "Difficulty", value: base.difficulty },
+              ]}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="criteria-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Ranking Criteria</p>
+          <h2 id="criteria-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How bases are compared
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Rankings are meant to support decisions, not replace player judgment. A base can be strong for
+            beginners, long-term survival, fast looting or high-risk city play.
+          </p>
+        </div>
+        <StatsTable rows={criteria} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Base planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+          <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Continue the base route
+          </h2>
+        </div>
+        <p class="max-w-xl text-sm leading-6 text-zsd-muted">
+          Current dataset includes {locations.length} location records and {baseLocationRankings.length} base candidates.
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>
