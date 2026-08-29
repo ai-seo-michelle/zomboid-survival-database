@@ -10,6 +10,6 @@ export const siteConfig = {
     { label: "Difficulty Ranking", href: "/maps/difficulty-ranking" },
     { label: "Locations", href: "/locations" },
     { label: "Survival Guides", href: "/guides/best-base-locations/" },
-    { label: "Build 42", href: "/build-42" },
+    { label: "Build 42", href: "/build-42/" },
   ],
 };
