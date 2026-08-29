@@ -92,7 +92,7 @@ const stats = [
         {
           location.build42Notes && location.build42Notes.length > 0 && (
             <section class="mt-10" aria-labelledby="build-42-notes">
-              <p class="text-sm font-semibold text-zsd-orange">Build 42 Rosewood Notes</p>
+              <p class="text-sm font-semibold text-zsd-orange">Build 42 {location.name} Notes</p>
               <h2 id="build-42-notes" class="mt-2 text-2xl font-semibold text-zsd-ash">
                 Use current-build planning without assuming exact map details
               </h2>
@@ -126,11 +126,11 @@ const stats = [
             <section class="mt-10" aria-labelledby="points-of-interest">
               <p class="text-sm font-semibold text-zsd-orange">Key Areas / POIs</p>
               <h2 id="points-of-interest" class="mt-2 text-2xl font-semibold text-zsd-ash">
-                Start with the major Rosewood decision points
+                Start with the major {location.name} decision points
               </h2>
               <div class="mt-5 grid gap-4 md:grid-cols-2">
                 {location.pointsOfInterest.map((poi) => (
-                  <Card title={poi.title} description={poi.description} href={poi.href} label="Open guide" />
+                  <Card title={poi.title} description={poi.description} href={poi.href} label={poi.label ?? "Open guide"} />
                 ))}
               </div>
             </section>
@@ -213,7 +213,7 @@ const stats = [
             <section class="mt-10" aria-labelledby="beginner-suitability">
               <p class="text-sm font-semibold text-zsd-orange">Beginner Suitability</p>
               <h2 id="beginner-suitability" class="mt-2 text-2xl font-semibold text-zsd-ash">
-                Why Rosewood remains a readable first map
+                Why {location.name} remains a readable first map
               </h2>
               <div class="mt-5 grid gap-3">
                 {location.beginnerSuitability.map((note) => (

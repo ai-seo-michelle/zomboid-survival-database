@@ -206,10 +206,43 @@ export const locations: LocationRecord[] = [
     lootRating: 3,
     riskRating: 2,
     description:
-      "Riverside is a calmer town option with useful early routes and steady long-term survival potential.",
+      "Use this Project Zomboid Riverside map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+    introduction:
+      "Riverside is the calmer town-level hub for players who want a slower Project Zomboid route plan. This page focuses on map-level decisions: how to use residential areas, commercial routes, river access roads and base options without turning Riverside into a single-purpose base or loot page.",
     overview:
-      "Riverside works well for players who want a slower start, safer movement and a town layout that supports cautious looting. It is less intense than Louisville and gives players time to build reliable habits.",
-    keyLocations: ["Residential areas", "Commercial strip", "River access roads"],
+      "Riverside is a calmer Project Zomboid town option with useful early routes and steady long-term survival potential.",
+    mapOverview:
+      "The Riverside map is best understood as a cautious survival area. Its value comes from slower route expansion, readable town movement and the ability to build repeatable supply loops before committing to longer travel.",
+    build42Notes: [
+      "Use Riverside as a current-build planning area in Build 42. Exact route pressure and building details should be checked in your own save instead of assumed from older habits.",
+      "Build 42 planning makes town comparison more important, so Riverside should be evaluated against Rosewood, Muldraugh, West Point and Louisville before choosing a route.",
+      "This is not a full interactive Riverside map. It is a static planning hub for routes, key areas, base choices and loot decisions.",
+    ],
+    keyLocations: [
+      "Residential neighborhoods",
+      "Commercial routes",
+      "River access roads",
+      "Edge roads and vehicle routes",
+    ],
+    keyLocationsLabel: "Key Areas / POIs",
+    keyLocationsHeading: "Riverside areas to compare",
+    pointsOfInterest: [
+      {
+        title: "Residential Neighborhoods",
+        description:
+          "Use residential areas for safer early supplies, storage decisions and slower expansion when the run needs stability.",
+      },
+      {
+        title: "Commercial Routes",
+        description:
+          "Treat commercial buildings as planned stops inside a route, not as a reason to overextend before the return path is clear.",
+      },
+      {
+        title: "River Access Roads",
+        description:
+          "Use Riverside's access roads as planning references for vehicle movement, exits and longer travel later in the run.",
+      },
+    ],
     bestBases: [
       {
         rank: 5,
@@ -219,47 +252,108 @@ export const locations: LocationRecord[] = [
         difficulty: "Easy",
         recommendedFor: "Beginners",
         description:
-          "A simple base style built around quieter houses and repeatable local supply runs.",
+          "A stable base style built around quieter housing, repeatable local supply runs and controlled route growth.",
       },
     ],
+    basePlanning: [
+      "Riverside base planning should start with route stability. A quieter building is useful only if food, tools and exits can be reached without long risky trips.",
+      "Residential-style bases fit Riverside well because the town supports slower recovery loops and cautious expansion.",
+    ],
     lootAndResources: [
-      "Residential routes can support steady early supplies.",
-      "Commercial buildings provide useful targets without full city pressure.",
-      "Road access helps with cautious movement and vehicle recovery.",
+      "Residential routes can support steady early food, containers and basic household supplies.",
+      "Commercial routes provide useful loot targets without forcing the same pressure as larger city areas.",
+      "Riverside loot planning works best when each stop is connected to a safe return path and a manageable carry load.",
+    ],
+    routePlanning: [
+      "Plan Riverside around calm, repeatable loops instead of one long sweep across town.",
+      "Use road access to keep vehicle recovery and future travel options open before pushing into harder areas.",
+      "Treat Riverside as a staging town when the run needs time to organize supplies before longer map movement.",
+    ],
+    beginnerSuitability: [
+      "Riverside is beginner-friendly because it gives players more room to slow down and recover between supply runs.",
+      "New players can use Riverside to practice route discipline, storage habits and vehicle planning without starting in a dense urban zone.",
+      "The main drawback is lower immediate pressure can hide weak planning habits, so every route still needs an exit and a return point.",
     ],
     survivalStrategy: [
       "Use the calmer town pace to establish storage and routine supply routes.",
       "Avoid overextending before a vehicle route is secured.",
       "Treat Riverside as a stable base area before longer travel.",
     ],
-    pros: ["Calmer early-game pressure", "Readable town layout", "Good for cautious survival"],
-    cons: ["Less high-value loot density", "Can require travel for advanced supplies"],
+    pros: [
+      "Calmer early-game pressure",
+      "Readable town layout for cautious players",
+      "Good for learning repeatable routes",
+      "Useful residential base planning",
+    ],
+    cons: [
+      "Less high-value loot density than harder areas",
+      "Can require travel for advanced supplies",
+      "Slower pace may delay broader map progression",
+    ],
+    faqs: [
+      {
+        question: "Is Riverside a good map for beginners in Project Zomboid?",
+        answer:
+          "Yes. Riverside is a good beginner-friendly map area because it supports slower routes, calmer movement and steady supply planning.",
+      },
+      {
+        question: "Is this a full interactive Riverside map?",
+        answer:
+          "No. This is a static Riverside map planning guide for routes, key areas, base options and loot decisions. It does not provide a full interactive map tool.",
+      },
+      {
+        question: "Is Riverside good for base building?",
+        answer:
+          "Riverside can be good for base planning, especially when you want safer residential routes and time to organize supplies before wider travel.",
+      },
+      {
+        question: "Where should I loot first in Riverside?",
+        answer:
+          "Start with nearby residential supplies, then move into commercial routes only when the return path and carry load are manageable.",
+      },
+      {
+        question: "How should I use Riverside in Build 42?",
+        answer:
+          "Use Riverside as a current-build planning town: check routes in your save, avoid assuming exact layouts and compare it with other towns before committing to long travel.",
+      },
+    ],
     relatedGuides: [
-      {
-        title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
-        description: "Compare Riverside with other base candidates.",
-      },
-      {
-        title: "Interactive Map",
-        href: "/maps/interactive-map",
-        description: "Use the map hub for future route planning.",
-      },
       {
         title: "Build 42 Map Guide",
         href: "/guides/project-zomboid-map/",
         description: "Compare Riverside with other Build 42 map planning areas.",
       },
       {
+        title: "Best Base Locations",
+        href: "/guides/best-base-locations/",
+        description: "Compare Riverside base options with safer and harder base candidates.",
+      },
+      {
+        title: "Best Loot Locations",
+        href: "/guides/best-loot-locations/",
+        description: "Compare Riverside loot routes with other high-value supply plans.",
+      },
+      {
+        title: "Best Starting Location",
+        href: "/guides/best-starting-location/",
+        description: "See when Riverside works as a calmer beginner starting area.",
+      },
+      {
         title: "Map Difficulty Ranking",
-        href: "/maps/difficulty-ranking",
+        href: "/maps/difficulty-ranking/",
         description: "Compare Riverside with other map areas.",
+      },
+      {
+        title: "Build 42 Guide",
+        href: "/build-42/",
+        description: "Review broader Build 42 planning without leaving the database structure.",
       },
     ],
     seo: {
-      title: "Riverside Map Guide",
+      title: "Project Zomboid Riverside Map Guide | Build 42",
       description:
-        "Explore Riverside in Project Zomboid including difficulty, base potential, resources and survival planning notes.",
+        "Use this Project Zomboid Riverside map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+      h1: "Project Zomboid Riverside Map Guide",
     },
   },
   {

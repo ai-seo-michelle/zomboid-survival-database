@@ -9,6 +9,11 @@ export type InfoCard = {
   description: string;
 };
 
+export type PointOfInterest = InfoCard & {
+  href?: string;
+  label?: string;
+};
+
 export type FaqItem = {
   question: string;
   answer: string;
@@ -43,7 +48,7 @@ export type LocationRecord = {
   keyLocations: string[];
   keyLocationsLabel?: string;
   keyLocationsHeading?: string;
-  pointsOfInterest?: RelatedGuide[];
+  pointsOfInterest?: PointOfInterest[];
   bestBases: BestBase[];
   basePlanning?: string[];
   lootAndResources: string[];
