@@ -1,0 +1,373 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Project Zomboid Dedicated Server Guide | Build 42";
+const description =
+  "Plan a Project Zomboid dedicated server setup with stable guidance for requirements, configuration, backups, network checks and Build 42 server planning.";
+
+const overviewCards = [
+  {
+    title: "Private Multiplayer World",
+    description:
+      "A dedicated server keeps a shared Project Zomboid world available outside a single player's local session.",
+  },
+  {
+    title: "Setup Before Details",
+    description:
+      "This guide focuses on the setup decisions that stay useful across versions instead of fragile command snippets.",
+  },
+  {
+    title: "Configuration Planning",
+    description:
+      "Treat server settings as a survival ruleset: population, loot, time, backups and access all shape the run.",
+  },
+];
+
+const requirementRows = [
+  { label: "Best For", value: "Private co-op groups and persistent worlds" },
+  { label: "Main Work", value: "Install, configure, start, test and maintain" },
+  { label: "Live Data", value: "Not a live server list or player count tool" },
+  { label: "Update Risk", value: "Commands and paths should be checked against current docs" },
+];
+
+const setupSteps = [
+  {
+    title: "Prepare the Host",
+    description:
+      "Choose a machine or rental environment that can stay online, receive updates and keep world files backed up.",
+  },
+  {
+    title: "Install Server Files",
+    description:
+      "Use the current official or platform-supported installation method rather than copying old commands from memory.",
+  },
+  {
+    title: "Review Configuration",
+    description:
+      "Set the server name, access rules, world options and multiplayer expectations before inviting players.",
+  },
+  {
+    title: "Test Locally First",
+    description:
+      "Confirm the server can start, create a world and accept a controlled connection before opening it to a group.",
+  },
+];
+
+const configurationCards = [
+  {
+    title: "World Rules",
+    description:
+      "Difficulty, loot behavior, day length and survival pressure should match the group's intended pace.",
+  },
+  {
+    title: "Access Control",
+    description:
+      "Decide whether the server is private, invite-only or public before sharing connection details.",
+  },
+  {
+    title: "Admin Routine",
+    description:
+      "Plan who can restart, update, moderate, restore saves and handle player support when something breaks.",
+  },
+];
+
+const networkNotes = [
+  {
+    title: "Ports and Firewall",
+    description:
+      "Network requirements can change by platform and configuration. Verify current port guidance before opening firewall rules.",
+  },
+  {
+    title: "Router and Hosting Layer",
+    description:
+      "Home hosting may require router changes, while rented servers usually expose those controls through a provider panel.",
+  },
+  {
+    title: "Connection Testing",
+    description:
+      "Test from the same machine, the local network and an outside connection so failures are easier to isolate.",
+  },
+];
+
+const commonProblems = [
+  {
+    title: "Players Cannot Connect",
+    description:
+      "Check whether the server is actually running, reachable from outside the host and using the intended access rules.",
+  },
+  {
+    title: "Settings Do Not Match the Run",
+    description:
+      "Configuration changes should be planned and tested carefully because some world decisions are easier to adjust early.",
+  },
+  {
+    title: "Version or Mod Mismatch",
+    description:
+      "Players should confirm game version, server version and any mod expectations before treating connection failures as network issues.",
+  },
+];
+
+const faqItems = [
+  {
+    question: "Is this a live Project Zomboid server list?",
+    answer:
+      "No. This is a dedicated server setup guide. It does not track live servers, player counts, server uptime or public server status.",
+  },
+  {
+    question: "Does this page include exact SteamCMD commands?",
+    answer:
+      "Not in this first version. Commands, paths and startup parameters can change, so this page keeps the stable setup structure separate from version-specific details.",
+  },
+  {
+    question: "Can a static guide help with a Project Zomboid dedicated server?",
+    answer:
+      "Yes. A static guide is useful for planning requirements, configuration, testing, backups and common failure points, even when exact commands need current verification.",
+  },
+  {
+    question: "Is this guide for Build 42?",
+    answer:
+      "It is written with Build 42 planning in mind, but it avoids unsupported claims about Build 42-specific server behavior.",
+  },
+  {
+    question: "Should I use home hosting or rented hosting?",
+    answer:
+      "That depends on uptime, network comfort and group size. This page explains planning tradeoffs without comparing commercial hosting providers or prices.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Build 42 Guide",
+    description: "Review the Build 42 overview before making version-specific server decisions.",
+    href: "/build-42/",
+  },
+  {
+    title: "Build 42 Map Guide",
+    description: "Use map planning when a multiplayer group needs shared routes, towns and base goals.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Pick a practical shared base plan before a long-running multiplayer world gets messy.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Generator Guide",
+    description: "Connect server planning to long-term power, fuel and base stability decisions.",
+    href: "/guides/generator/",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqs={faqItems}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Dedicated Server Setup Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid Dedicated Server Guide
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Plan a stable Project Zomboid dedicated server for private multiplayer survival without turning
+        the page into a live server list, player count tracker or hosting comparison.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Use this as a dedicated server planning checklist
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          A Project Zomboid dedicated server is a technical setup problem and a survival planning problem.
+          The host needs a reliable environment, the group needs clear server rules and everyone needs a
+          predictable way to connect, back up progress and recover from mistakes.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="overview-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Dedicated Server Overview</p>
+        <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          What this page covers
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {overviewCards.map((card) => <Card {...card} eyebrow="Server Guide" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="requirements-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Requirements</p>
+          <h2 id="requirements-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Start with the hosting environment
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Before installation, decide where the server will run, who maintains it and how often the
+            world needs to be available. A casual private server can be planned differently from a
+            persistent group world, but both need a host, storage, update access and a backup habit.
+          </p>
+        </div>
+        <StatsTable rows={requirementRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="setup-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Installation / Setup</p>
+        <h2 id="setup-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Build the server in controlled steps
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {setupSteps.map((step) => <Card {...step} eyebrow="Setup Step" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="configuration-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Server Configuration</p>
+        <h2 id="configuration-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Treat settings like a multiplayer survival contract
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {configurationCards.map((card) => <Card {...card} eyebrow="Configuration" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="start-connect-title">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Starting the Server</p>
+          <h2 id="start-connect-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Start, read logs and test before inviting players
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            The first successful start should prove that the server can load a world, apply the intended
+            configuration and report problems clearly. Save exact startup commands and platform notes in
+            your own server documentation after confirming them against current official guidance.
+          </p>
+        </article>
+        <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Connecting to the Server</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Keep connection details simple and private
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Share only the details players need, confirm they are on the expected game version and avoid
+            changing access rules while people are troubleshooting. A stable connection process prevents
+            small setup issues from becoming group confusion.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="network-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Ports / Network Notes</p>
+        <h2 id="network-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Verify network details instead of guessing them
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {networkNotes.map((note) => <Card {...note} eyebrow="Network Check" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="backup-title">
+      <div class="grid gap-6 border border-zsd-line bg-zsd-panel/80 p-6 lg:grid-cols-[1fr_320px] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Save / Backup Notes</p>
+          <h2 id="backup-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Backups are part of the server setup, not an afterthought
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            A persistent Project Zomboid multiplayer world should have a clear backup rhythm before the
+            group invests time into bases, vehicles and map progress. Keep backup storage separate from
+            normal play decisions and test restoration before relying on it.
+          </p>
+        </div>
+        <div class="grid gap-3 text-sm">
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Manual restore check</div>
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Update-before-backup habit</div>
+          <div class="border border-zsd-line bg-zsd-black/35 p-3 text-zsd-muted">Shared admin ownership</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="build-42-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Build 42 Notes</p>
+          <h2 id="build-42-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Keep Build 42 server details version-aware
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Build 42 can affect how players plan worlds, maps and long-term survival, but this page does
+            not claim unverified Build 42-specific server behavior. Check current release notes before
+            applying version-sensitive commands, configuration fields or mod assumptions.
+          </p>
+        </div>
+        <Card
+          title="Build 42 Guide"
+          description="Use the Build 42 hub for version-level planning before locking in a long-running server."
+          href="/build-42/"
+          label="Open Build 42"
+          eyebrow="Related Hub"
+        />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="problems-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Common Problems</p>
+        <h2 id="problems-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Troubleshoot by layer
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {commonProblems.map((problem) => <Card {...problem} eyebrow="Troubleshooting" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Project Zomboid dedicated server questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqItems.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Connect server setup to survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>
