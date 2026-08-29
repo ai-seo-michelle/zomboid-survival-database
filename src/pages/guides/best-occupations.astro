@@ -1,0 +1,356 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const occupations = [
+  {
+    rank: 1,
+    name: "Carpenter",
+    bestFor: "Beginner base planning",
+    playStyle: "Builder",
+    difficulty: "Easy",
+    mainValue: "Turns early safehouses into stronger long-term bases",
+  },
+  {
+    rank: 2,
+    name: "Fire Officer",
+    bestFor: "Balanced survival",
+    playStyle: "Combat / Mobility",
+    difficulty: "Easy-Medium",
+    mainValue: "Strong early physical profile for safer movement and fights",
+  },
+  {
+    rank: 3,
+    name: "Burglar",
+    bestFor: "Vehicle routes",
+    playStyle: "Escape / Scouting",
+    difficulty: "Medium",
+    mainValue: "Excellent route flexibility when cars are part of the plan",
+  },
+  {
+    rank: 4,
+    name: "Police Officer",
+    bestFor: "Weapon-focused runs",
+    playStyle: "Combat",
+    difficulty: "Medium",
+    mainValue: "Useful for players planning more combat and loot pressure",
+  },
+  {
+    rank: 5,
+    name: "Repairman",
+    bestFor: "Durable tools",
+    playStyle: "Builder / Utility",
+    difficulty: "Medium",
+    mainValue: "Supports tool use, repairs and longer survival loops",
+  },
+  {
+    rank: 6,
+    name: "Veteran",
+    bestFor: "Advanced combat",
+    playStyle: "Combat",
+    difficulty: "Hard",
+    mainValue: "Strong combat identity but less forgiving for new players",
+  },
+];
+
+const rankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "bestFor", label: "Best For" },
+  { key: "playStyle", label: "Play Style" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "mainValue", label: "Main Value" },
+];
+
+const rankingRows = occupations.map((occupation) => ({
+  title: occupation.name,
+  values: {
+    rank: `#${occupation.rank}`,
+    bestFor: occupation.bestFor,
+    playStyle: occupation.playStyle,
+    difficulty: occupation.difficulty,
+    mainValue: occupation.mainValue,
+  },
+}));
+
+const beginnerOccupations = [
+  {
+    title: "Carpenter",
+    description:
+      "A strong first pick when the goal is to secure a simple base, improve storage and build toward long-term safety.",
+  },
+  {
+    title: "Fire Officer",
+    description:
+      "A practical beginner-friendly option for players who want better movement and early fight recovery.",
+  },
+  {
+    title: "Burglar",
+    description:
+      "Useful when the run depends on scouting, cars and flexible escape planning, though it rewards map awareness.",
+  },
+];
+
+const combatOccupations = [
+  {
+    title: "Fire Officer",
+    description:
+      "Best for players who want a forgiving combat profile without locking the whole run into weapon-focused play.",
+  },
+  {
+    title: "Police Officer",
+    description:
+      "Fits loot routes where weapon access and controlled fights matter more than pure base-building speed.",
+  },
+  {
+    title: "Veteran",
+    description:
+      "A strong advanced combat identity, but it is better for players who already understand pressure and exits.",
+  },
+];
+
+const builderOccupations = [
+  {
+    title: "Carpenter",
+    description:
+      "The cleanest builder pick for players who want the base to become safer and more organized quickly.",
+  },
+  {
+    title: "Repairman",
+    description:
+      "A utility-focused option for players who care about tool durability, maintenance and practical long runs.",
+  },
+  {
+    title: "Construction Worker",
+    description:
+      "A sturdy builder-style choice when the run needs practical melee value alongside base development.",
+  },
+];
+
+const comparisonRows = [
+  { label: "Best beginner pick", value: "Carpenter" },
+  { label: "Best balanced pick", value: "Fire Officer" },
+  { label: "Best vehicle route pick", value: "Burglar" },
+  { label: "Best combat identity", value: "Police Officer or Veteran" },
+  { label: "Best base-building path", value: "Carpenter or Repairman" },
+  { label: "Safest paired start", value: "Rosewood with a simple base plan" },
+];
+
+const recommendedBuilds = [
+  {
+    title: "Beginner Base Builder",
+    description:
+      "Carpenter works well with Rosewood starts and safer base-first planning.",
+    href: "/locations/rosewood",
+    label: "Open Rosewood",
+    stats: [
+      { label: "Occupation", value: "Carpenter" },
+      { label: "Goal", value: "Safe base setup" },
+    ],
+  },
+  {
+    title: "Balanced Survivor",
+    description:
+      "Fire Officer supports movement, early recovery and safer short loot routes.",
+    href: "/guides/best-starting-location",
+    label: "Compare starts",
+    stats: [
+      { label: "Occupation", value: "Fire Officer" },
+      { label: "Goal", value: "Flexible survival" },
+    ],
+  },
+  {
+    title: "Loot Route Runner",
+    description:
+      "Burglar fits players who want cars, scouting and route control to shape the run.",
+    href: "/guides/best-loot-locations",
+    label: "Compare loot",
+    stats: [
+      { label: "Occupation", value: "Burglar" },
+      { label: "Goal", value: "Route flexibility" },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: "What is the best occupation in Project Zomboid?",
+    answer:
+      "For most new players, Carpenter is the safest overall recommendation because it supports base planning and long-term survival decisions.",
+  },
+  {
+    question: "What occupation is best for combat?",
+    answer:
+      "Fire Officer is a forgiving combat-friendly choice, while Police Officer and Veteran fit more weapon-focused or advanced runs.",
+  },
+  {
+    question: "Should beginners choose Burglar?",
+    answer:
+      "Burglar can be strong if the player wants vehicle routes, but it works best when you already understand scouting and escape planning.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Starting Location",
+    description: "Pair your occupation with a beginner-friendly starting town.",
+    href: "/guides/best-starting-location",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Choose a base plan that matches your occupation and play style.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Build 42 Guide",
+    description: "Review Build 42 planning notes for long-term survival decisions.",
+    href: "/guides/build-42",
+  },
+  {
+    title: "Rosewood Location Guide",
+    description: "Use Rosewood as a safer starting route for beginner builds.",
+    href: "/locations/rosewood",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Occupations in Project Zomboid"
+  description="Compare the best occupations in Project Zomboid by beginner value, combat strength, builder utility, recommended builds and survival planning."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Occupation Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Occupations in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Compare occupations by beginner safety, combat value, builder utility and how each choice supports a
+        long-term survival plan.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Choose an occupation for the run you want to survive
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The best occupation is not the same for every player. A beginner needs forgiveness, a base builder
+          needs utility, and a combat-focused survivor needs a plan for risk. This page ranks occupations as
+          survival decisions rather than pure character sheet bonuses.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Occupation Ranking Table</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked occupation choices
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Occupation" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="beginner-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Beginner Occupations</p>
+        <h2 id="beginner-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Forgiving picks for early survival
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {beginnerOccupations.map((occupation) => <Card title={occupation.title} description={occupation.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="combat-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Combat Occupations</p>
+        <h2 id="combat-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Picks for weapon and pressure-heavy runs
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {combatOccupations.map((occupation) => <Card title={occupation.title} description={occupation.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="builder-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Builder Occupations</p>
+        <h2 id="builder-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Picks for bases, tools and long-term stability
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {builderOccupations.map((occupation) => <Card title={occupation.title} description={occupation.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Occupation Comparison</p>
+          <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Match the job to the survival problem
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Occupation value changes with the route. A Carpenter shines when the base matters early, Burglar
+            becomes stronger when vehicles shape the run, and combat jobs need careful loot and escape planning.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="builds-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Recommended Builds</p>
+        <h2 id="builds-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Simple build directions for early planning
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {recommendedBuilds.map((build) => <Card {...build} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Occupation planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

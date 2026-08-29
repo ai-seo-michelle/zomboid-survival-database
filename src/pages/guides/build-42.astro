@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+---
+
+<BaseLayout
+  title="Project Zomboid Build 42 Guide"
+  description="Explore major changes and survival planning for Project Zomboid Build 42."
+  ogType="article"
+>
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold text-zsd-orange">Build 42 Guide</p>
+      <h1 class="mt-3 text-4xl font-bold text-zsd-ash">Project Zomboid Build 42 Guide</h1>
+      <p class="mt-5 text-base leading-7 text-zsd-muted">
+        Explore major changes and survival planning for Project Zomboid Build 42.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      <Card title="Build 42 Hub" description="Open the main Build 42 database entry." href="/build-42" label="Open hub" />
+      <Card title="Location Database" description="Compare towns and survival areas." href="/locations" label="Browse locations" />
+      <Card title="Base Locations" description="Review base candidates by safety and resources." href="/guides/best-base-locations/" label="Compare bases" />
+    </div>
+  </PageContainer>
+</BaseLayout>
+

@@ -1,0 +1,369 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const weapons = [
+  {
+    tier: "S",
+    name: "Crowbar",
+    category: "Melee",
+    bestFor: "Reliable everyday combat",
+    difficulty: "Easy",
+    mainValue: "Durable, quiet and useful for repeated fights",
+  },
+  {
+    tier: "A",
+    name: "Fire Axe",
+    category: "Melee",
+    bestFor: "High melee damage",
+    difficulty: "Medium",
+    mainValue: "Strong clearing power when stamina and spacing are managed",
+  },
+  {
+    tier: "A",
+    name: "Baseball Bat",
+    category: "Melee",
+    bestFor: "Early game control",
+    difficulty: "Easy",
+    mainValue: "Simple, readable weapon for beginner fights",
+  },
+  {
+    tier: "B",
+    name: "Spear",
+    category: "Melee",
+    bestFor: "Crafted backups",
+    difficulty: "Medium",
+    mainValue: "Useful when weapon supply is low and crafting is available",
+  },
+  {
+    tier: "B",
+    name: "Shotgun",
+    category: "Firearm",
+    bestFor: "Emergency crowd control",
+    difficulty: "Hard",
+    mainValue: "Powerful but loud, risky and route-dependent",
+  },
+  {
+    tier: "C",
+    name: "Pistol",
+    category: "Firearm",
+    bestFor: "Prepared ranged use",
+    difficulty: "Hard",
+    mainValue: "Only strong when noise, ammo and exits are planned",
+  },
+];
+
+const rankingColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "category", label: "Category" },
+  { key: "bestFor", label: "Best For" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "mainValue", label: "Main Value" },
+];
+
+const rankingRows = weapons.map((weapon) => ({
+  title: weapon.name,
+  values: {
+    tier: weapon.tier,
+    category: weapon.category,
+    bestFor: weapon.bestFor,
+    difficulty: weapon.difficulty,
+    mainValue: weapon.mainValue,
+  },
+}));
+
+const earlyWeapons = [
+  {
+    title: "Crowbar",
+    description:
+      "A strong early weapon because it is reliable, quiet and fits repeatable looting routes.",
+  },
+  {
+    title: "Baseball Bat",
+    description:
+      "A practical beginner weapon that teaches spacing and short controlled fights without firearm noise.",
+  },
+  {
+    title: "Kitchen Knife or Short Blade",
+    description:
+      "Useful only as a backup when safer melee options are unavailable, not as the main plan.",
+  },
+];
+
+const meleeWeapons = [
+  {
+    title: "Crowbar",
+    description:
+      "Best for everyday survival because durability and low noise matter more than dramatic single fights.",
+  },
+  {
+    title: "Fire Axe",
+    description:
+      "A high-value melee option for prepared players who can manage stamina and avoid overcommitting.",
+  },
+  {
+    title: "Baseball Bat",
+    description:
+      "A forgiving early weapon that works well before the survivor has perfect gear or strong skills.",
+  },
+];
+
+const firearms = [
+  {
+    title: "Shotgun",
+    description:
+      "Powerful for emergencies, but the noise can turn a small problem into a full route collapse.",
+  },
+  {
+    title: "Pistol",
+    description:
+      "Useful only with ammo, distance, exits and a clear reason to accept the sound risk.",
+  },
+  {
+    title: "Rifle",
+    description:
+      "Better treated as a prepared tool for advanced runs rather than a default beginner weapon.",
+  },
+];
+
+const comparisonRows = [
+  { label: "Best overall weapon", value: "Crowbar" },
+  { label: "Best beginner melee", value: "Baseball Bat" },
+  { label: "Best high-damage melee", value: "Fire Axe" },
+  { label: "Best emergency firearm", value: "Shotgun" },
+  { label: "Safest combat style", value: "Quiet melee with clear exits" },
+  { label: "Biggest weapon risk", value: "Noise, stamina loss and overconfidence" },
+];
+
+const weaponSources = [
+  {
+    title: "Loot Route Planning",
+    description:
+      "Use a loot-first route to find weapons without turning the run into a risky city sweep.",
+    href: "/guides/best-loot-locations",
+    label: "Compare loot",
+  },
+  {
+    title: "Map-Based Searches",
+    description:
+      "Plan weapon searches around towns, roads and escape routes instead of entering areas blindly.",
+    href: "/guides/project-zomboid-map",
+    label: "Open map guide",
+  },
+  {
+    title: "Build Synergy",
+    description:
+      "Occupations and traits change how safely a character can use heavy melee or noisy firearms.",
+    href: "/guides/best-occupations",
+    label: "Compare occupations",
+  },
+];
+
+const combatTips = [
+  "Use one-on-one fights whenever possible instead of testing a weapon against a large group.",
+  "Carry a backup weapon before long loot runs so durability does not decide the route.",
+  "Avoid firearms unless the escape route is open and the noise is part of the plan.",
+  "Stop fighting when fatigue, panic or injuries make spacing unreliable.",
+];
+
+const faqs = [
+  {
+    question: "What is the best weapon in Project Zomboid?",
+    answer:
+      "For most survival runs, the crowbar is one of the safest overall choices because it is quiet, durable and practical for repeated melee fights.",
+  },
+  {
+    question: "Are guns good in Project Zomboid?",
+    answer:
+      "Guns can be powerful, but they are risky because noise can attract more pressure than the player can safely escape.",
+  },
+  {
+    question: "What weapon should beginners use first?",
+    answer:
+      "Beginners should usually focus on simple melee weapons such as a baseball bat or crowbar while learning spacing, stamina and escape routes.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Loot Locations",
+    description: "Find safer weapon routes and supply targets before committing to risky areas.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Best Traits",
+    description: "Choose traits that support awareness, stamina and manageable combat pressure.",
+    href: "/guides/best-traits",
+  },
+  {
+    title: "Best Occupations",
+    description: "Match weapon choice with occupations built for combat, utility or survival.",
+    href: "/guides/best-occupations",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use map planning to connect weapon searches with safe return routes.",
+    href: "/guides/project-zomboid-map",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Weapons in Project Zomboid"
+  description="Compare the best weapons in Project Zomboid with melee and firearm rankings, early game picks, weapon locations, combat tips and related survival guides."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Weapons Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Weapons in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        A Project Zomboid weapons guide for choosing reliable melee tools, judging firearm risk and planning
+        safer combat routes.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          The best weapon is the one that keeps the route controlled
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          Weapon choice in Project Zomboid is not only about damage. Noise, stamina, durability, skill level and
+          the return route all decide whether a fight helps the run or ends it.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Weapon Tier Ranking</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked weapon choices
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Weapon" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="early-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Early Game Weapons</p>
+        <h2 id="early-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Picks for the first survival routes
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {earlyWeapons.map((weapon) => <Card title={weapon.title} description={weapon.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="melee-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Melee Weapons</p>
+        <h2 id="melee-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Quiet tools for repeatable fights
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {meleeWeapons.map((weapon) => <Card title={weapon.title} description={weapon.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="firearms-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Firearms</p>
+        <h2 id="firearms-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Powerful tools with serious noise risk
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {firearms.map((weapon) => <Card title={weapon.title} description={weapon.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Weapon Comparison</p>
+          <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Compare weapons by survival pressure
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            A weapon is stronger when it supports the whole route. Quiet melee keeps pressure low, while
+            firearms can solve one fight and create the next three.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="find-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Where To Find Weapons</p>
+        <h2 id="find-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Search by route, not by panic
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {weaponSources.map((source) => <Card {...source} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="tips-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Combat Tips</p>
+        <h2 id="tips-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Let the weapon support the escape plan
+        </h2>
+      </div>
+      <div class="grid gap-3">
+        {
+          combatTips.map((tip, index) => (
+            <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+              <span class="font-semibold text-zsd-green-soft">Tip {index + 1}: </span>
+              {tip}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Weapon planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue combat planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

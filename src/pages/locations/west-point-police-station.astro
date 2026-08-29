@@ -1,0 +1,314 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationStats = [
+  { label: "Area", value: "West Point" },
+  { label: "Building Type", value: "Police station" },
+  { label: "Difficulty", value: "Hard" },
+  { label: "Recommended For", value: "Prepared players" },
+  { label: "Loot Focus", value: "Police gear and weapons" },
+  { label: "Route Risk", value: "High" },
+];
+
+const overviewCards = [
+  {
+    title: "Police Gear Target",
+    description:
+      "West Point Police Station is useful for players looking for police-related loot, defensive supplies and weapon access.",
+  },
+  {
+    title: "High-Pressure Route",
+    description:
+      "The building fits West Point's harder survival profile, where scouting and exits matter more than raw loot value.",
+  },
+  {
+    title: "Loot Stop, Not Safehouse",
+    description:
+      "Most players should treat it as a focused objective before returning to a safer base or staging point.",
+  },
+];
+
+const policeLootNotes = [
+  "Use the police station as a focused stop for police gear, utility supplies and possible weapon-related loot.",
+  "Do not skip food, water and medical basics just because the building has high-value combat potential.",
+  "Sort priority loot quickly and return to base before fatigue or outside pressure turns the route unstable.",
+];
+
+const weaponAccessNotes = [
+  "Plan weapon access around safe movement, not around clearing every nearby building.",
+  "Carry only what improves the next route; heavy or noisy gear can make the return more dangerous.",
+  "Pair police station weapon finds with the West Point Gun Store page for a broader weapon route plan.",
+];
+
+const securityRows = [
+  { label: "Main threat", value: "West Point street pressure and route collapse" },
+  { label: "Entry check", value: "Scout nearby roads before entering" },
+  { label: "Loot risk", value: "Overstaying for weapons or gear" },
+  { label: "Best control", value: "Short objective, clear exit, staged vehicle" },
+];
+
+const approachRoute = [
+  "Start from a secured West Point base route or temporary staging location.",
+  "Check surrounding streets before entering the police station.",
+  "Prioritize police gear, weapons and supplies that directly support the next survival goal.",
+  "Exit early and return later instead of extending the route into nearby pressure.",
+];
+
+const strategyNotes = [
+  "Treat the police station as one objective inside a wider West Point map plan.",
+  "Avoid firing weapons near the route unless sound risk and escape direction are already planned.",
+  "Bring enough carrying space for priority loot, but do not overload the return trip.",
+  "Use the building to upgrade survivability before moving into harder West Point or Louisville routes.",
+];
+
+const pros = [
+  "Useful police gear and weapon-focused loot target",
+  "Strong connection to West Point route planning",
+  "Good objective for prepared players building combat readiness",
+  "Pairs naturally with the West Point Gun Store and weapons guide",
+];
+
+const cons = [
+  "Not beginner-friendly without scouting and escape planning",
+  "High-value loot can encourage risky overextension",
+  "Less useful if the survivor lacks storage or transport",
+  "West Point pressure can make repeat visits dangerous",
+];
+
+const faqs = [
+  {
+    question: "Is West Point Police Station worth looting in Project Zomboid?",
+    answer:
+      "Yes, if the route is prepared. It can provide useful police gear and weapon-related loot, but West Point pressure makes the approach risky.",
+  },
+  {
+    question: "Should beginners rush West Point Police Station?",
+    answer:
+      "No. Beginners should usually learn safer towns and routes first, then visit West Point Police Station with a base, transport and exit plan.",
+  },
+  {
+    question: "How does West Point Police Station compare with West Point Gun Store?",
+    answer:
+      "The police station is a broader police-gear and weapon-access stop, while the gun store is a more focused weapon loot objective.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "West Point Location Guide",
+    description: "Review West Point map pressure, base options, key buildings and survival strategy.",
+    href: "/locations/west-point",
+  },
+  {
+    title: "West Point Gun Store",
+    description: "Plan a focused weapon route around West Point's gun store objective.",
+    href: "/locations/west-point-gun-store",
+  },
+  {
+    title: "Best Weapons",
+    description: "Compare weapon choices before deciding what police station loot is worth keeping.",
+    href: "/guides/best-weapons",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare West Point Police Station with other loot targets by risk and reward.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use map planning to connect West Point routes, exits and nearby destinations.",
+    href: "/guides/project-zomboid-map",
+  },
+];
+---
+
+<BaseLayout
+  title="West Point Police Station Project Zomboid Guide"
+  description="Plan West Point Police Station in Project Zomboid with police loot, weapon access, security analysis, approach route and survival strategy."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Building Database</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            West Point Police Station Project Zomboid Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused building guide for West Point Police Station, covering police loot, weapon access and
+            safer exploration routes.
+          </p>
+        </div>
+        <StatsTable rows={locationStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-visit-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why players visit West Point Police Station</p>
+          <h2 id="why-visit-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A risky but useful police loot objective
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Players visit West Point Police Station to look for police gear, weapon access and supplies that
+            can support harder routes. The building is valuable, but it should be approached as a controlled
+            objective because West Point punishes long, noisy or improvised runs.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How this building fits into West Point
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {overviewCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="police-loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Police Loot</p>
+          <h2 id="police-loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Prioritize gear that improves survivability
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              policeLootNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="weapon-title">
+          <p class="text-sm font-semibold text-zsd-orange">Weapon Access</p>
+          <h2 id="weapon-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Use weapons to support the route, not replace the plan
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              weaponAccessNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="approach-title">
+          <p class="text-sm font-semibold text-zsd-orange">Best Approach Route</p>
+          <h2 id="approach-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Enter with a narrow objective and leave early
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              approachRoute.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Route step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Build the police station into a larger West Point route
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategyNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Building Stats</p>
+          <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={locationStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="security-title">
+          <p class="text-sm font-semibold text-zsd-orange">Security Analysis</p>
+          <h2 id="security-title" class="mt-2 text-xl font-semibold text-zsd-ash">Route controls</h2>
+          <div class="mt-4">
+            <StatsTable rows={securityRows} />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why target West Point Police Station
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          West Point Police Station questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue West Point route planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

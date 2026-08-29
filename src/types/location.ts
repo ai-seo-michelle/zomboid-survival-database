@@ -4,6 +4,16 @@ export type RelatedGuide = {
   description?: string;
 };
 
+export type InfoCard = {
+  title: string;
+  description: string;
+};
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type BestBase = {
   name: string;
   rank: number;
@@ -26,12 +36,16 @@ export type LocationRecord = {
   riskRating: number;
   description: string;
   overview: string;
+  whyChoose?: InfoCard[];
   keyLocations: string[];
+  keyLocationsLabel?: string;
+  keyLocationsHeading?: string;
   bestBases: BestBase[];
   lootAndResources: string[];
   survivalStrategy: string[];
   pros: string[];
   cons: string[];
+  faqs?: FaqItem[];
   relatedGuides: RelatedGuide[];
   seo: {
     title: string;

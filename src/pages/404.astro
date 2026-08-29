@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import PageContainer from "../components/PageContainer.astro";
+
+const recoveryLinks = [
+  {
+    title: "Interactive Map",
+    description: "Return to the map hub for location and route planning.",
+    href: "/maps/interactive-map",
+  },
+  {
+    title: "Location Database",
+    description: "Browse tracked towns, locations and survival opportunities.",
+    href: "/locations",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Compare base candidates by safety, resources and difficulty.",
+    href: "/guides/best-base-locations/",
+  },
+];
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The requested Zomboid Survival Database page could not be found."
+  canonicalPath={null}
+  noindex={true}
+>
+  <PageContainer as="section" class="py-16 sm:py-20">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold text-zsd-orange">404</p>
+      <h1 class="mt-3 text-4xl font-bold text-zsd-ash sm:text-5xl">Page Not Found</h1>
+      <p class="mt-5 text-base leading-7 text-zsd-muted">
+        This database route does not exist. Use one of the main planning hubs below to continue.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      {recoveryLinks.map((link) => <Card {...link} label="Open page" />)}
+    </div>
+  </PageContainer>
+</BaseLayout>

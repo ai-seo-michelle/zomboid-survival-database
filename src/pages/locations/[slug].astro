@@ -27,7 +27,7 @@ const stats = [
 ];
 ---
 
-<BaseLayout title={location.seo.title} description={location.seo.description}>
+<BaseLayout title={location.seo.title} description={location.seo.description} faqs={location.faqs}>
   <section class="border-b border-zsd-line bg-zsd-black/45">
     <PageContainer class="py-12 sm:py-16">
       <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
@@ -62,6 +62,20 @@ const stats = [
           </h2>
           <p class="mt-4 text-base leading-7 text-zsd-muted">{location.overview}</p>
         </section>
+
+        {
+          location.whyChoose && location.whyChoose.length > 0 && (
+            <section class="mt-10" aria-labelledby="why-choose-location">
+              <p class="text-sm font-semibold text-zsd-orange">Why choose {location.name}</p>
+              <h2 id="why-choose-location" class="mt-2 text-2xl font-semibold text-zsd-ash">
+                Survival reasons to consider this area
+              </h2>
+              <div class="mt-5 grid gap-4 md:grid-cols-3">
+                {location.whyChoose.map((item) => <Card title={item.title} description={item.description} />)}
+              </div>
+            </section>
+          )
+        }
 
         <section class="mt-10" aria-labelledby="best-base-spots">
           <p class="text-sm font-semibold text-zsd-orange">Best Base Spots</p>
@@ -130,8 +144,10 @@ const stats = [
         </section>
 
         <section aria-labelledby="key-locations">
-          <p class="text-sm font-semibold text-zsd-orange">Key Locations</p>
-          <h2 id="key-locations" class="mt-2 text-xl font-semibold text-zsd-ash">Places to check</h2>
+          <p class="text-sm font-semibold text-zsd-orange">{location.keyLocationsLabel ?? "Key Locations"}</p>
+          <h2 id="key-locations" class="mt-2 text-xl font-semibold text-zsd-ash">
+            {location.keyLocationsHeading ?? "Places to check"}
+          </h2>
           <div class="mt-4 grid gap-3">
             {
               location.keyLocations.map((keyLocation) => (
@@ -163,6 +179,27 @@ const stats = [
         </div>
       </div>
     </section>
+
+    {
+      location.faqs && location.faqs.length > 0 && (
+        <section class="mt-12" aria-labelledby="faq-title">
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+            <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+              {location.name} questions
+            </h2>
+          </div>
+          <div class="grid gap-4">
+            {location.faqs.map((item) => (
+              <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+                <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+                <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
 
     <section class="mt-12" aria-labelledby="related-guides-title">
       <div class="mb-6">

@@ -1,0 +1,327 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationStats = [
+  { label: "Location Type", value: "High-risk prison complex" },
+  { label: "Difficulty", value: "Hard" },
+  { label: "Recommended For", value: "Experienced Players" },
+  { label: "Loot Focus", value: "Security, weapons and supplies" },
+  { label: "Route Risk", value: "Very High" },
+  { label: "Base Potential", value: "Specialized" },
+];
+
+const overviewCards = [
+  {
+    title: "High-Risk Landmark",
+    description:
+      "The Prison is best treated as a deliberate expedition, not a casual stop during early survival.",
+  },
+  {
+    title: "Security-Focused Loot",
+    description:
+      "Players visit for equipment and route value, but the payoff depends on controlled entry and a clean exit.",
+  },
+  {
+    title: "Specialized Base Idea",
+    description:
+      "The structure may interest advanced players, but its scale and pressure make it harder than ordinary bases.",
+  },
+];
+
+const prisonLootNotes = [
+  "Prioritize practical supplies that improve the next route rather than trying to clear the entire complex.",
+  "Treat security-related loot and tools as route upgrades, not as a reason to stay exposed longer.",
+  "Plan storage and transport before the run so high-value items can be moved without overloading the survivor.",
+];
+
+const equipmentNotes = [
+  "Weapons and equipment are useful only if the survivor can leave the Prison safely afterward.",
+  "Carry backups, but avoid turning the run into a heavy gear haul that slows every exit.",
+  "Use firearms cautiously because sound can make a high-risk location much harder to control.",
+];
+
+const securityRows = [
+  { label: "Main threat", value: "Complex layout, pressure and difficult retreat paths" },
+  { label: "Entry control", value: "Scout first and define a limited objective" },
+  { label: "Loot risk", value: "Overstaying for secondary supplies" },
+  { label: "Best control", value: "Short run, clear exit and staged vehicle" },
+];
+
+const basePotentialRows = [
+  { label: "Base role", value: "Advanced challenge base" },
+  { label: "Best use", value: "Loot objective before long-term commitment" },
+  { label: "Main issue", value: "Scale and security management" },
+  { label: "Safer comparison", value: "Review base ranking before committing" },
+];
+
+const approachRoute = [
+  "Start from a stable base or vehicle staging point instead of improvising the trip.",
+  "Scout the approach and decide exactly which area of the Prison is worth entering.",
+  "Keep the vehicle positioned for departure and avoid parking deep in a risky path.",
+  "Exit after priority loot instead of extending the run into every section of the complex.",
+];
+
+const strategyNotes = [
+  "Visit only after basic supplies, weapons, medical items and fuel are already handled.",
+  "Split the Prison into separate route objectives rather than trying to solve it in one trip.",
+  "Retreat early if fatigue, injuries or sound pressure start building.",
+  "Compare the Prison with military and loot-focused pages before deciding whether the risk fits the run.",
+];
+
+const pros = [
+  "Strong high-value exploration target for prepared players",
+  "Useful for security, weapon and equipment-focused route planning",
+  "Can become a memorable advanced challenge location",
+  "Connects well with map, loot, weapons and base planning guides",
+];
+
+const cons = [
+  "Very poor choice for unprepared beginners",
+  "Large high-risk area can punish overconfidence",
+  "Base potential requires more work than safer locations",
+  "Loot value does not matter if the exit route fails",
+];
+
+const faqs = [
+  {
+    question: "Is the Prison worth visiting in Project Zomboid?",
+    answer:
+      "The Prison can be worth visiting for experienced players, but it should be treated as a high-risk objective with scouting, transport and a clear exit route.",
+  },
+  {
+    question: "Is the Prison a good base location?",
+    answer:
+      "It can be an advanced challenge base, but most players should evaluate safer base options before committing to a large high-pressure location.",
+  },
+  {
+    question: "Should beginners explore the Prison early?",
+    answer:
+      "No. Beginners are usually better served by safer towns, simpler loot routes and base locations that are easier to recover from.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use map planning to compare the Prison with other high-risk travel objectives.",
+    href: "/guides/project-zomboid-map",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare prison exploration with other loot routes by reward and risk.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Best Weapons",
+    description: "Review weapon choices before entering a high-pressure location.",
+    href: "/guides/best-weapons",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Compare safer long-term base options before choosing a challenge base.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Louisville Military Base",
+    description: "Compare another high-value, high-risk equipment-focused objective.",
+    href: "/locations/louisville-military-base",
+  },
+];
+---
+
+<BaseLayout
+  title="Project Zomboid Prison Location Guide"
+  description="Plan the Prison in Project Zomboid with high-risk route notes, prison loot, weapons, security analysis, base potential and survival strategy."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">High Value Location Guide</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            Project Zomboid Prison Location Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused prison guide for high-risk exploration, loot planning, security checks and advanced base
+            potential.
+          </p>
+        </div>
+        <StatsTable rows={locationStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-visit-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why players visit the Prison</p>
+          <h2 id="why-visit-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A dangerous landmark for prepared survivors
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Players visit the Prison because it represents a high-value, high-risk objective. It can offer
+            useful supplies and a major exploration challenge, but the route should be planned around scouting,
+            limited goals and safe extraction.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Prison Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How to evaluate the prison route
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {overviewCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Prison Loot</p>
+          <h2 id="loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Target useful supplies without overextending
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              prisonLootNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="equipment-title">
+          <p class="text-sm font-semibold text-zsd-orange">Weapons & Equipment</p>
+          <h2 id="equipment-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Equipment matters only if the route survives
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              equipmentNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="approach-title">
+          <p class="text-sm font-semibold text-zsd-orange">Best Approach Route</p>
+          <h2 id="approach-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Keep the approach narrow and recoverable
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              approachRoute.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Route step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Treat the Prison as a planned expedition
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategyNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Prison Stats</p>
+          <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={locationStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="security-title">
+          <p class="text-sm font-semibold text-zsd-orange">Security Analysis</p>
+          <h2 id="security-title" class="mt-2 text-xl font-semibold text-zsd-ash">Route controls</h2>
+          <div class="mt-4">
+            <StatsTable rows={securityRows} />
+          </div>
+        </section>
+
+        <section aria-labelledby="base-title">
+          <p class="text-sm font-semibold text-zsd-orange">Base Potential</p>
+          <h2 id="base-title" class="mt-2 text-xl font-semibold text-zsd-ash">Long-term fit</h2>
+          <div class="mt-4">
+            <StatsTable rows={basePotentialRows} />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why target the Prison
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Prison route questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue high-risk route planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

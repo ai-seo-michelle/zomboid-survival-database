@@ -1,0 +1,393 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const vehicles = [
+  {
+    tier: "S",
+    name: "Pickup Truck",
+    category: "Utility",
+    bestFor: "Balanced survival",
+    difficulty: "Easy-Medium",
+    mainValue: "Good mix of storage, durability and route flexibility",
+  },
+  {
+    tier: "A",
+    name: "Van",
+    category: "Storage",
+    bestFor: "Base supply runs",
+    difficulty: "Medium",
+    mainValue: "Strong cargo value for moving loot and base materials",
+  },
+  {
+    tier: "A",
+    name: "Station Wagon",
+    category: "Early game",
+    bestFor: "Starter travel",
+    difficulty: "Easy",
+    mainValue: "Useful early vehicle type for safer town-to-base movement",
+  },
+  {
+    tier: "B",
+    name: "Off-road Utility Vehicle",
+    category: "Off-road",
+    bestFor: "Rough route planning",
+    difficulty: "Medium",
+    mainValue: "Better for routes where roads and exits are less predictable",
+  },
+  {
+    tier: "B",
+    name: "Sedan",
+    category: "Common car",
+    bestFor: "Short trips",
+    difficulty: "Easy",
+    mainValue: "Reliable enough for early scouting and small loot runs",
+  },
+  {
+    tier: "C",
+    name: "Sports Car",
+    category: "Speed",
+    bestFor: "Fast travel",
+    difficulty: "Hard",
+    mainValue: "Speed is useful, but low practicality can hurt survival planning",
+  },
+];
+
+const rankingColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "category", label: "Category" },
+  { key: "bestFor", label: "Best For" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "mainValue", label: "Main Value" },
+];
+
+const rankingRows = vehicles.map((vehicle) => ({
+  title: vehicle.name,
+  values: {
+    tier: vehicle.tier,
+    category: vehicle.category,
+    bestFor: vehicle.bestFor,
+    difficulty: vehicle.difficulty,
+    mainValue: vehicle.mainValue,
+  },
+}));
+
+const earlyVehicles = [
+  {
+    title: "Station Wagon",
+    description:
+      "A practical early vehicle type because it can support scouting, small loot runs and basic base movement.",
+  },
+  {
+    title: "Sedan",
+    description:
+      "A common first car for short trips when the player needs mobility more than heavy storage.",
+  },
+  {
+    title: "Pickup Truck",
+    description:
+      "A strong early upgrade when you need a vehicle that can carry supplies without feeling too specialized.",
+  },
+];
+
+const storageVehicles = [
+  {
+    title: "Van",
+    description:
+      "Best for moving larger loot loads, base materials and supplies between towns and safehouses.",
+  },
+  {
+    title: "Pickup Truck",
+    description:
+      "A flexible storage choice because it balances cargo value with easier route handling.",
+  },
+  {
+    title: "Box or Work Vehicle",
+    description:
+      "Useful when the run has shifted from survival scouting into serious supply hauling.",
+  },
+];
+
+const offRoadVehicles = [
+  {
+    title: "Off-road Utility Vehicle",
+    description:
+      "A better fit when route planning involves rough exits, rural travel or unpredictable road conditions.",
+  },
+  {
+    title: "Pickup Truck",
+    description:
+      "A strong general-purpose option that can handle more demanding routes than small cars.",
+  },
+  {
+    title: "Durable Work Vehicle",
+    description:
+      "Good for prepared players who care more about route survival than speed or comfort.",
+  },
+];
+
+const comparisonRows = [
+  { label: "Best overall vehicle", value: "Pickup Truck" },
+  { label: "Best storage vehicle", value: "Van" },
+  { label: "Best early car", value: "Station Wagon or Sedan" },
+  { label: "Best rough route option", value: "Off-road Utility Vehicle" },
+  { label: "Main vehicle risk", value: "Noise, fuel, condition and blocked exits" },
+  { label: "Best vehicle plan", value: "Use cars to support routes, not replace caution" },
+];
+
+const vehicleSources = [
+  {
+    title: "Map-Based Vehicle Search",
+    description:
+      "Use the map guide to plan road access, parking areas and route exits before committing to travel.",
+    href: "/guides/project-zomboid-map",
+    label: "Open map guide",
+  },
+  {
+    title: "Loot Route Planning",
+    description:
+      "Vehicle searches work best when they connect to fuel, tools, weapons and base supply routes.",
+    href: "/guides/best-loot-locations",
+    label: "Compare loot",
+  },
+  {
+    title: "Base Supply Runs",
+    description:
+      "A good base needs a vehicle plan for hauling materials, storing supplies and escaping bad routes.",
+    href: "/guides/best-base-locations/",
+    label: "Compare bases",
+  },
+];
+
+const maintenanceRows = [
+  { label: "Check first", value: "Fuel, engine condition, tires and storage space" },
+  { label: "Carry when possible", value: "Tools, spare parts and backup fuel planning" },
+  { label: "Avoid", value: "Long trips with poor condition and no return plan" },
+  { label: "Best habit", value: "Park facing the exit before entering a loot target" },
+];
+
+const fuelStrategy = [
+  "Treat fuel as a route budget, not just a tank number.",
+  "Plan the return trip before driving into a dense or unfamiliar area.",
+  "Keep one vehicle close to base for emergencies instead of using every car for risky travel.",
+  "Do not let a fuel run become louder or longer than the supplies can justify.",
+];
+
+const faqs = [
+  {
+    question: "What is the best vehicle in Project Zomboid?",
+    answer:
+      "For most runs, a pickup truck is one of the safest overall choices because it balances storage, durability and route flexibility.",
+  },
+  {
+    question: "What is the best car for beginners?",
+    answer:
+      "Beginners usually benefit from a simple sedan, station wagon or pickup truck because these vehicles support short trips without demanding complex planning.",
+  },
+  {
+    question: "Are sports cars good in Project Zomboid?",
+    answer:
+      "Sports cars can be fast, but speed alone is not enough. Storage, condition, fuel and escape reliability usually matter more for survival.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Plan road routes, towns and travel choices before committing to a vehicle run.",
+    href: "/guides/project-zomboid-map",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Connect vehicle searches with useful supply and tool routes.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Best Weapons",
+    description: "Prepare for dangerous vehicle recovery and travel routes.",
+    href: "/guides/best-weapons",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Choose a base that supports parking, storage and repeatable supply runs.",
+    href: "/guides/best-base-locations/",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Vehicles in Project Zomboid"
+  description="Compare the best vehicles in Project Zomboid, including early cars, storage vehicles, off-road options, maintenance, fuel strategy and related survival guides."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Vehicles Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Vehicles in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        A Project Zomboid cars guide for choosing practical vehicles, planning fuel, hauling supplies and
+        keeping routes recoverable.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          The best car is the one that supports the route
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          Vehicles change how far you can loot, where you can base and how quickly you can leave danger. The
+          strongest vehicle choice balances storage, fuel, condition and escape planning instead of chasing
+          speed alone.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Vehicle Tier Ranking</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked vehicle choices
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Vehicle" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="early-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Early Game Vehicles</p>
+        <h2 id="early-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Cars for scouting and first supply routes
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {earlyVehicles.map((vehicle) => <Card title={vehicle.title} description={vehicle.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="storage-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Storage Vehicles</p>
+        <h2 id="storage-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Vehicles for hauling loot and base materials
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {storageVehicles.map((vehicle) => <Card title={vehicle.title} description={vehicle.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="offroad-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Off-road Vehicles</p>
+        <h2 id="offroad-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Options for rougher routes and safer exits
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {offRoadVehicles.map((vehicle) => <Card title={vehicle.title} description={vehicle.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Vehicle Comparison</p>
+          <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Compare cars by survival value
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            A fast car is useful only if it can survive the route. Storage, engine condition, fuel access and
+            parking discipline often matter more than top speed.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="find-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Where To Find Vehicles</p>
+        <h2 id="find-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Search where vehicles support the next route
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {vehicleSources.map((source) => <Card {...source} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="maintenance-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Vehicle Maintenance Guide</p>
+          <h2 id="maintenance-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A working vehicle is part of the survival kit
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Vehicle maintenance is mostly about preventing route failure. A damaged engine, empty tank or weak
+            tire can turn a safe loot run into a long walk back through pressure.
+          </p>
+        </div>
+        <StatsTable rows={maintenanceRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="fuel-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Fuel Strategy</p>
+        <h2 id="fuel-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Plan fuel around the return path
+        </h2>
+      </div>
+      <div class="grid gap-3">
+        {
+          fuelStrategy.map((tip, index) => (
+            <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+              <span class="font-semibold text-zsd-green-soft">Fuel note {index + 1}: </span>
+              {tip}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Vehicle planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue route planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

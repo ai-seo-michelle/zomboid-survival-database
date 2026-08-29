@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+---
+
+<BaseLayout
+  title="Project Zomboid Farming Guide"
+  description="Build a sustainable food source in Project Zomboid with farming, base planning and long-term survival notes."
+  ogType="article"
+>
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold text-zsd-orange">Survival Guide</p>
+      <h1 class="mt-3 text-4xl font-bold text-zsd-ash">Project Zomboid Farming Guide</h1>
+      <p class="mt-5 text-base leading-7 text-zsd-muted">
+        Build a sustainable food source for long-term survival.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      <Card title="Food Security" description="Use farming to reduce dependency on risky loot runs." />
+      <Card title="Base Planning" description="Choose a base with space and water access in mind." />
+      <Card title="Long-Term Survival" description="Treat farming as part of a broader supply system." />
+    </div>
+  </PageContainer>
+</BaseLayout>
+

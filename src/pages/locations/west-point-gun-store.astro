@@ -1,0 +1,290 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationStats = [
+  { label: "Area", value: "West Point" },
+  { label: "Building Type", value: "Weapon loot target" },
+  { label: "Difficulty", value: "Hard" },
+  { label: "Recommended For", value: "Prepared players" },
+  { label: "Loot Focus", value: "Weapons and ammunition" },
+  { label: "Risk Level", value: "High" },
+];
+
+const overviewCards = [
+  {
+    title: "High-Value Weapon Stop",
+    description:
+      "West Point Gun Store is best treated as a focused weapon objective, not a casual early loot run.",
+  },
+  {
+    title: "Route-Dependent Value",
+    description:
+      "The building is only worth the pressure when the survivor has a safe approach, exit and return plan.",
+  },
+  {
+    title: "Advanced Timing",
+    description:
+      "Prepared players should visit after securing basics, transport and a base that can absorb the loot.",
+  },
+];
+
+const weaponLootNotes = [
+  "Prioritize weapons and ammunition that support the next route instead of trying to clear every container.",
+  "Plan storage before the run so valuable finds can be moved quickly and sorted back at base.",
+  "Treat firearm loot as a tactical upgrade, not a reason to create more noise than the route can handle.",
+];
+
+const securityRows = [
+  { label: "Main risk", value: "High-value loot attracts risky decision-making" },
+  { label: "Route pressure", value: "High if the surrounding streets are not scouted" },
+  { label: "Entry plan", value: "Prepare tools, transport and a fallback path before arrival" },
+  { label: "Exit priority", value: "Leave early if noise or fatigue starts building" },
+];
+
+const approachRoute = [
+  "Start from a secured West Point base or temporary staging point.",
+  "Scout the nearby streets before moving loot or making noise around the building.",
+  "Keep a vehicle parked for departure rather than deeper exploration.",
+  "Return to base after priority loot instead of extending the run into extra buildings.",
+];
+
+const strategyNotes = [
+  "Visit only when food, water, medical supplies and a return route are already handled.",
+  "Use the gun store as one objective in a larger West Point map plan, not the entire day plan.",
+  "Avoid firing weapons near the route unless the sound risk is intentional and recoverable.",
+  "Pair the run with a base storage plan so weapons do not become dead weight during travel.",
+];
+
+const pros = [
+  "Strong weapon-focused loot target",
+  "Useful for prepared West Point and Louisville route planning",
+  "Connects naturally with combat, loot and map guide decisions",
+  "Can upgrade a survivor's options for high-risk routes",
+];
+
+const cons = [
+  "Poor choice for an unprepared beginner loot run",
+  "Firearm loot can encourage noisy and risky play",
+  "Requires escape planning before the visit is worthwhile",
+  "High-value loot does not help if the return route fails",
+];
+
+const faqs = [
+  {
+    question: "Is West Point Gun Store worth visiting in Project Zomboid?",
+    answer:
+      "Yes, but mainly for prepared players. It is a valuable weapon loot target, but the route needs scouting, transport and a safe return plan.",
+  },
+  {
+    question: "Should beginners rush West Point Gun Store?",
+    answer:
+      "No. Beginners should usually secure a base, basic supplies and safer routes before targeting weapon-heavy locations.",
+  },
+  {
+    question: "How should I use the weapons from the gun store?",
+    answer:
+      "Use them to support specific survival plans. Firearms are powerful, but the noise risk means they should be used with exits and recovery routes in mind.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Weapons",
+    description: "Compare weapon choices before deciding which loot is worth carrying back.",
+    href: "/guides/best-weapons",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare high-value loot routes by risk, reward and player readiness.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Plan map routes, exits and nearby towns before committing to a weapon run.",
+    href: "/guides/project-zomboid-map",
+  },
+  {
+    title: "West Point Location Guide",
+    description: "Review West Point map pressure, base options and survival strategy.",
+    href: "/locations/west-point",
+  },
+  {
+    title: "Louisville Location Guide",
+    description: "Compare West Point weapon planning with higher-pressure city routes.",
+    href: "/locations/louisville",
+  },
+];
+---
+
+<BaseLayout
+  title="West Point Gun Store Project Zomboid Guide"
+  description="Plan a West Point Gun Store route in Project Zomboid with weapon loot notes, security analysis, approach strategy, pros and cons."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Building Database</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            West Point Gun Store Project Zomboid Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused building guide for planning weapon loot, security checks and safe approach routes around
+            West Point.
+          </p>
+        </div>
+        <StatsTable rows={locationStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-visit-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why players visit West Point Gun Store</p>
+          <h2 id="why-visit-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A weapon objective for prepared survivors
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Players visit West Point Gun Store because weapon access can change how a run handles dangerous
+            routes. The tradeoff is pressure: the store should be approached with scouting, storage and escape
+            planning already in place.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How this building fits into West Point
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {overviewCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="weapon-loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Weapon Loot</p>
+          <h2 id="weapon-loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Take what supports the next route
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              weaponLootNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="approach-title">
+          <p class="text-sm font-semibold text-zsd-orange">Best Approach Route</p>
+          <h2 id="approach-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Approach with a short objective and clear exit
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              approachRoute.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Route step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Make the gun store a controlled mission
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategyNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Building Stats</p>
+          <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={locationStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="security-title">
+          <p class="text-sm font-semibold text-zsd-orange">Security Analysis</p>
+          <h2 id="security-title" class="mt-2 text-xl font-semibold text-zsd-ash">Risk controls</h2>
+          <div class="mt-4">
+            <StatsTable rows={securityRows} />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why target West Point Gun Store
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">West Point Gun Store questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue weapon route planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

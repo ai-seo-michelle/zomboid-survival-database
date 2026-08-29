@@ -1,0 +1,329 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationStats = [
+  { label: "Area", value: "Louisville" },
+  { label: "Location Type", value: "Military checkpoint" },
+  { label: "Difficulty", value: "Hard" },
+  { label: "Recommended For", value: "Veteran Players" },
+  { label: "Loot Focus", value: "Military gear and weapons" },
+  { label: "Route Risk", value: "Very High" },
+];
+
+const overviewCards = [
+  {
+    title: "High Value Loot Stop",
+    description:
+      "Louisville Military Checkpoint is best treated as a targeted loot objective for equipment-focused routes.",
+  },
+  {
+    title: "Route Planning Required",
+    description:
+      "The checkpoint is not a casual stop. A safe approach, vehicle exit and fallback plan matter as much as the loot.",
+  },
+  {
+    title: "Advanced Progression Target",
+    description:
+      "Prepared players can use the checkpoint to upgrade gear before harder Louisville routes and longer travel.",
+  },
+];
+
+const militaryLootNotes = [
+  "Prioritize military gear and supplies that improve the next route rather than clearing every possible container.",
+  "Move high-value loot back to a stable base before extending the trip into deeper Louisville pressure.",
+  "Treat the checkpoint as a single objective inside a larger map plan, not as an open-ended city run.",
+];
+
+const equipmentNotes = [
+  "Weapons and equipment are most useful when they support a planned route, escape path or base defense need.",
+  "Avoid carrying more than the survivor can move with safely, especially if fatigue or panic is rising.",
+  "Use firearms carefully because noise around a checkpoint route can turn a clean exit into a dangerous chase.",
+];
+
+const riskRows = [
+  { label: "Main threat", value: "Louisville pressure and blocked exits" },
+  { label: "Route risk", value: "Very high without scouting and transport" },
+  { label: "Loot risk", value: "Overcommitting after finding valuable equipment" },
+  { label: "Best control", value: "Short objective, staged vehicle and early retreat" },
+];
+
+const approachRoute = [
+  "Start from a prepared Louisville staging route or safer external base.",
+  "Scout the approach before moving into the checkpoint area.",
+  "Keep the vehicle positioned for departure before entering the loot objective.",
+  "Collect priority military loot, then leave before the route becomes noisy or crowded.",
+];
+
+const strategyNotes = [
+  "Do not visit the checkpoint until food, water, medical supplies and fuel are already handled.",
+  "Use the checkpoint to solve specific equipment gaps, not as an excuse to stay in high pressure too long.",
+  "Avoid firearm use unless the sound risk is intentional and the exit route is already open.",
+  "Return later for secondary loot instead of extending a successful first run into a failed second objective.",
+];
+
+const basePotentialRows = [
+  { label: "Base role", value: "Temporary staging only" },
+  { label: "Long-term value", value: "Better as a loot objective than a base" },
+  { label: "Storage plan", value: "Move loot back to safer storage quickly" },
+  { label: "Best pairing", value: "External base plus planned Louisville route" },
+];
+
+const pros = [
+  "Strong military loot and equipment potential",
+  "Useful advanced target for Louisville progression",
+  "Good route objective for prepared players",
+  "Connects naturally with weapons, loot and map planning guides",
+];
+
+const cons = [
+  "Very risky for new or underprepared players",
+  "High-value loot can encourage overextension",
+  "Requires transport, fuel and an exit route before the run starts",
+  "Poor long-term base choice compared with safer locations",
+];
+
+const faqs = [
+  {
+    question: "Is Louisville Military Checkpoint worth visiting in Project Zomboid?",
+    answer:
+      "It can be worth visiting for prepared players who need military gear or equipment upgrades, but the route should be scouted and kept short.",
+  },
+  {
+    question: "Should beginners go to Louisville Military Checkpoint?",
+    answer:
+      "No. Beginners should usually build experience with safer towns and loot routes before attempting high-pressure Louisville objectives.",
+  },
+  {
+    question: "Can Louisville Military Checkpoint work as a base?",
+    answer:
+      "For most runs, it is better used as a loot objective or temporary staging point. Long-term bases are safer when they support repeatable routes and storage.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Louisville Location Guide",
+    description: "Review Louisville map pressure, loot potential and advanced survival planning.",
+    href: "/locations/louisville",
+  },
+  {
+    title: "Louisville Military Base",
+    description: "Compare another military-focused Louisville objective and route plan.",
+    href: "/locations/louisville-military-base",
+  },
+  {
+    title: "Best Weapons",
+    description: "Compare weapons before deciding which checkpoint loot is worth carrying.",
+    href: "/guides/best-weapons",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare military checkpoint runs with other high-value loot routes.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use map planning to connect Louisville routes, checkpoints and exits.",
+    href: "/guides/project-zomboid-map",
+  },
+];
+---
+
+<BaseLayout
+  title="Louisville Military Checkpoint Project Zomboid Guide"
+  description="Plan Louisville Military Checkpoint in Project Zomboid with military loot, weapons, equipment, risk analysis, approach routes and survival strategy."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">High Value Loot Guide</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            Louisville Military Checkpoint Project Zomboid Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused Louisville checkpoint guide for military loot, equipment resources and safer high-risk
+            route planning.
+          </p>
+        </div>
+        <StatsTable rows={locationStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-visit-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why players visit Louisville Military Checkpoint</p>
+          <h2 id="why-visit-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A high-risk objective for military equipment
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Players visit Louisville Military Checkpoint because military loot can improve weapons, defense and
+            late-route options. The checkpoint is valuable only when the survivor can approach, loot and leave
+            without letting Louisville pressure take control of the run.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How the checkpoint fits into Louisville route planning
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {overviewCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="military-loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Military Loot</p>
+          <h2 id="military-loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Target priority gear and leave cleanly
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              militaryLootNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="equipment-title">
+          <p class="text-sm font-semibold text-zsd-orange">Weapons & Equipment</p>
+          <h2 id="equipment-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Let equipment support the survival plan
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              equipmentNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="approach-title">
+          <p class="text-sm font-semibold text-zsd-orange">Best Approach Route</p>
+          <h2 id="approach-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Approach as a short, planned operation
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              approachRoute.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Route step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Keep the checkpoint run narrow and recoverable
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategyNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Checkpoint Stats</p>
+          <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={locationStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="risk-title">
+          <p class="text-sm font-semibold text-zsd-orange">Risk Analysis</p>
+          <h2 id="risk-title" class="mt-2 text-xl font-semibold text-zsd-ash">Route controls</h2>
+          <div class="mt-4">
+            <StatsTable rows={riskRows} />
+          </div>
+        </section>
+
+        <section aria-labelledby="base-potential-title">
+          <p class="text-sm font-semibold text-zsd-orange">Base Potential</p>
+          <h2 id="base-potential-title" class="mt-2 text-xl font-semibold text-zsd-ash">Best use case</h2>
+          <div class="mt-4">
+            <StatsTable rows={basePotentialRows} />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why target Louisville Military Checkpoint
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Louisville Military Checkpoint questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue Louisville loot planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

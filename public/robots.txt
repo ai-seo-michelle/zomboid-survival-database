@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zomboid-survival-database.pages.dev/sitemap-index.xml
-
+Sitemap: https://zomboidsurvival.com/sitemap-index.xml

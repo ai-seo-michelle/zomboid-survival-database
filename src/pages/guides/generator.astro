@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+---
+
+<BaseLayout
+  title="Project Zomboid Generator Guide"
+  description="Learn how generators fit into Project Zomboid survival planning, including power, fuel and base safety."
+  ogType="article"
+>
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold text-zsd-orange">Survival Guide</p>
+      <h1 class="mt-3 text-4xl font-bold text-zsd-ash">Project Zomboid Generator Guide</h1>
+      <p class="mt-5 text-base leading-7 text-zsd-muted">
+        Learn how to find, connect and maintain generators after electricity loss.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      <Card title="Find a Generator" description="Plan generator searches around safer loot routes." />
+      <Card title="Connect Power" description="Use generators as part of a stable base plan." />
+      <Card title="Maintain Fuel" description="Track fuel, noise and long-term power needs." />
+    </div>
+  </PageContainer>
+</BaseLayout>
+

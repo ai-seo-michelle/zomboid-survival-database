@@ -1,0 +1,273 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const baseStats = [
+  { label: "Town", value: "Rosewood" },
+  { label: "Base Type", value: "Emergency service building" },
+  { label: "Difficulty", value: "Easy" },
+  { label: "Recommended For", value: "Beginners" },
+  { label: "Defense", value: "High" },
+  { label: "Resources", value: "High" },
+];
+
+const advantages = [
+  {
+    title: "Strong Utility Space",
+    description:
+      "The fire station works well as a practical base because it supports storage, vehicle planning and repeated supply runs.",
+  },
+  {
+    title: "Beginner-Friendly Routes",
+    description:
+      "Rosewood's compact town layout makes it easier to learn safe routes without committing to long city travel early.",
+  },
+  {
+    title: "Good Long-Term Setup",
+    description:
+      "The location can support a first stable safehouse before the player expands into wider map exploration.",
+  },
+];
+
+const defenseNotes = [
+  "Control entrances before expanding storage or long-term base rooms.",
+  "Keep noise low around the base so nearby pressure does not build faster than expected.",
+  "Use short scouting loops to understand the surrounding streets before large loot runs.",
+];
+
+const resourceNotes = [
+  "The surrounding town supports practical early searches for food, tools and medical basics.",
+  "Nearby road access makes vehicle recovery and supply movement easier than dense city starts.",
+  "Emergency-service routes can help players build a simple early survival plan around repeatable targets.",
+];
+
+const strategySteps = [
+  "Secure the building first and avoid clearing more of Rosewood than you can safely manage.",
+  "Create a short supply route between the base, nearby houses and key town buildings.",
+  "Prioritize water, food, storage and vehicle access before planning longer trips.",
+  "Treat the fire station as a staging point for later map movement rather than a reason to rush.",
+];
+
+const pros = [
+  "One of the strongest beginner base candidates in Rosewood",
+  "Good defensive potential for early and mid-game planning",
+  "Useful access to town routes and nearby loot targets",
+  "Easy to understand for players learning base management",
+];
+
+const cons = [
+  "Can attract pressure if players make too much noise nearby",
+  "Rosewood has less late-game loot depth than larger cities",
+  "Still needs careful route control before it becomes truly stable",
+];
+
+const faqs = [
+  {
+    question: "Is Rosewood Fire Station a good base in Project Zomboid?",
+    answer:
+      "Yes. It is a strong beginner-friendly base candidate because it combines practical space, useful routes and manageable early pressure.",
+  },
+  {
+    question: "Why do players choose Rosewood Fire Station?",
+    answer:
+      "Players often choose it because the building supports storage and staging while Rosewood remains easier to read than larger urban areas.",
+  },
+  {
+    question: "Should new players start near the fire station?",
+    answer:
+      "For many beginner runs, Rosewood and the fire station area are easier to learn than high-pressure city starts.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Rosewood Location Guide",
+    description: "Review Rosewood difficulty, base options, resources and survival notes.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Best Starting Location",
+    description: "Compare beginner-friendly towns before choosing your next spawn.",
+    href: "/guides/best-starting-location",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Compare base candidates by safety, resources and long-term survival value.",
+    href: "/guides/best-base-locations/",
+  },
+];
+---
+
+<BaseLayout
+  title="Rosewood Fire Station Base Project Zomboid Guide"
+  description="Plan a Rosewood Fire Station base in Project Zomboid with defense notes, loot routes, early strategy, pros and cons."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Location Base Guide</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            Rosewood Fire Station Base Project Zomboid Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused survival database entry for planning Rosewood Fire Station as an early and long-term
+            base location.
+          </p>
+        </div>
+        <StatsTable rows={baseStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-choose-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why players choose this base</p>
+          <h2 id="why-choose-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A stable Rosewood base for learning survival systems
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Rosewood Fire Station is a popular base choice because it gives players a practical building to
+            secure while keeping nearby routes simple enough for early planning. It is best used as a controlled
+            safehouse, supply hub and staging point before wider map travel.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="advantages-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Advantages</p>
+          <h2 id="advantages-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why the fire station works
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {advantages.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="defense-title">
+          <p class="text-sm font-semibold text-zsd-orange">Defense Analysis</p>
+          <h2 id="defense-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Control the area before expanding
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              defenseNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Loot & Resources</p>
+          <h2 id="loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Build the base around repeatable supply routes
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              resourceNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Early Game Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Turn the fire station into a safe operating base
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategySteps.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="base-stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Base Snapshot</p>
+          <h2 id="base-stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision stats</h2>
+          <div class="mt-4">
+            <StatsTable rows={baseStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="route-links-title">
+          <p class="text-sm font-semibold text-zsd-orange">Internal Routes</p>
+          <h2 id="route-links-title" class="mt-2 text-xl font-semibold text-zsd-ash">Planning links</h2>
+          <div class="mt-4 grid gap-3">
+            <Card title="Rosewood Guide" href="/locations/rosewood" label="Open guide" />
+            <Card title="Starting Location Guide" href="/guides/best-starting-location" label="Open guide" />
+            <Card title="Base Ranking" href="/guides/best-base-locations/" label="Open guide" />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why choose Rosewood Fire Station
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Rosewood Fire Station questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue Rosewood survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

@@ -1,0 +1,355 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import { locations } from "../../data/locations";
+import maps from "../../data/maps.json";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const regionColumns = [
+  { key: "difficulty", label: "Difficulty" },
+  { key: "recommendedFor", label: "Recommended For" },
+  { key: "baseRating", label: "Base Rating" },
+  { key: "lootRating", label: "Loot Rating" },
+  { key: "riskRating", label: "Risk Rating" },
+];
+
+const regionRows = locations.map((location) => ({
+  title: location.name,
+  href: `/locations/${location.slug}`,
+  values: {
+    difficulty: location.difficulty,
+    recommendedFor: location.recommendedFor,
+    baseRating: `${location.baseRating}/5`,
+    lootRating: `${location.lootRating}/5`,
+    riskRating: `${location.riskRating}/5`,
+  },
+}));
+
+const difficultyColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "recommendedFor", label: "Recommended For" },
+  { key: "challenge", label: "Main Challenge" },
+];
+
+const difficultyRows = maps.map((map) => ({
+  title: map.name,
+  href: map.guideLink,
+  values: {
+    tier: map.tier,
+    difficulty: map.difficulty,
+    recommendedFor: map.recommendedFor,
+    challenge: map.challenge,
+  },
+}));
+
+const overviewStats = [
+  { label: "Tracked locations", value: locations.length },
+  { label: "Beginner focus", value: "Rosewood and Riverside" },
+  { label: "Advanced focus", value: "Louisville" },
+  { label: "Best use", value: "Route and base planning" },
+];
+
+const startingAreas = [
+  {
+    title: "Rosewood",
+    description:
+      "A compact beginner-friendly town with strong base options and clear early survival routes.",
+    href: "/locations/rosewood",
+    label: "Open Rosewood",
+    stats: [
+      { label: "Difficulty", value: "Easy" },
+      { label: "Best For", value: "New players" },
+    ],
+  },
+  {
+    title: "Riverside",
+    description:
+      "A calmer starting area for players who prefer safer movement and slower route expansion.",
+    href: "/locations/riverside",
+    label: "Open Riverside",
+    stats: [
+      { label: "Difficulty", value: "Easy" },
+      { label: "Best For", value: "Cautious starts" },
+    ],
+  },
+  {
+    title: "Louisville",
+    description:
+      "A high-pressure city area with strong loot potential and more demanding escape planning.",
+    href: "/locations/louisville",
+    label: "Open Louisville",
+    stats: [
+      { label: "Difficulty", value: "Hard" },
+      { label: "Best For", value: "Veterans" },
+    ],
+  },
+];
+
+const majorCities = [
+  {
+    title: "Rosewood",
+    description:
+      "Best used as a readable learning town where players can practice short supply routes and base setup.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Riverside",
+    description:
+      "Useful for slower survival planning, cautious looting and stable movement before longer trips.",
+    href: "/locations/riverside",
+  },
+  {
+    title: "Louisville",
+    description:
+      "A major high-risk destination for advanced loot routes, city navigation and veteran survival planning.",
+    href: "/locations/louisville",
+  },
+];
+
+const navigationRows = [
+  { label: "Location database", value: "Browse towns and survival areas by difficulty and ratings" },
+  { label: "Interactive map hub", value: "Use the map entry point for future search and route tools" },
+  { label: "Difficulty ranking", value: "Compare areas before choosing the next challenge" },
+  { label: "Guide cluster", value: "Connect map choices to bases, loot and starting strategy" },
+];
+
+const recommendedRoutes = [
+  {
+    title: "Beginner Route",
+    description:
+      "Start in Rosewood, secure a base candidate, then expand into short nearby loot loops.",
+    href: "/guides/best-starting-location",
+    label: "Compare starts",
+  },
+  {
+    title: "Base-First Route",
+    description:
+      "Choose a reliable base location first, then let storage, safety and return paths shape exploration.",
+    href: "/guides/best-base-locations/",
+    label: "Compare bases",
+  },
+  {
+    title: "Loot Route",
+    description:
+      "Move from safer local supply runs into higher-value targets only after exits are planned.",
+    href: "/guides/best-loot-locations",
+    label: "Compare loot",
+  },
+];
+
+const faqs = [
+  {
+    question: "What is the best Project Zomboid map area for beginners?",
+    answer:
+      "Rosewood is usually the safest first recommendation because it is compact, readable and supports practical early base planning.",
+  },
+  {
+    question: "How should I use Project Zomboid maps for survival planning?",
+    answer:
+      "Use the map to compare routes, base candidates, loot targets and escape options before committing to long travel.",
+  },
+  {
+    question: "Is Louisville good for new players?",
+    answer:
+      "Louisville has strong loot potential, but it is better for experienced players because the pressure and navigation risk are much higher.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Rosewood Location Guide",
+    description: "Review Rosewood difficulty, base options and early survival value.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Riverside Location Guide",
+    description: "Compare a calmer town option for cautious map planning.",
+    href: "/locations/riverside",
+  },
+  {
+    title: "Louisville Location Guide",
+    description: "Review advanced city pressure, loot potential and route risk.",
+    href: "/locations/louisville",
+  },
+  {
+    title: "Best Starting Location",
+    description: "Choose where to begin before planning longer map routes.",
+    href: "/guides/best-starting-location",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Connect map decisions to safe long-term base choices.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Plan loot routes by risk, reward and distance from safety.",
+    href: "/guides/best-loot-locations",
+  },
+];
+---
+
+<BaseLayout
+  title="Project Zomboid Map Guide"
+  description="Use this Project Zomboid map guide to compare locations, starting areas, major cities, difficulty rankings and recommended survival routes."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Map Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid Map Guide
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Compare Project Zomboid maps, towns and route choices by difficulty, survival value and long-term
+        planning potential.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Use the map as a survival decision tool
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          A Project Zomboid map is most useful when it helps answer practical questions: where to start, where
+          to base, where to loot and when a route is too risky. This page connects map areas to the database
+          guides already tracked on the site.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="overview-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Project Zomboid Map Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            From towns to routes to survival plans
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            The database currently focuses on high-value map decisions: beginner-friendly towns, major city
+            risk, base potential and loot route planning. Future map pages can expand from this same structure
+            without changing the site architecture.
+          </p>
+        </div>
+        <StatsTable rows={overviewStats} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="regions-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Map Regions Comparison</p>
+        <h2 id="regions-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare tracked regions
+        </h2>
+      </div>
+      <RankingTable columns={regionColumns} rows={regionRows} titleLabel="Region" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="starting-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Starting Areas</p>
+        <h2 id="starting-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Where to begin the run
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {startingAreas.map((area) => <Card {...area} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="cities-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Major Cities</p>
+        <h2 id="cities-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Key map areas in the current database
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {majorCities.map((city) => <Card {...city} label="Open location" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="navigation-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Location Navigation</p>
+          <h2 id="navigation-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Move from map search to survival action
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Use location pages for town-level context, guide pages for decisions and the interactive map hub
+            for future map tools such as search, base filters and route planning.
+          </p>
+        </div>
+        <StatsTable rows={navigationRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="difficulty-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Map Difficulty Ranking</p>
+        <h2 id="difficulty-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare map difficulty before traveling
+        </h2>
+      </div>
+      <RankingTable columns={difficultyColumns} rows={difficultyRows} titleLabel="Map Area" />
+      <div class="mt-5">
+        <Card
+          title="Open Full Map Difficulty Ranking"
+          description="Use the dedicated ranking page to compare difficulty, player fit and main survival challenges."
+          href="/maps/difficulty-ranking"
+          label="View ranking"
+        />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="routes-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Recommended Routes</p>
+        <h2 id="routes-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Turn map knowledge into repeatable plans
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {recommendedRoutes.map((route) => <Card {...route} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Project Zomboid map questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue map-based survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

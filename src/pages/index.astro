@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
 import PageContainer from "../components/PageContainer.astro";
 
 type HomeModule =
@@ -46,9 +47,50 @@ const modules: HomeModule[] = [
     title: "Survival Guides",
     description: "Use practical guide pages for base decisions and Build 42 planning.",
     links: [
-      { label: "Best Base Locations", href: "/survival/best-base-locations" },
+      { label: "Best Base Locations", href: "/guides/best-base-locations/" },
       { label: "Build 42 Guide", href: "/build-42" },
     ],
+  },
+];
+
+const survivalGuides = [
+  {
+    title: "Best Base Locations",
+    description: "Compare the safest and most practical base locations for long-term survival.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Generator Guide",
+    description: "Learn how to find, connect and maintain generators after electricity loss.",
+    href: "/guides/generator",
+  },
+  {
+    title: "Farming Guide",
+    description: "Build a sustainable food source for long-term survival.",
+    href: "/guides/farming",
+  },
+  {
+    title: "Build 42 Guide",
+    description: "Explore major changes and survival planning for Project Zomboid Build 42.",
+    href: "/guides/build-42",
+  },
+];
+
+const popularLocations = [
+  {
+    title: "Rosewood",
+    description: "Beginner-friendly town with strong early survival options.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Riverside",
+    description: "A quieter town option for players planning safer early routes.",
+    href: "/locations/riverside",
+  },
+  {
+    title: "Louisville",
+    description: "High-risk city area with strong loot potential and advanced route planning.",
+    href: "/locations/louisville",
   },
 ];
 ---
@@ -135,6 +177,44 @@ const modules: HomeModule[] = [
               </div>
             )}
           </article>
+        ))
+      }
+    </div>
+  </PageContainer>
+
+  <PageContainer as="section" class="pb-12 sm:pb-16">
+    <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-semibold text-zsd-orange">Survival Guides</p>
+        <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Popular Survival Guides</h2>
+      </div>
+      <p class="max-w-xl text-sm leading-6 text-zsd-muted">
+        Practical entry points for base planning, power, food and Build 42 survival decisions.
+      </p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        survivalGuides.map((guide) => (
+          <Card {...guide} label="Open guide" eyebrow="Survival Guide" />
+        ))
+      }
+    </div>
+  </PageContainer>
+
+  <PageContainer as="section" class="pb-12 sm:pb-16">
+    <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
+        <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Popular Locations</h2>
+      </div>
+      <p class="max-w-xl text-sm leading-6 text-zsd-muted">
+        Start with the most useful town and city pages for survival planning.
+      </p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-3">
+      {
+        popularLocations.map((location) => (
+          <Card {...location} label="View location" eyebrow="Location Record" />
         ))
       }
     </div>

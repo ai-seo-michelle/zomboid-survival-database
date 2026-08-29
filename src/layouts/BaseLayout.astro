@@ -2,23 +2,68 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { siteConfig } from "../config/site";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  serializeJsonLd,
+  type FaqItem,
+} from "../utils/structuredData";
 import "../styles/global.css";
 
 export interface Props {
   title?: string;
   description?: string;
   ogType?: "website" | "article";
+  faqs?: FaqItem[];
+  canonicalPath?: string | null;
+  noindex?: boolean;
 }
 
 const {
   title = siteConfig.title,
   description = siteConfig.description,
   ogType = "website",
+  faqs = [],
+  canonicalPath,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.name}`;
-const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
+const canonicalUrl =
+  canonicalPath === null ? null : new URL(canonicalPath ?? Astro.url.pathname, siteConfig.url).toString();
 const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
+const isGuidePage = Astro.url.pathname.startsWith("/guides/");
+const breadcrumbSchema = noindex
+  ? null
+  : buildBreadcrumbSchema({
+      pathname: Astro.url.pathname,
+      title,
+      siteUrl: siteConfig.url,
+    });
+const articleSchema = isGuidePage && canonicalUrl && !noindex
+  ? buildArticleSchema({
+      title,
+      description,
+      url: canonicalUrl,
+      image: ogImageUrl,
+      siteName: siteConfig.name,
+    })
+  : null;
+const faqSchema = noindex ? null : buildFaqSchema(faqs);
+const jsonLdSchemas: Record<string, unknown>[] = [];
+
+if (breadcrumbSchema) {
+  jsonLdSchemas.push(breadcrumbSchema);
+}
+
+if (articleSchema) {
+  jsonLdSchemas.push(articleSchema);
+}
+
+if (faqSchema) {
+  jsonLdSchemas.push(faqSchema);
+}
 ---
 
 <!doctype html>
@@ -31,7 +76,8 @@ const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="YZ6U3gdo8fse3QzQC7nQmCFdFnBwEyLht_GT8u39s4U" />
     <meta name="theme-color" content="#070a08" />
-    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DLSMF8Q3HK"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -50,7 +96,7 @@ const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:url" content={canonicalUrl} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -61,6 +107,11 @@ const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="Zomboid Survival Database tactical map dashboard preview" />
+    {
+      jsonLdSchemas.map((schema) => (
+        <script is:inline type="application/ld+json" set:html={serializeJsonLd(schema)}></script>
+      ))
+    }
   </head>
   <body>
     <Header />

@@ -1,0 +1,300 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const lootLocations = [
+  {
+    rank: 1,
+    name: "Rosewood Fire Station",
+    href: "/locations/rosewood-fire-station",
+    bestFor: "Tools and base setup",
+    risk: "Low-Medium",
+    lootFocus: "Tools, storage, utility",
+    recommendedFor: "Beginners",
+    description:
+      "A practical early loot target because it supports base setup, route learning and controlled Rosewood progression.",
+  },
+  {
+    rank: 2,
+    name: "Louisville Urban Routes",
+    href: "/locations/louisville",
+    bestFor: "High-value city loot",
+    risk: "High",
+    lootFocus: "Weapons, tools, supplies",
+    recommendedFor: "Veteran Players",
+    description:
+      "Louisville offers strong loot potential, but the pressure and navigation risk make it better for prepared players.",
+  },
+  {
+    rank: 3,
+    name: "Rosewood Town Routes",
+    href: "/locations/rosewood",
+    bestFor: "Safe early supplies",
+    risk: "Low",
+    lootFocus: "Food, basics, starter gear",
+    recommendedFor: "New Players",
+    description:
+      "Rosewood's compact layout makes it useful for repeated short supply runs without committing to dense urban pressure.",
+  },
+  {
+    rank: 4,
+    name: "Riverside Commercial Routes",
+    href: "/locations/riverside",
+    bestFor: "Cautious supply runs",
+    risk: "Low-Medium",
+    lootFocus: "Food, tools, general supplies",
+    recommendedFor: "Beginners",
+    description:
+      "Riverside is useful for players who want slower route planning and steady supplies before longer map travel.",
+  },
+];
+
+const rankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "bestFor", label: "Best For" },
+  { key: "risk", label: "Risk" },
+  { key: "lootFocus", label: "Loot Focus" },
+  { key: "recommendedFor", label: "Recommended For" },
+];
+
+const rankingRows = lootLocations.map((location) => ({
+  title: location.name,
+  href: location.href,
+  values: {
+    rank: `#${location.rank}`,
+    bestFor: location.bestFor,
+    risk: location.risk,
+    lootFocus: location.lootFocus,
+    recommendedFor: location.recommendedFor,
+  },
+}));
+
+const comparisonCards = lootLocations.map((location) => ({
+  title: location.name,
+  description: location.description,
+  href: location.href,
+  label: "View Guide",
+  eyebrow: "Loot Location",
+  badge: `#${location.rank}`,
+  stats: [
+    { label: "Best For", value: location.bestFor },
+    { label: "Risk", value: location.risk },
+    { label: "Focus", value: location.lootFocus },
+    { label: "Player", value: location.recommendedFor },
+  ],
+}));
+
+const lootCategories = [
+  {
+    title: "Weapons",
+    description:
+      "Prioritize safer targets first, then move into higher-risk areas only when escape routes are planned.",
+  },
+  {
+    title: "Food",
+    description:
+      "Early food runs are strongest when they can be repeated without crossing too many high-pressure streets.",
+  },
+  {
+    title: "Tools",
+    description:
+      "Tools matter because they turn a safe building into a functioning base with storage, repairs and utility.",
+  },
+  {
+    title: "Medical Supplies",
+    description:
+      "Medical loot is best collected before risky travel, so injuries do not turn a good route into a failed run.",
+  },
+];
+
+const riskRewardRows = [
+  { label: "Low risk", value: "Rosewood town routes and controlled base-adjacent runs" },
+  { label: "Medium risk", value: "Riverside commercial routes and longer road movement" },
+  { label: "High reward", value: "Louisville routes when the player has transport and exits" },
+  { label: "Best balance", value: "Rosewood Fire Station for early tools and base momentum" },
+];
+
+const strategySteps = [
+  "Start with short loot runs near your intended base before expanding into a full town route.",
+  "Sort loot by survival need: water, food, tools, weapons, medical supplies and vehicle support.",
+  "Mark safe return paths mentally before entering larger buildings or dense streets.",
+  "Leave high-value loot behind when fatigue, injuries or zombie pressure make the return route unsafe.",
+];
+
+const faqs = [
+  {
+    question: "What are the best loot locations in Project Zomboid?",
+    answer:
+      "The best loot locations depend on risk tolerance. Rosewood Fire Station is strong for early base setup, while Louisville offers higher reward with much higher danger.",
+  },
+  {
+    question: "Where should beginners loot first?",
+    answer:
+      "Beginners should usually start with safer town routes near a planned base. Rosewood is easier to read than dense urban areas.",
+  },
+  {
+    question: "Is Louisville worth looting early?",
+    answer:
+      "Louisville can be valuable, but it is not ideal for a first route unless the player already has transport, escape planning and enough supplies.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Starting Location",
+    description: "Choose a beginner-friendly town before planning loot routes.",
+    href: "/guides/best-starting-location",
+  },
+  {
+    title: "Louisville Location Guide",
+    description: "Review high-risk city survival notes and route planning.",
+    href: "/locations/louisville",
+  },
+  {
+    title: "Rosewood Fire Station Base",
+    description: "Plan a strong Rosewood base around practical early loot routes.",
+    href: "/locations/rosewood-fire-station",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Compare base candidates by safety, resources and long-term value.",
+    href: "/guides/best-base-locations/",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Loot Locations in Project Zomboid"
+  description="Compare the best loot locations in Project Zomboid by weapons, food, tools, medical supplies, risk and survival route value."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Loot Location Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Loot Locations in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        A database-style guide for comparing loot routes by supply value, player experience and risk level.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Loot routes should serve the survival plan
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The best loot location is not always the place with the biggest reward. Good routes balance supplies,
+          distance, escape options and whether the run helps your base become safer.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Loot Location Ranking Table</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked loot routes
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Loot Location" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Location Comparison</p>
+        <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare route value and risk
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        {comparisonCards.map((card) => <Card {...card} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="categories-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Loot Categories</p>
+        <h2 id="categories-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          What to prioritize by supply type
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {lootCategories.map((category) => <Card title={category.title} description={category.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="risk-reward-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Risk vs Reward Analysis</p>
+          <h2 id="risk-reward-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Bigger loot pools need better exits
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            A high-value loot area only helps if the player can return safely. For early survival, controlled
+            Rosewood routes usually create more progress than a dangerous city run that ends with exhaustion,
+            injuries or a blocked vehicle path.
+          </p>
+        </div>
+        <StatsTable rows={riskRewardRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="strategy-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Loot Strategy</p>
+        <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Build safe loops before chasing rare supplies
+        </h2>
+      </div>
+      <div class="grid gap-3">
+        {
+          strategySteps.map((step, index) => (
+            <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+              <span class="font-semibold text-zsd-green-soft">Step {index + 1}: </span>
+              {step}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Loot planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

@@ -1,0 +1,426 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const traits = [
+  {
+    rank: 1,
+    name: "Fast Learner",
+    type: "Positive",
+    bestFor: "Long-term growth",
+    difficulty: "Easy",
+    mainValue: "Helps the survivor scale skills across a longer run",
+  },
+  {
+    rank: 2,
+    name: "Keen Hearing",
+    type: "Positive",
+    bestFor: "Situational awareness",
+    difficulty: "Easy",
+    mainValue: "Improves safety when moving, looting and checking blind angles",
+  },
+  {
+    rank: 3,
+    name: "Wakeful",
+    type: "Positive",
+    bestFor: "Daily efficiency",
+    difficulty: "Easy",
+    mainValue: "Supports longer useful days without pushing into exhaustion",
+  },
+  {
+    rank: 4,
+    name: "High Thirst",
+    type: "Negative",
+    bestFor: "Manageable points",
+    difficulty: "Easy-Medium",
+    mainValue: "A common tradeoff when water planning is already part of the route",
+  },
+  {
+    rank: 5,
+    name: "Slow Reader",
+    type: "Negative",
+    bestFor: "Low-risk drawback",
+    difficulty: "Easy-Medium",
+    mainValue: "Manageable when reading time can be planned safely",
+  },
+  {
+    rank: 6,
+    name: "Weak Stomach",
+    type: "Negative",
+    bestFor: "Careful food management",
+    difficulty: "Medium",
+    mainValue: "Works only if the player avoids risky food decisions",
+  },
+];
+
+const rankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "type", label: "Type" },
+  { key: "bestFor", label: "Best For" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "mainValue", label: "Main Value" },
+];
+
+const rankingRows = traits.map((trait) => ({
+  title: trait.name,
+  values: {
+    rank: `#${trait.rank}`,
+    type: trait.type,
+    bestFor: trait.bestFor,
+    difficulty: trait.difficulty,
+    mainValue: trait.mainValue,
+  },
+}));
+
+const positiveTraits = [
+  {
+    title: "Fast Learner",
+    description:
+      "A strong all-purpose trait for players who want their character to improve steadily across a long survival plan.",
+  },
+  {
+    title: "Keen Hearing",
+    description:
+      "Useful for safer looting and movement because awareness mistakes are often more dangerous than weak stats.",
+  },
+  {
+    title: "Wakeful",
+    description:
+      "Helps the player get more controlled work done each day without turning every route into an exhaustion problem.",
+  },
+  {
+    title: "Outdoorsman",
+    description:
+      "A practical survival trait for players who spend more time moving between towns, bases and outdoor routes.",
+  },
+];
+
+const negativeTraits = [
+  {
+    title: "High Thirst",
+    description:
+      "A manageable drawback when the build already includes water storage, bottle habits and stable base planning.",
+  },
+  {
+    title: "Slow Reader",
+    description:
+      "A safer negative pick when reading can happen in a secured base instead of during a pressured route.",
+  },
+  {
+    title: "Weak Stomach",
+    description:
+      "Can be manageable for careful players, but it punishes careless food choices and rushed looting.",
+  },
+  {
+    title: "Smoker",
+    description:
+      "Only fits players who are comfortable managing another supply need during looting and base routines.",
+  },
+];
+
+const beginnerBuilds = [
+  {
+    title: "Safe Beginner Trait Core",
+    description:
+      "Fast Learner, Keen Hearing and Wakeful give new players stronger awareness, growth and daily planning value.",
+  },
+  {
+    title: "Manageable Negative Picks",
+    description:
+      "High Thirst and Slow Reader are easier to manage when the player starts in a calmer location and builds routines.",
+  },
+  {
+    title: "Avoid Overloading Drawbacks",
+    description:
+      "Beginners should avoid stacking negatives that punish food, sleep, panic and movement at the same time.",
+  },
+];
+
+const combatBuilds = [
+  {
+    title: "Awareness First",
+    description:
+      "Keen Hearing is valuable for combat builds because the safest fight is still the one you can hear coming.",
+  },
+  {
+    title: "Longer Active Days",
+    description:
+      "Wakeful supports route control by giving more usable time before fatigue begins to narrow safe choices.",
+  },
+  {
+    title: "Keep Drawbacks Simple",
+    description:
+      "Combat builds should not take too many survival-management negatives that distract from exits and pressure.",
+  },
+];
+
+const survivalBuilds = [
+  {
+    title: "Base-Focused Survival",
+    description:
+      "Pair practical positives with manageable negatives, then use a safe base plan to reduce daily pressure.",
+  },
+  {
+    title: "Route-Focused Survival",
+    description:
+      "Traits that improve awareness, endurance planning and routine management are stronger than risky min-max choices.",
+  },
+  {
+    title: "Long-Term Stability",
+    description:
+      "The best survival trait build is one you can manage after the first week, not only during character creation.",
+  },
+];
+
+const comparisonRows = [
+  { label: "Best positive trait", value: "Fast Learner" },
+  { label: "Best safety trait", value: "Keen Hearing" },
+  { label: "Best daily planning trait", value: "Wakeful" },
+  { label: "Most manageable negative", value: "High Thirst" },
+  { label: "Beginner caution", value: "Avoid stacking too many needs at once" },
+  { label: "Best paired guide", value: "Best Occupations and Starting Location" },
+];
+
+const recommendedBuilds = [
+  {
+    title: "Beginner Survivor",
+    description:
+      "Fast Learner, Keen Hearing and a conservative negative trait setup fit safer early-game learning.",
+    href: "/guides/best-starting-location",
+    label: "Compare starts",
+    stats: [
+      { label: "Focus", value: "Safety" },
+      { label: "Route", value: "Beginner towns" },
+    ],
+  },
+  {
+    title: "Base Planner",
+    description:
+      "Use manageable drawbacks and practical positives with a base-first plan.",
+    href: "/guides/best-base-locations/",
+    label: "Compare bases",
+    stats: [
+      { label: "Focus", value: "Stability" },
+      { label: "Plan", value: "Long-term base" },
+    ],
+  },
+  {
+    title: "Occupation Pairing",
+    description:
+      "Match traits to your occupation so the build has one clear survival identity.",
+    href: "/guides/best-occupations",
+    label: "Compare jobs",
+    stats: [
+      { label: "Focus", value: "Build synergy" },
+      { label: "Plan", value: "Occupation match" },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: "What are the best traits in Project Zomboid?",
+    answer:
+      "Fast Learner, Keen Hearing and Wakeful are strong general choices because they support skill growth, awareness and daily planning.",
+  },
+  {
+    question: "What negative traits are best for beginners?",
+    answer:
+      "High Thirst and Slow Reader are common manageable picks, but only if the player builds safe routines around water and reading time.",
+  },
+  {
+    question: "Should I stack many negative traits?",
+    answer:
+      "New players should avoid stacking too many drawbacks. A simple build that survives is better than a point-heavy build that collapses under routine pressure.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Occupations",
+    description: "Pair traits with an occupation that supports the same survival plan.",
+    href: "/guides/best-occupations",
+  },
+  {
+    title: "Best Starting Location",
+    description: "Choose a starting town that makes your trait drawbacks easier to manage.",
+    href: "/guides/best-starting-location",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Use a stable base to make negative traits easier to control.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Build 42 Guide",
+    description: "Review Build 42 planning notes for survival build decisions.",
+    href: "/guides/build-42",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Traits in Project Zomboid"
+  description="Compare the best traits in Project Zomboid by positive value, manageable negative traits, beginner builds, combat builds and survival planning."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Traits Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Traits in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Compare positive and negative traits by survival value, risk management and how they support beginner,
+        combat and long-term builds.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Traits are a survival budget, not just character flavor
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The best traits create a build you can actually manage after the first few days. Strong positive
+          traits improve awareness, learning or planning, while good negative traits are drawbacks you can
+          control with habits, base setup and route discipline.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Traits Ranking Table</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked trait choices
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Trait" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="positive-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Positive Traits</p>
+        <h2 id="positive-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Traits that improve survival decisions
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {positiveTraits.map((trait) => <Card title={trait.title} description={trait.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="negative-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Negative Traits</p>
+        <h2 id="negative-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Drawbacks that can be planned around
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {negativeTraits.map((trait) => <Card title={trait.title} description={trait.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="beginner-builds-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Beginner Trait Builds</p>
+        <h2 id="beginner-builds-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Keep the first build manageable
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {beginnerBuilds.map((build) => <Card title={build.title} description={build.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="combat-builds-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Combat Trait Builds</p>
+        <h2 id="combat-builds-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Support fights without losing route control
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {combatBuilds.map((build) => <Card title={build.title} description={build.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="survival-builds-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Survival Trait Builds</p>
+        <h2 id="survival-builds-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Traits for stable long-term routines
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {survivalBuilds.map((build) => <Card title={build.title} description={build.description} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Trait Comparison</p>
+          <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Compare traits by how much pressure they add or remove
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            A good trait build reduces decision pressure. If a drawback creates more problems than the positive
+            traits solve, the build is probably too ambitious for the route.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="recommended-builds-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Recommended Builds</p>
+        <h2 id="recommended-builds-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Simple directions for trait planning
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {recommendedBuilds.map((build) => <Card {...build} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Trait planning questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue build planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

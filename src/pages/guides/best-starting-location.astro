@@ -1,0 +1,221 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import { locations } from "../../data/locations";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationBySlug = new Map(locations.map((location) => [location.slug, location]));
+
+const startingLocations = [
+  {
+    rank: 1,
+    slug: "rosewood",
+    startingValue: "Best beginner start",
+    mainReason: "Compact routes and strong early base options",
+  },
+  {
+    rank: 2,
+    slug: "riverside",
+    startingValue: "Safer paced start",
+    mainReason: "Calmer pressure and readable town movement",
+  },
+  {
+    rank: 3,
+    slug: "louisville",
+    startingValue: "Advanced target",
+    mainReason: "High loot potential with much higher pressure",
+  },
+];
+
+const rankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "difficulty", label: "Difficulty" },
+  { key: "recommendedFor", label: "Recommended For" },
+  { key: "startingValue", label: "Starting Value" },
+  { key: "mainReason", label: "Main Reason" },
+];
+
+const rankingRows = startingLocations.map((entry) => {
+  const location = locationBySlug.get(entry.slug);
+
+  return {
+    title: location?.name ?? entry.slug,
+    href: `/locations/${entry.slug}`,
+    values: {
+      rank: `#${entry.rank}`,
+      difficulty: location?.difficulty ?? "Unknown",
+      recommendedFor: location?.recommendedFor ?? "Unknown",
+      startingValue: entry.startingValue,
+      mainReason: entry.mainReason,
+    },
+  };
+});
+
+const comparisonCards = startingLocations.map((entry) => {
+  const location = locationBySlug.get(entry.slug);
+
+  return {
+    title: location?.name ?? entry.slug,
+    description: location?.description ?? "Location data is being prepared.",
+    href: `/locations/${entry.slug}`,
+    label: "View Location Guide",
+    eyebrow: "Location Comparison",
+    badge: `#${entry.rank}`,
+    stats: [
+      { label: "Difficulty", value: location?.difficulty ?? "Unknown" },
+      { label: "Base Rating", value: location ? `${location.baseRating}/5` : "Unknown" },
+      { label: "Loot Rating", value: location ? `${location.lootRating}/5` : "Unknown" },
+      { label: "Risk Rating", value: location ? `${location.riskRating}/5` : "Unknown" },
+    ],
+  };
+});
+
+const recommendationRows = [
+  { label: "Best first pick", value: "Rosewood" },
+  { label: "Why it works", value: "Easy routes, strong base options and lower early pressure" },
+  { label: "Alternative", value: "Riverside for a slower, more cautious start" },
+  { label: "Avoid first", value: "Louisville unless you already understand urban survival pressure" },
+];
+
+const faqs = [
+  {
+    question: "What is the best starting location in Project Zomboid?",
+    answer:
+      "For most new players, Rosewood is the strongest first recommendation because it is compact, readable and has practical early base options.",
+  },
+  {
+    question: "Is Riverside good for beginners?",
+    answer:
+      "Yes. Riverside is a good beginner-friendly option for players who prefer a slower pace and safer movement between loot routes.",
+  },
+  {
+    question: "Should beginners start in Louisville?",
+    answer:
+      "Louisville is better treated as an advanced target. It has strong loot potential, but the pressure and navigation risk make it unforgiving for a first run.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Base Locations",
+    description: "Compare base candidates by safety, resources and long-term survival value.",
+    href: "/guides/best-base-locations/",
+  },
+  {
+    title: "Rosewood Base Guide",
+    description: "Review Rosewood stats, base spots and early survival planning.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Map Difficulty Ranking",
+    description: "Compare tracked map areas by difficulty and recommended player type.",
+    href: "/maps/difficulty-ranking",
+  },
+];
+---
+
+<BaseLayout
+  title="Best Starting Location in Project Zomboid"
+  description="Compare the best starting locations in Project Zomboid by difficulty, base potential, loot access and beginner-friendly survival value."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Starting Location Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Starting Location in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Compare beginner-friendly towns and survival routes before choosing where to start your next Project
+        Zomboid run.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+        <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Start where the map helps you learn
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The best starting location is not only about low zombie pressure. A strong start should give you
+          clear roads, recoverable supplies, practical base options and enough breathing room to make mistakes
+          without losing the run immediately.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Starting Location Ranking Table</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked starting choices
+        </h2>
+      </div>
+      <RankingTable columns={rankingColumns} rows={rankingRows} titleLabel="Location" />
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Location Comparison</p>
+        <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare the current database records
+        </h2>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {comparisonCards.map((card) => <Card {...card} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="recommendation-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Beginner Recommendation</p>
+          <h2 id="recommendation-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Rosewood is the safest first recommendation
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Rosewood gives new players a practical learning loop: choose a secure building, run short supply
+            routes, keep a vehicle path open and expand only after the first base is stable. Riverside is a
+            strong alternative when you want a quieter pace.
+          </p>
+        </div>
+        <StatsTable rows={recommendationRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Starting location questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survival planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

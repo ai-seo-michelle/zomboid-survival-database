@@ -1,0 +1,282 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const locationStats = [
+  { label: "Town", value: "Rosewood" },
+  { label: "Location Type", value: "Police station" },
+  { label: "Difficulty", value: "Easy-Medium" },
+  { label: "Recommended For", value: "Prepared beginners" },
+  { label: "Loot Focus", value: "Weapons and supplies" },
+  { label: "Base Potential", value: "Medium" },
+];
+
+const overviewCards = [
+  {
+    title: "Weapon-Focused Target",
+    description:
+      "Rosewood Police Station is useful when a run needs controlled access to weapon-related supplies before wider travel.",
+  },
+  {
+    title: "Central Route Value",
+    description:
+      "Its value comes from being part of a compact Rosewood route rather than a standalone answer to every survival need.",
+  },
+  {
+    title: "Planning Checkpoint",
+    description:
+      "Treat it as a stop in a larger loot plan, especially when your main base is nearby or already secured.",
+  },
+];
+
+const lootNotes = [
+  "The police station is best treated as a focused loot stop instead of a broad supply replacement.",
+  "Pair it with residential and commercial routes so food, tools and medical basics are not ignored.",
+  "Bring bags and leave room for priority items rather than clearing everything in one risky trip.",
+];
+
+const weaponAccessNotes = [
+  "Plan weapon access only after you have a safe entry, exit and return route.",
+  "Do not let weapon-focused looting delay food, water, storage and base stability.",
+  "Use the police station to improve survivability, not as a reason to create more noise than the area can handle.",
+];
+
+const strategySteps = [
+  "Scout the streets around the station before committing to the building.",
+  "Enter only when fatigue, panic and nearby pressure are still manageable.",
+  "Prioritize useful supplies, then return to base before pushing deeper into town.",
+  "Link the station with Rosewood Fire Station or another secure base for repeatable routes.",
+];
+
+const basePotentialRows = [
+  { label: "Best use", value: "Loot target and route checkpoint" },
+  { label: "Base safety", value: "Medium if the area is controlled" },
+  { label: "Main limitation", value: "Less practical than Rosewood Fire Station for long-term setup" },
+  { label: "Recommended plan", value: "Use as a supply stop while basing elsewhere in Rosewood" },
+];
+
+const pros = [
+  "Useful weapon-focused loot target in Rosewood",
+  "Works well with short beginner-friendly town routes",
+  "Can support early confidence if approached carefully",
+  "Strong internal link between Rosewood survival and loot planning",
+];
+
+const cons = [
+  "Not as flexible as Rosewood Fire Station for a long-term base",
+  "Weapon-focused runs can create risky decision-making",
+  "Still requires route control before it becomes safe to revisit",
+];
+
+const faqs = [
+  {
+    question: "Is Rosewood Police Station worth looting in Project Zomboid?",
+    answer:
+      "Yes, it can be worth looting when you need weapon-related supplies, but it works best as part of a controlled Rosewood route.",
+  },
+  {
+    question: "Is Rosewood Police Station a good base?",
+    answer:
+      "It has some base potential, but most players will find Rosewood Fire Station more practical for long-term setup.",
+  },
+  {
+    question: "Should beginners rush the police station?",
+    answer:
+      "No. Beginners should secure food, water, storage and an escape route first, then loot the police station when the area is manageable.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Rosewood Location Guide",
+    description: "Review Rosewood difficulty, base options and survival strategy.",
+    href: "/locations/rosewood",
+  },
+  {
+    title: "Rosewood Fire Station Base",
+    description: "Compare the police station with Rosewood's strongest base candidate.",
+    href: "/locations/rosewood-fire-station",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare loot routes by supply value, risk and player experience.",
+    href: "/guides/best-loot-locations",
+  },
+  {
+    title: "Best Starting Location",
+    description: "Choose a beginner-friendly town before planning your first route.",
+    href: "/guides/best-starting-location",
+  },
+];
+---
+
+<BaseLayout
+  title="Rosewood Police Station Project Zomboid Guide"
+  description="Plan Rosewood Police Station in Project Zomboid with loot notes, weapon access, survival strategy, base potential and related guides."
+  ogType="article"
+  faqs={faqs}
+>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Location Database</p>
+      <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+        <div>
+          <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+            Rosewood Police Station Project Zomboid Guide
+          </h1>
+          <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+            A focused Rosewood location guide for weapon access, loot planning and early survival decisions.
+          </p>
+        </div>
+        <StatsTable rows={locationStats.slice(0, 4)} />
+      </div>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
+      <div>
+        <section aria-labelledby="why-matters-title">
+          <p class="text-sm font-semibold text-zsd-orange">Why this location matters</p>
+          <h2 id="why-matters-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            A compact Rosewood loot target with clear tactical value
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Rosewood Police Station matters because it gives players a focused reason to enter town: improve
+            combat readiness without leaving the beginner-friendly structure of Rosewood. It should be planned
+            as a route objective, not rushed as a first move.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="overview-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Overview</p>
+          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            How the police station fits into Rosewood
+          </h2>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {overviewCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="loot-title">
+          <p class="text-sm font-semibold text-zsd-orange">Loot & Resources</p>
+          <h2 id="loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Use it as one stop in a balanced route
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              lootNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="weapon-title">
+          <p class="text-sm font-semibold text-zsd-orange">Weapon Access</p>
+          <h2 id="weapon-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Better equipment still needs a safe plan
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              weaponAccessNotes.map((note) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  {note}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="strategy-title">
+          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <h2 id="strategy-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Loot the station after the route is controlled
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              strategySteps.map((step, index) => (
+                <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                  <span class="font-semibold text-zsd-green-soft">Step {index + 1}: </span>
+                  {step}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+
+      <aside class="grid gap-6">
+        <section aria-labelledby="stats-title">
+          <p class="text-sm font-semibold text-zsd-orange">Location Stats</p>
+          <h2 id="stats-title" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <div class="mt-4">
+            <StatsTable rows={locationStats} />
+          </div>
+        </section>
+
+        <section aria-labelledby="base-potential-title">
+          <p class="text-sm font-semibold text-zsd-orange">Base Potential</p>
+          <h2 id="base-potential-title" class="mt-2 text-xl font-semibold text-zsd-ash">Best use case</h2>
+          <div class="mt-4">
+            <StatsTable rows={basePotentialRows} />
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="mt-12" aria-labelledby="pros-cons-title">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Pros</p>
+          <h2 id="pros-cons-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Why visit Rosewood Police Station
+          </h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {pros.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+        <div class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Cons</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">Tradeoffs to plan around</h2>
+          <ul class="mt-5 grid gap-3 text-sm leading-6 text-zsd-muted">
+            {cons.map((item) => <li class="border border-zsd-line/80 bg-zsd-black/35 p-3">{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Rosewood Police Station questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue Rosewood planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>
