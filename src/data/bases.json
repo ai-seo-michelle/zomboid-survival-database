@@ -8,7 +8,7 @@
     "difficulty": "Easy",
     "recommendedFor": "Beginners",
     "description": "A practical early base candidate in Rosewood with strong defensive potential and useful emergency-service access nearby.",
-    "guideLink": "/locations/rosewood"
+    "guideLink": "/locations/rosewood/"
   },
   {
     "slug": "louisville-warehouse-base",
@@ -22,4 +22,3 @@
     "guideLink": "/locations/louisville"
   }
 ]
-

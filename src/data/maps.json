@@ -6,7 +6,7 @@
     "difficulty": "Easy",
     "recommendedFor": "New Players",
     "challenge": "Compact town planning with fewer major escape complications than larger urban areas.",
-    "guideLink": "/locations/rosewood"
+    "guideLink": "/locations/rosewood/"
   },
   {
     "slug": "louisville",
@@ -18,4 +18,3 @@
     "guideLink": "/locations/louisville"
   }
 ]
-

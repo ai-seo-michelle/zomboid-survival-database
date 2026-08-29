@@ -12,14 +12,45 @@ export const locations: LocationRecord[] = [
     lootRating: 4,
     riskRating: 2,
     description:
-      "Rosewood is a compact starting town with practical base options, clear road access and manageable early pressure.",
+      "Use this Project Zomboid Rosewood map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+    introduction:
+      "Rosewood is the town-level hub for planning a safer Project Zomboid run. This page focuses on map-level decisions: where to start, which POIs matter, how to link short routes and when to open the focused Fire Station or Police Station guides.",
     overview:
-      "Rosewood is one of the strongest base-focused starts in Project Zomboid because its important buildings are close together and the town is easier to read than larger urban areas. It gives new players room to learn supply routes, vehicle access and safehouse planning without immediately dealing with Louisville-level density.",
+      "Rosewood is a compact starting town in Project Zomboid with practical base options, clear road access and manageable early pressure.",
+    mapOverview:
+      "The Rosewood map works best as a short-route planning area. Its residential blocks, emergency-service buildings and road exits sit close enough together that players can plan one objective at a time instead of crossing a large city for every supply run.",
+    build42Notes: [
+      "Build 42 planning should be treated as current-build planning. Use Rosewood's known town structure as a starting point, but verify exact building layouts and route pressure in your current save.",
+      "Official Build 42 notes include updates to existing map areas, including Rosewood, so older habits should be checked against the current build before committing to a base or loot loop.",
+      "This is not a full interactive Rosewood map. It is a planning hub for routes, POIs and survival decisions without claiming exact coordinates or exhaustive building data.",
+    ],
     keyLocations: [
-      "Rosewood Fire Department",
+      "Rosewood Fire Station",
       "Rosewood Police Station",
       "Residential neighborhoods",
       "Main road commercial strip",
+    ],
+    keyLocationsLabel: "Key Areas / POIs",
+    keyLocationsHeading: "Rosewood areas to compare",
+    pointsOfInterest: [
+      {
+        title: "Rosewood Fire Station",
+        href: "/locations/rosewood-fire-station/",
+        description:
+          "Open the Fire Station guide when the route plan turns into a base decision or defensive setup.",
+      },
+      {
+        title: "Rosewood Police Station",
+        href: "/locations/rosewood-police-station/",
+        description:
+          "Use the Police Station guide for weapon-access planning and a focused Rosewood POI route.",
+      },
+      {
+        title: "Fire Station Loot Guide",
+        href: "/locations/rosewood-fire-station-loot/",
+        description:
+          "Check the loot-focused page when you need firefighter gear, utility supplies and a short station route.",
+      },
     ],
     bestBases: [
       {
@@ -30,7 +61,7 @@ export const locations: LocationRecord[] = [
         difficulty: "Easy",
         recommendedFor: "Beginners",
         description:
-          "A top Rosewood base candidate with strong defensive potential, useful utility space and quick access to town routes.",
+          "A top Rosewood base candidate because it connects practical building utility with short town routes.",
       },
       {
         rank: 2,
@@ -40,7 +71,7 @@ export const locations: LocationRecord[] = [
         difficulty: "Easy",
         recommendedFor: "New Players",
         description:
-          "A practical fallback area for players who want nearby weapons access and a central route into town.",
+          "A focused POI area for weapon access and route control, usually better as a stop than the whole long-term plan.",
       },
       {
         rank: 3,
@@ -50,13 +81,27 @@ export const locations: LocationRecord[] = [
         difficulty: "Easy",
         recommendedFor: "Cautious Players",
         description:
-          "A quieter base style built around houses near the edge of town, useful for slower looting and controlled movement.",
+          "A quieter edge-of-town approach for slower looting, controlled movement and lower early pressure.",
       },
     ],
+    basePlanning: [
+      "Treat Rosewood bases as part of the town map, not as isolated buildings. A strong base still needs repeatable routes, nearby supplies and a clear way out.",
+      "The Fire Station deserves its own base guide, while this hub keeps the broader Rosewood base decision connected to map movement and town pressure.",
+    ],
     lootAndResources: [
-      "Emergency-service buildings give Rosewood useful early-game targets.",
-      "Residential blocks provide food, basic tools and storage opportunities.",
-      "Road access makes short loot runs and vehicle recovery easier than in dense city areas.",
+      "Emergency-service POIs give Rosewood useful early loot targets without forcing a long city route.",
+      "Residential blocks provide food, basic tools and storage opportunities for safer recovery runs.",
+      "Rosewood loot planning works best when each stop has an exit path back to the base or vehicle route.",
+    ],
+    routePlanning: [
+      "Plan Rosewood routes around short loops: scout, enter one area, collect priority supplies and return before fatigue builds.",
+      "Use the main road and residential edges as planning references instead of trying to clear the entire town at once.",
+      "Keep vehicle access in mind early so Rosewood can become a staging point for Muldraugh, West Point or Louisville later.",
+    ],
+    beginnerSuitability: [
+      "Rosewood is beginner-friendly because the town is easier to read than dense urban areas.",
+      "New players can learn a repeatable loop: pick a safehouse, check one POI, return, sort supplies and expand slowly.",
+      "The main risk is overconfidence. Rosewood is safer than many areas, but noise, fatigue and poor exits still turn simple runs dangerous.",
     ],
     survivalStrategy: [
       "Secure one building first, then expand routes instead of clearing the whole town at once.",
@@ -74,16 +119,58 @@ export const locations: LocationRecord[] = [
       "Can feel limited after the early phase",
       "Still requires noise control near town center",
     ],
+    faqs: [
+      {
+        question: "Is Rosewood a good map for beginners in Project Zomboid?",
+        answer:
+          "Yes. Rosewood is one of the easier towns to read because routes are shorter and important POIs are easier to connect than in larger city areas.",
+      },
+      {
+        question: "Is this a full interactive Rosewood map?",
+        answer:
+          "No. This is a static Rosewood map planning guide for routes, POIs, bases and loot decisions. It does not provide exact coordinates or a full interactive map tool.",
+      },
+      {
+        question: "Where should I go first in Rosewood?",
+        answer:
+          "Start with a safe building and nearby residential supplies, then plan controlled trips toward the Fire Station or Police Station once the route is manageable.",
+      },
+      {
+        question: "Is Rosewood Fire Station covered on this page?",
+        answer:
+          "This page explains how the Fire Station fits into the Rosewood map. Use the dedicated Fire Station guide for the full base-focused breakdown.",
+      },
+      {
+        question: "How should I use Rosewood in Build 42?",
+        answer:
+          "Use Rosewood as a current-build planning area: check routes in your save, avoid relying on old exact layouts and keep each loot or base decision recoverable.",
+      },
+    ],
     relatedGuides: [
+      {
+        title: "Rosewood Fire Station",
+        href: "/locations/rosewood-fire-station/",
+        description: "Open the focused Fire Station base and POI guide.",
+      },
+      {
+        title: "Rosewood Police Station",
+        href: "/locations/rosewood-police-station/",
+        description: "Plan weapon access and a controlled Police Station route.",
+      },
+      {
+        title: "Fire Station Loot Guide",
+        href: "/locations/rosewood-fire-station-loot/",
+        description: "Review Rosewood Fire Station loot categories and route notes.",
+      },
       {
         title: "Best Base Locations",
         href: "/guides/best-base-locations/",
-        description: "Compare Rosewood with other base candidates.",
+        description: "Compare Rosewood base options with the wider base ranking.",
       },
       {
-        title: "Interactive Map",
-        href: "/maps/interactive-map",
-        description: "Use the map hub for routes and future location filters.",
+        title: "Best Loot Locations",
+        href: "/guides/best-loot-locations/",
+        description: "Compare Rosewood loot planning with other high-value routes.",
       },
       {
         title: "Build 42 Map Guide",
@@ -92,14 +179,20 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Map Difficulty Ranking",
-        href: "/maps/difficulty-ranking",
+        href: "/maps/difficulty-ranking/",
         description: "Compare Rosewood against harder map areas.",
+      },
+      {
+        title: "Best Starting Location",
+        href: "/guides/best-starting-location/",
+        description: "See why Rosewood remains a practical first-town candidate.",
       },
     ],
     seo: {
-      title: "Rosewood Base Guide - Best Location in Project Zomboid",
+      title: "Project Zomboid Rosewood Map Guide | Build 42",
       description:
-        "Plan a Rosewood base in Project Zomboid with stats, best base spots, loot notes, survival strategy and related guides.",
+        "Use this Project Zomboid Rosewood map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+      h1: "Project Zomboid Rosewood Map Guide",
     },
   },
   {
@@ -427,7 +520,7 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Rosewood Location Guide",
-        href: "/locations/rosewood",
+        href: "/locations/rosewood/",
         description: "Compare Muldraugh with a more beginner-friendly town.",
       },
       {

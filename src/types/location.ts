@@ -35,13 +35,20 @@ export type LocationRecord = {
   lootRating: number;
   riskRating: number;
   description: string;
+  introduction?: string;
   overview: string;
+  mapOverview?: string;
+  build42Notes?: string[];
   whyChoose?: InfoCard[];
   keyLocations: string[];
   keyLocationsLabel?: string;
   keyLocationsHeading?: string;
+  pointsOfInterest?: RelatedGuide[];
   bestBases: BestBase[];
+  basePlanning?: string[];
   lootAndResources: string[];
+  routePlanning?: string[];
+  beginnerSuitability?: string[];
   survivalStrategy: string[];
   pros: string[];
   cons: string[];
@@ -50,5 +57,6 @@ export type LocationRecord = {
   seo: {
     title: string;
     description: string;
+    h1?: string;
   };
 };

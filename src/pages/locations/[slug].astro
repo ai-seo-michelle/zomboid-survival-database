@@ -16,6 +16,18 @@ export function getStaticPaths() {
 
 const { location } = Astro.props as { location: LocationRecord };
 
+const isMapHub = Boolean(
+  location.introduction ||
+    location.mapOverview ||
+    location.build42Notes?.length ||
+    location.pointsOfInterest?.length ||
+    location.routePlanning?.length ||
+    location.beginnerSuitability?.length,
+);
+const heroTitle = location.seo.h1 ?? location.seo.title;
+const overviewCopy = location.mapOverview ?? location.overview;
+const strategyNotes = location.routePlanning ?? location.survivalStrategy;
+
 const stats = [
   { label: "Difficulty", value: location.difficulty },
   { label: "Recommended For", value: location.recommendedFor },
@@ -34,7 +46,7 @@ const stats = [
       <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_340px] lg:items-end">
         <div>
           <h1 class="max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
-            {location.seo.title}
+            {heroTitle}
           </h1>
           <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
             {location.description}
@@ -55,13 +67,45 @@ const stats = [
   <PageContainer as="section" class="py-12 sm:py-16">
     <div class="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
       <div>
-        <section aria-labelledby="rosewood-overview">
-          <p class="text-sm font-semibold text-zsd-orange">{location.name} Overview</p>
-          <h2 id="rosewood-overview" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Why this location works
+        {
+          location.introduction && (
+            <section aria-labelledby="location-introduction">
+              <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+              <h2 id="location-introduction" class="mt-2 text-2xl font-semibold text-zsd-ash">
+                Plan {location.name} as a map and location hub
+              </h2>
+              <p class="mt-4 text-base leading-7 text-zsd-muted">{location.introduction}</p>
+            </section>
+          )
+        }
+
+        <section class={location.introduction ? "mt-10" : ""} aria-labelledby="location-overview">
+          <p class="text-sm font-semibold text-zsd-orange">
+            {isMapHub ? `${location.name} Map Overview` : `${location.name} Overview`}
+          </p>
+          <h2 id="location-overview" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            {isMapHub ? `${location.name} map planning notes` : "Why this location works"}
           </h2>
-          <p class="mt-4 text-base leading-7 text-zsd-muted">{location.overview}</p>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">{overviewCopy}</p>
         </section>
+
+        {
+          location.build42Notes && location.build42Notes.length > 0 && (
+            <section class="mt-10" aria-labelledby="build-42-notes">
+              <p class="text-sm font-semibold text-zsd-orange">Build 42 Rosewood Notes</p>
+              <h2 id="build-42-notes" class="mt-2 text-2xl font-semibold text-zsd-ash">
+                Use current-build planning without assuming exact map details
+              </h2>
+              <div class="mt-5 grid gap-3">
+                {location.build42Notes.map((note) => (
+                  <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                    {note}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )
+        }
 
         {
           location.whyChoose && location.whyChoose.length > 0 && (
@@ -77,11 +121,38 @@ const stats = [
           )
         }
 
+        {
+          location.pointsOfInterest && location.pointsOfInterest.length > 0 && (
+            <section class="mt-10" aria-labelledby="points-of-interest">
+              <p class="text-sm font-semibold text-zsd-orange">Key Areas / POIs</p>
+              <h2 id="points-of-interest" class="mt-2 text-2xl font-semibold text-zsd-ash">
+                Start with the major Rosewood decision points
+              </h2>
+              <div class="mt-5 grid gap-4 md:grid-cols-2">
+                {location.pointsOfInterest.map((poi) => (
+                  <Card title={poi.title} description={poi.description} href={poi.href} label="Open guide" />
+                ))}
+              </div>
+            </section>
+          )
+        }
+
         <section class="mt-10" aria-labelledby="best-base-spots">
-          <p class="text-sm font-semibold text-zsd-orange">Best Base Spots</p>
+          <p class="text-sm font-semibold text-zsd-orange">{isMapHub ? "Base Planning" : "Best Base Spots"}</p>
           <h2 id="best-base-spots" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Base candidates in {location.name}
+            {isMapHub ? `How bases fit into the ${location.name} map` : `Base candidates in ${location.name}`}
           </h2>
+          {
+            location.basePlanning && location.basePlanning.length > 0 && (
+              <div class="mt-5 grid gap-3">
+                {location.basePlanning.map((note) => (
+                  <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                    {note}
+                  </div>
+                ))}
+              </div>
+            )
+          }
           <div class="mt-5 grid gap-4">
             {
               location.bestBases.map((base, index) => (
@@ -102,7 +173,9 @@ const stats = [
         </section>
 
         <section class="mt-10" aria-labelledby="loot-resources">
-          <p class="text-sm font-semibold text-zsd-orange">Loot & Resources</p>
+          <p class="text-sm font-semibold text-zsd-orange">
+            {isMapHub ? "Loot & Resource Planning" : "Loot & Resources"}
+          </p>
           <h2 id="loot-resources" class="mt-2 text-2xl font-semibold text-zsd-ash">
             Resource planning notes
           </h2>
@@ -118,13 +191,15 @@ const stats = [
         </section>
 
         <section class="mt-10" aria-labelledby="survival-strategy">
-          <p class="text-sm font-semibold text-zsd-orange">Survival Strategy</p>
+          <p class="text-sm font-semibold text-zsd-orange">
+            {location.routePlanning ? "Route / Access Planning" : "Survival Strategy"}
+          </p>
           <h2 id="survival-strategy" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            How to approach {location.name}
+            {location.routePlanning ? `How to move through ${location.name}` : `How to approach ${location.name}`}
           </h2>
           <div class="mt-5 grid gap-3">
             {
-              location.survivalStrategy.map((note) => (
+              strategyNotes.map((note) => (
                 <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
                   {note}
                 </div>
@@ -132,19 +207,43 @@ const stats = [
             }
           </div>
         </section>
+
+        {
+          location.beginnerSuitability && location.beginnerSuitability.length > 0 && (
+            <section class="mt-10" aria-labelledby="beginner-suitability">
+              <p class="text-sm font-semibold text-zsd-orange">Beginner Suitability</p>
+              <h2 id="beginner-suitability" class="mt-2 text-2xl font-semibold text-zsd-ash">
+                Why Rosewood remains a readable first map
+              </h2>
+              <div class="mt-5 grid gap-3">
+                {location.beginnerSuitability.map((note) => (
+                  <div class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm leading-6 text-zsd-muted">
+                    {note}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )
+        }
       </div>
 
       <aside class="grid gap-6">
         <section aria-labelledby="location-stats">
-          <p class="text-sm font-semibold text-zsd-orange">Location Stats</p>
-          <h2 id="location-stats" class="mt-2 text-xl font-semibold text-zsd-ash">Decision snapshot</h2>
+          <p class="text-sm font-semibold text-zsd-orange">
+            {isMapHub ? "Location Stats / Town Snapshot" : "Location Stats"}
+          </p>
+          <h2 id="location-stats" class="mt-2 text-xl font-semibold text-zsd-ash">
+            {isMapHub ? "Town snapshot" : "Decision snapshot"}
+          </h2>
           <div class="mt-4">
             <StatsTable rows={stats} />
           </div>
         </section>
 
         <section aria-labelledby="key-locations">
-          <p class="text-sm font-semibold text-zsd-orange">{location.keyLocationsLabel ?? "Key Locations"}</p>
+          <p class="text-sm font-semibold text-zsd-orange">
+            {location.keyLocationsLabel ?? (isMapHub ? "Key Areas / POIs" : "Key Locations")}
+          </p>
           <h2 id="key-locations" class="mt-2 text-xl font-semibold text-zsd-ash">
             {location.keyLocationsHeading ?? "Places to check"}
           </h2>
