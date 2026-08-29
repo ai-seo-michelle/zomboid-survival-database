@@ -7,7 +7,7 @@ export const siteConfig = {
   ogImage: "/og-image.png",
   navItems: [
     { label: "Interactive Map", href: "/maps/interactive-map" },
-    { label: "Difficulty Ranking", href: "/maps/difficulty-ranking" },
+    { label: "Difficulty Ranking", href: "/maps/difficulty-ranking/" },
     { label: "Locations", href: "/locations" },
     { label: "Survival Guides", href: "/guides/best-base-locations/" },
     { label: "Build 42", href: "/build-42/" },

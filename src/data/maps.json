@@ -5,8 +5,51 @@
     "tier": "Beginner",
     "difficulty": "Easy",
     "recommendedFor": "New Players",
+    "beginnerSafety": "High",
+    "routePressure": "Low",
+    "lootAccess": "Medium-High",
+    "bestFor": "Learning short routes and basic base planning",
     "challenge": "Compact town planning with fewer major escape complications than larger urban areas.",
     "guideLink": "/locations/rosewood/"
+  },
+  {
+    "slug": "riverside",
+    "name": "Riverside",
+    "tier": "Beginner",
+    "difficulty": "Easy",
+    "recommendedFor": "Cautious Players",
+    "beginnerSafety": "High",
+    "routePressure": "Low-Medium",
+    "lootAccess": "Medium",
+    "bestFor": "Slower route expansion and safer recovery loops",
+    "challenge": "Calmer town planning with less immediate pressure but fewer high-value rewards than harder areas.",
+    "guideLink": "/locations/riverside/"
+  },
+  {
+    "slug": "muldraugh",
+    "name": "Muldraugh",
+    "tier": "Intermediate",
+    "difficulty": "Medium",
+    "recommendedFor": "Intermediate Players",
+    "beginnerSafety": "Medium",
+    "routePressure": "Medium",
+    "lootAccess": "Medium-High",
+    "bestFor": "Practicing staged routes and longer road planning",
+    "challenge": "Longer town movement where overextension becomes a bigger problem than in compact beginner areas.",
+    "guideLink": "/locations/muldraugh/"
+  },
+  {
+    "slug": "west-point",
+    "name": "West Point",
+    "tier": "Advanced",
+    "difficulty": "Hard",
+    "recommendedFor": "Experienced Players",
+    "beginnerSafety": "Medium-Low",
+    "routePressure": "High",
+    "lootAccess": "High",
+    "bestFor": "Experienced route discipline and higher-pressure looting",
+    "challenge": "Valuable routes with less room for mistakes, especially when players stay exposed too long.",
+    "guideLink": "/locations/west-point/"
   },
   {
     "slug": "louisville",
@@ -14,7 +57,11 @@
     "tier": "Hardcore",
     "difficulty": "Hard",
     "recommendedFor": "Veteran Players",
+    "beginnerSafety": "Low",
+    "routePressure": "Very High",
+    "lootAccess": "High",
+    "bestFor": "Veteran city survival and advanced route control",
     "challenge": "Dense city survival with higher pressure, longer routes and more demanding exit planning.",
-    "guideLink": "/locations/louisville"
+    "guideLink": "/locations/louisville/"
   }
 ]

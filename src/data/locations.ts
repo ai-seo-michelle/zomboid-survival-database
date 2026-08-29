@@ -686,7 +686,7 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Map Difficulty Ranking",
-        href: "/maps/difficulty-ranking",
+        href: "/maps/difficulty-ranking/",
         description: "Compare Louisville against easier areas.",
       },
       {

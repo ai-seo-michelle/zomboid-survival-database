@@ -2,10 +2,88 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Card from "../../components/Card.astro";
 import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
 import mapsData from "../../data/maps.json";
 import type { MapRankingRecord } from "../../types/map";
 
 const rankings = mapsData as MapRankingRecord[];
+
+const comparisonColumns = [
+  { key: "difficulty", label: "Difficulty" },
+  { key: "beginnerSafety", label: "Beginner Safety" },
+  { key: "routePressure", label: "Route Pressure" },
+  { key: "lootAccess", label: "Loot Access" },
+  { key: "recommendedFor", label: "Recommended For" },
+];
+
+const comparisonRows = rankings.map((location) => ({
+  title: location.name,
+  href: location.guideLink,
+  values: {
+    difficulty: location.difficulty,
+    beginnerSafety: location.beginnerSafety,
+    routePressure: location.routePressure,
+    lootAccess: location.lootAccess,
+    recommendedFor: location.recommendedFor,
+  },
+}));
+
+const easiestAreas = rankings.filter((location) => location.difficulty === "Easy");
+const hardestAreas = rankings.filter((location) => location.difficulty === "Hard");
+
+const comparisonCriteria = [
+  { label: "Beginner Safety", value: "How forgiving the area is while learning routes and recovery habits" },
+  { label: "Route Pressure", value: "How quickly travel, density or distance can punish overextension" },
+  { label: "Loot Access", value: "How practical supply runs feel before the route becomes unstable" },
+  { label: "Player Fit", value: "Whether the area supports new, cautious, intermediate or veteran play" },
+];
+
+const recommendationCards = [
+  {
+    title: "Best beginner difficulty",
+    description:
+      "For most new players, the current database points to Easy towns first: Rosewood for compact route learning and Riverside for a calmer pace.",
+  },
+  {
+    title: "Best intermediate step",
+    description:
+      "Muldraugh sits between beginner towns and harder pressure zones, making it useful once players can manage longer staged routes.",
+  },
+  {
+    title: "Best veteran challenge",
+    description:
+      "West Point and Louisville are better treated as harder objectives where route control, exits and recovery planning matter more.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Which Project Zomboid map area is easiest for beginners?",
+    answer:
+      "In the current database, Rosewood and Riverside are the easiest tracked areas because both are marked Easy and better suited to new or cautious players.",
+  },
+  {
+    question: "Which Project Zomboid map area is hardest?",
+    answer:
+      "Louisville and West Point are the hardest tracked areas in this database. Louisville is the strongest city-pressure example, while West Point is a demanding town route challenge.",
+  },
+  {
+    question: "Is this the same as choosing Project Zomboid sandbox difficulty?",
+    answer:
+      "No. This page compares map area difficulty, not sandbox presets or custom world settings. Use it to choose where to start or travel.",
+  },
+  {
+    question: "Does map comparison require an interactive map?",
+    answer:
+      "No. A static comparison can help players choose towns by difficulty, route pressure and survival fit before opening a full map tool.",
+  },
+  {
+    question: "Will Build 42 change these rankings?",
+    answer:
+      "Build 42 can change planning details over time, so the page avoids exact coordinates or unsupported POI claims and keeps the comparison data easy to update.",
+  },
+];
 
 const relatedPages = [
   {
@@ -16,7 +94,7 @@ const relatedPages = [
   {
     title: "Interactive Map",
     description: "Use the map hub as the starting point for routes, areas and future filters.",
-    href: "/maps/interactive-map",
+    href: "/maps/interactive-map/",
   },
   {
     title: "Best Base Locations",
@@ -24,42 +102,109 @@ const relatedPages = [
     href: "/guides/best-base-locations/",
   },
   {
+    title: "Best Starting Location",
+    description: "Compare beginner-friendly towns before choosing the first spawn or early route.",
+    href: "/guides/best-starting-location/",
+  },
+  {
+    title: "Location Database",
+    description: "Browse all tracked towns and location pages behind this map comparison.",
+    href: "/locations/",
+  },
+  {
     title: "Rosewood Guide",
     description: "Open the Rosewood location page for base and route planning.",
     href: "/locations/rosewood/",
   },
   {
+    title: "Riverside Guide",
+    description: "Open Riverside for calmer route planning and beginner-friendly town notes.",
+    href: "/locations/riverside/",
+  },
+  {
+    title: "Muldraugh Guide",
+    description: "Open Muldraugh for intermediate road planning and staged survival routes.",
+    href: "/locations/muldraugh/",
+  },
+  {
+    title: "West Point Guide",
+    description: "Open West Point for higher-pressure route and loot planning.",
+    href: "/locations/west-point/",
+  },
+  {
     title: "Louisville Guide",
     description: "Open the Louisville location page for high-risk city survival planning.",
-    href: "/locations/louisville",
+    href: "/locations/louisville/",
   },
 ];
 ---
 
 <BaseLayout
-  title="Project Zomboid Map Difficulty Ranking"
-  description="Compare Project Zomboid map areas by difficulty, player fit and main survival challenge before choosing your next route."
+  title="Project Zomboid Map Difficulty Ranking | Best Maps for Beginners"
+  description="Compare Project Zomboid map areas by difficulty, beginner safety, route pressure, loot access and survival challenge before choosing where to start."
+  faqs={faqs}
 >
   <PageContainer as="section" class="py-12 sm:py-16">
     <div class="max-w-3xl">
       <p class="text-sm font-semibold text-zsd-orange">Map Difficulty Ranking</p>
       <h1 class="mt-3 text-4xl font-bold text-zsd-ash">Project Zomboid Map Difficulty Ranking</h1>
       <p class="mt-5 text-base leading-7 text-zsd-muted">
-        Different Project Zomboid map areas suit different survival styles. Some locations are easier
-        for learning core systems, while larger cities demand tighter route planning, better noise
-        control and faster escape decisions.
+        Compare Project Zomboid map areas by difficulty, beginner safety, route pressure and survival
+        challenge before choosing where to start or which town to explore next.
       </p>
     </div>
+
+    <section class="mt-12" aria-labelledby="meaning-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">What This Difficulty Ranking Means</p>
+          <h2 id="meaning-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Map difficulty is about survival pressure
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            This ranking compares towns and city areas, not sandbox presets. A lower-difficulty map area
+            gives players more room to learn routes, recover from mistakes and build a repeatable supply
+            loop. A harder area can offer stronger rewards, but it asks for better exits, timing and
+            pressure control.
+          </p>
+        </div>
+        <StatsTable rows={comparisonCriteria} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="new-player-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Difficulty for New Players</p>
+        <h2 id="new-player-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Start with forgiving map areas first
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {recommendationCards.map((card) => <Card {...card} eyebrow="Recommendation" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Map Difficulty Comparison Table</p>
+        <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare tracked map areas
+        </h2>
+      </div>
+      <RankingTable columns={comparisonColumns} rows={comparisonRows} titleLabel="Map Area" />
+    </section>
 
     <section class="mt-12" aria-labelledby="ranking-title">
       <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <p class="text-sm font-semibold text-zsd-orange">Difficulty Ranking</p>
-          <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">First map comparison set</h2>
+          <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Ranked map difficulty cards
+          </h2>
         </div>
         <p class="max-w-xl text-sm leading-6 text-zsd-muted">
-          MVP v0.1 starts with two core areas. More towns can be added later through the same card
-          structure.
+          The current data covers {rankings.length} tracked areas. Treat the ranking as a planning aid,
+          then check the linked location guide for town-specific route and base notes.
         </p>
       </div>
 
@@ -77,8 +222,108 @@ const relatedPages = [
                 { label: "Tier", value: location.tier },
                 { label: "Difficulty", value: location.difficulty },
                 { label: "Recommended Player", value: location.recommendedFor },
+                { label: "Best For", value: location.bestFor },
               ]}
             />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="easy-hard-title">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Easiest Map Areas</p>
+          <h2 id="easy-hard-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Lower-pressure choices in the current database
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              easiestAreas.map((area) => (
+                <Card
+                  title={area.name}
+                  description={area.bestFor}
+                  href={area.guideLink}
+                  label="Open location"
+                  eyebrow={area.difficulty}
+                />
+              ))
+            }
+          </div>
+        </article>
+        <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+          <p class="text-sm font-semibold text-zsd-orange">Hardest Map Areas</p>
+          <h2 class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Higher-pressure choices for experienced players
+          </h2>
+          <div class="mt-5 grid gap-3">
+            {
+              hardestAreas.map((area) => (
+                <Card
+                  title={area.name}
+                  description={area.challenge}
+                  href={area.guideLink}
+                  label="Open location"
+                  eyebrow={area.difficulty}
+                />
+              ))
+            }
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="player-fit-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Beginner vs Veteran Recommendations</p>
+        <h2 id="player-fit-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Match the area to the run you want
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          If the question is the best difficulty for a first Project Zomboid run, choose a map area that
+          reduces route pressure and gives recovery time. If the goal is a harder challenge, move toward
+          areas where loot access is stronger but mistakes cost more.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="criteria-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">How We Compare Map Difficulty</p>
+          <h2 id="criteria-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Use the ranking as a decision tool
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            This page uses the site's existing location records and map ranking data. It avoids exact
+            coordinates, unverified POI counts and claims that would need a full interactive map to prove.
+          </p>
+        </div>
+        <StatsTable
+          rows={[
+            { label: "Primary Intent", value: "Map area difficulty and comparison" },
+            { label: "Not Covered", value: "Sandbox preset tuning or complete interactive map data" },
+            { label: "Data Scope", value: "Current tracked towns and city areas" },
+            { label: "Update Path", value: "Add areas through maps.json as location records mature" },
+          ]}
+        />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Map difficulty questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {
+          faqs.map((item) => (
+            <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+              <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+            </article>
           ))
         }
       </div>
@@ -90,7 +335,7 @@ const relatedPages = [
         <h2 id="related-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Continue planning</h2>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2">
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {relatedPages.map((page) => <Card {...page} label="Open page" />)}
       </div>
     </section>
