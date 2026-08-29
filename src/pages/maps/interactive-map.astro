@@ -30,6 +30,20 @@ const futureTools = [
     description: "Structured loot categories for planning routes before committing to a run.",
   },
 ];
+
+const relatedMapGuides = [
+  {
+    title: "Build 42 Map Guide",
+    description:
+      "Use the main Project Zomboid Build 42 map guide for town comparison and route planning while the full interactive toolset is still future-facing.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Map Difficulty Ranking",
+    description: "Compare map areas by difficulty, player fit and survival challenge.",
+    href: "/maps/difficulty-ranking/",
+  },
+];
 ---
 
 <BaseLayout
@@ -119,6 +133,18 @@ const futureTools = [
       </div>
       <div class="grid gap-4 md:grid-cols-3">
         {futureTools.map((tool) => <Card {...tool} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-map-guides-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Map Guides</p>
+        <h2 id="related-map-guides-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue map planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {relatedMapGuides.map((guide) => <Card {...guide} label="Open guide" />)}
       </div>
     </section>
   </PageContainer>

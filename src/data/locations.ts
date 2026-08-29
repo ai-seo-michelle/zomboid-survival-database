@@ -86,6 +86,11 @@ export const locations: LocationRecord[] = [
         description: "Use the map hub for routes and future location filters.",
       },
       {
+        title: "Build 42 Map Guide",
+        href: "/guides/project-zomboid-map/",
+        description: "Compare Rosewood with other Build 42 map planning areas.",
+      },
+      {
         title: "Map Difficulty Ranking",
         href: "/maps/difficulty-ranking",
         description: "Compare Rosewood against harder map areas.",
@@ -146,6 +151,11 @@ export const locations: LocationRecord[] = [
         title: "Interactive Map",
         href: "/maps/interactive-map",
         description: "Use the map hub for future route planning.",
+      },
+      {
+        title: "Build 42 Map Guide",
+        href: "/guides/project-zomboid-map/",
+        description: "Compare Riverside with other Build 42 map planning areas.",
       },
       {
         title: "Map Difficulty Ranking",
@@ -262,8 +272,8 @@ export const locations: LocationRecord[] = [
     ],
     relatedGuides: [
       {
-        title: "Project Zomboid Map Guide",
-        href: "/guides/project-zomboid-map",
+        title: "Build 42 Map Guide",
+        href: "/guides/project-zomboid-map/",
         description: "Compare West Point with other map areas and route choices.",
       },
       {
@@ -396,8 +406,8 @@ export const locations: LocationRecord[] = [
     ],
     relatedGuides: [
       {
-        title: "Project Zomboid Map Guide",
-        href: "/guides/project-zomboid-map",
+        title: "Build 42 Map Guide",
+        href: "/guides/project-zomboid-map/",
         description: "Compare Muldraugh with other towns and route choices.",
       },
       {
@@ -481,6 +491,11 @@ export const locations: LocationRecord[] = [
         title: "Interactive Map",
         href: "/maps/interactive-map",
         description: "Plan routes and future map filters.",
+      },
+      {
+        title: "Build 42 Map Guide",
+        href: "/guides/project-zomboid-map/",
+        description: "Compare Louisville with other Build 42 map planning areas.",
       },
       {
         title: "Map Difficulty Ranking",

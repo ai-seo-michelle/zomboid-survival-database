@@ -4,180 +4,284 @@ import PageContainer from "../../components/PageContainer.astro";
 import RankingTable from "../../components/RankingTable.astro";
 import StatsTable from "../../components/StatsTable.astro";
 import { locations } from "../../data/locations";
-import maps from "../../data/maps.json";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const regionColumns = [
-  { key: "difficulty", label: "Difficulty" },
-  { key: "recommendedFor", label: "Recommended For" },
-  { key: "baseRating", label: "Base Rating" },
-  { key: "lootRating", label: "Loot Rating" },
-  { key: "riskRating", label: "Risk Rating" },
+const areaColumns = [
+  { key: "beginnerFriendliness", label: "Beginner Friendliness" },
+  { key: "routeAccess", label: "Route Access" },
+  { key: "survivalPlanning", label: "Survival Planning" },
+  { key: "basePlanning", label: "Base Planning" },
 ];
 
-const regionRows = locations.map((location) => ({
-  title: location.name,
-  href: `/locations/${location.slug}`,
+const areaPlanning = [
+  {
+    name: "Rosewood",
+    slug: "rosewood",
+    beginnerFriendliness: "High",
+    routeAccess: "Short town routes",
+    survivalPlanning: "Best for learning controlled loops",
+    basePlanning: "Strong early base relevance",
+  },
+  {
+    name: "Riverside",
+    slug: "riverside",
+    beginnerFriendliness: "High",
+    routeAccess: "Calmer local movement",
+    survivalPlanning: "Good for cautious expansion",
+    basePlanning: "Stable residential base planning",
+  },
+  {
+    name: "Louisville",
+    slug: "louisville",
+    beginnerFriendliness: "Low",
+    routeAccess: "Demanding city routes",
+    survivalPlanning: "Advanced pressure management",
+    basePlanning: "High reward, higher risk",
+  },
+  {
+    name: "West Point",
+    slug: "west-point",
+    beginnerFriendliness: "Medium-Low",
+    routeAccess: "Risky but valuable routes",
+    survivalPlanning: "Good route discipline test",
+    basePlanning: "Better for experienced players",
+  },
+  {
+    name: "Muldraugh",
+    slug: "muldraugh",
+    beginnerFriendliness: "Medium",
+    routeAccess: "Long road planning",
+    survivalPlanning: "Strong staged-route practice",
+    basePlanning: "Warehouse and edge-base value",
+  },
+];
+
+const areaRows = areaPlanning.map((area) => ({
+  title: area.name,
+  href: `/locations/${area.slug}/`,
   values: {
-    difficulty: location.difficulty,
-    recommendedFor: location.recommendedFor,
-    baseRating: `${location.baseRating}/5`,
-    lootRating: `${location.lootRating}/5`,
-    riskRating: `${location.riskRating}/5`,
+    beginnerFriendliness: area.beginnerFriendliness,
+    routeAccess: area.routeAccess,
+    survivalPlanning: area.survivalPlanning,
+    basePlanning: area.basePlanning,
   },
 }));
 
-const difficultyColumns = [
-  { key: "tier", label: "Tier" },
-  { key: "difficulty", label: "Difficulty" },
-  { key: "recommendedFor", label: "Recommended For" },
-  { key: "challenge", label: "Main Challenge" },
+const build42Overview = [
+  {
+    title: "Expanded Knox Country",
+    description:
+      "Official Build 42.20 notes describe a heavily evolved Knox Country with new and reworked areas across the Kentucky setting.",
+  },
+  {
+    title: "Reworked Existing Locales",
+    description:
+      "The official overview highlights upgrades for existing areas including Riverside, West Point, Rosewood, Fallas Lake, Muldraugh, Ekron and Dixie.",
+  },
+  {
+    title: "Planning, Not Coordinates",
+    description:
+      "This page avoids unverified coordinates, exact borders and exhaustive POI claims. It focuses on town choice, routes and survival decisions.",
+  },
 ];
 
-const difficultyRows = maps.map((map) => ({
-  title: map.name,
-  href: map.guideLink,
-  values: {
-    tier: map.tier,
-    difficulty: map.difficulty,
-    recommendedFor: map.recommendedFor,
-    challenge: map.challenge,
-  },
-}));
-
-const overviewStats = [
-  { label: "Tracked locations", value: locations.length },
-  { label: "Beginner focus", value: "Rosewood and Riverside" },
-  { label: "Advanced focus", value: "Louisville" },
-  { label: "Best use", value: "Route and base planning" },
+const planningChanges = [
+  { label: "Build 42 focus", value: "Bigger, refreshed world planning across Knox Country" },
+  { label: "B42 map use", value: "Compare towns before choosing routes, bases or loot targets" },
+  { label: "Current-build note", value: "Map details can change as Build 42 updates continue" },
+  { label: "Interactive status", value: "Static guide hub; not a full interactive map tool" },
 ];
 
 const startingAreas = [
   {
     title: "Rosewood",
     description:
-      "A compact beginner-friendly town with strong base options and clear early survival routes.",
-    href: "/locations/rosewood",
+      "Check Rosewood first if the run needs a readable town, short supply routes and strong early base planning.",
+    href: "/locations/rosewood/",
     label: "Open Rosewood",
     stats: [
-      { label: "Difficulty", value: "Easy" },
-      { label: "Best For", value: "New players" },
+      { label: "Use Case", value: "Beginner start" },
+      { label: "Planning Angle", value: "Base-first route" },
     ],
   },
   {
     title: "Riverside",
     description:
-      "A calmer starting area for players who prefer safer movement and slower route expansion.",
-    href: "/locations/riverside",
+      "Use Riverside when you want slower route expansion, calmer movement and a more cautious early survival plan.",
+    href: "/locations/riverside/",
     label: "Open Riverside",
     stats: [
-      { label: "Difficulty", value: "Easy" },
-      { label: "Best For", value: "Cautious starts" },
+      { label: "Use Case", value: "Cautious start" },
+      { label: "Planning Angle", value: "Steady supplies" },
     ],
   },
   {
-    title: "Louisville",
+    title: "Muldraugh",
     description:
-      "A high-pressure city area with strong loot potential and more demanding escape planning.",
-    href: "/locations/louisville",
-    label: "Open Louisville",
+      "Use Muldraugh as an intermediate planning step where route length and return paths matter more than raw safety.",
+    href: "/locations/muldraugh/",
+    label: "Open Muldraugh",
     stats: [
-      { label: "Difficulty", value: "Hard" },
-      { label: "Best For", value: "Veterans" },
+      { label: "Use Case", value: "Intermediate run" },
+      { label: "Planning Angle", value: "Long-road routes" },
     ],
   },
 ];
 
-const majorCities = [
-  {
-    title: "Rosewood",
-    description:
-      "Best used as a readable learning town where players can practice short supply routes and base setup.",
-    href: "/locations/rosewood",
-  },
-  {
-    title: "Riverside",
-    description:
-      "Useful for slower survival planning, cautious looting and stable movement before longer trips.",
-    href: "/locations/riverside",
-  },
+const highlightAreas = [
   {
     title: "Louisville",
     description:
-      "A major high-risk destination for advanced loot routes, city navigation and veteran survival planning.",
-    href: "/locations/louisville",
+      "A high-pressure city destination for experienced players planning loot depth, exits and advanced route control.",
+    href: "/locations/louisville/",
+    label: "Open Louisville",
+  },
+  {
+    title: "West Point",
+    description:
+      "A demanding town where map planning should focus on short objectives, retreat windows and pressure control.",
+    href: "/locations/west-point/",
+    label: "Open West Point",
+  },
+  {
+    title: "Muldraugh",
+    description:
+      "A road-shaped town where staged routes, vehicle access and edge-base choices shape the survival plan.",
+    href: "/locations/muldraugh/",
+    label: "Open Muldraugh",
   },
 ];
 
-const navigationRows = [
-  { label: "Location database", value: "Browse towns and survival areas by difficulty and ratings" },
-  { label: "Interactive map hub", value: "Use the map entry point for future search and route tools" },
-  { label: "Difficulty ranking", value: "Compare areas before choosing the next challenge" },
-  { label: "Guide cluster", value: "Connect map choices to bases, loot and starting strategy" },
-];
-
-const recommendedRoutes = [
+const mapNotes = [
   {
-    title: "Beginner Route",
+    id: "rosewood-notes",
+    eyebrow: "Rosewood Map Notes",
+    title: "Rosewood supports short, recoverable planning loops",
     description:
-      "Start in Rosewood, secure a base candidate, then expand into short nearby loot loops.",
-    href: "/guides/best-starting-location",
-    label: "Compare starts",
+      "Rosewood is the first stop for many players because its compact layout makes base setup, police station visits and fire station planning easier to connect.",
+    links: [
+      { title: "Rosewood Location Guide", href: "/locations/rosewood/" },
+      { title: "Rosewood Fire Station", href: "/locations/rosewood-fire-station/" },
+      { title: "Rosewood Fire Station Loot", href: "/locations/rosewood-fire-station-loot/" },
+    ],
   },
   {
-    title: "Base-First Route",
+    id: "riverside-notes",
+    eyebrow: "Riverside Map Notes",
+    title: "Riverside is useful for slower B42 map planning",
     description:
-      "Choose a reliable base location first, then let storage, safety and return paths shape exploration.",
+      "Riverside works best when you want a calmer town plan, repeatable supply runs and room to build confidence before longer map travel.",
+    links: [{ title: "Riverside Location Guide", href: "/locations/riverside/" }],
+  },
+  {
+    id: "louisville-notes",
+    eyebrow: "Louisville Map Notes",
+    title: "Louisville should stay an advanced map objective",
+    description:
+      "Louisville remains the high-pressure city reference in this database. Use it for advanced loot and city route planning, not as a casual first map target.",
+    links: [
+      { title: "Louisville Location Guide", href: "/locations/louisville/" },
+      { title: "Louisville Military Base", href: "/locations/louisville-military-base/" },
+      { title: "Louisville Military Checkpoint", href: "/locations/louisville-military-checkpoint/" },
+    ],
+  },
+  {
+    id: "west-point-notes",
+    eyebrow: "West Point Map Notes",
+    title: "West Point rewards disciplined route planning",
+    description:
+      "West Point can be valuable, but the town punishes long, improvised trips. Plan short objectives and connect them to safe exits.",
+    links: [
+      { title: "West Point Location Guide", href: "/locations/west-point/" },
+      { title: "West Point Gun Store", href: "/locations/west-point-gun-store/" },
+      { title: "West Point Police Station", href: "/locations/west-point-police-station/" },
+    ],
+  },
+  {
+    id: "muldraugh-notes",
+    eyebrow: "Muldraugh Map Notes",
+    title: "Muldraugh is about route length and staging",
+    description:
+      "Muldraugh's long-town shape makes it useful for learning staged loot runs, warehouse planning and vehicle-supported movement.",
+    links: [{ title: "Muldraugh Location Guide", href: "/locations/muldraugh/" }],
+  },
+];
+
+const supportModules = [
+  {
+    title: "Map Difficulty Ranking",
+    description:
+      "Use the dedicated ranking page when the question is difficulty, player fit or area challenge rather than broad Build 42 map planning.",
+    href: "/maps/difficulty-ranking/",
+    label: "Compare difficulty",
+  },
+  {
+    title: "Base Location Planning",
+    description:
+      "Use the base guide when the question shifts from where towns are to which buildings and areas support long-term survival.",
     href: "/guides/best-base-locations/",
     label: "Compare bases",
   },
   {
-    title: "Loot Route",
+    title: "Build 42 Guide",
     description:
-      "Move from safer local supply runs into higher-value targets only after exits are planned.",
-    href: "/guides/best-loot-locations",
-    label: "Compare loot",
+      "Use the Build 42 hub for version-level changes. This map page stays focused on towns, routes and location planning.",
+    href: "/build-42/",
+    label: "Open Build 42 hub",
+  },
+  {
+    title: "Build 42 Guide Page",
+    description:
+      "Use the guide entry for broader Build 42 survival planning without turning this map hub into a general update article.",
+    href: "/guides/build-42/",
+    label: "Open guide",
   },
 ];
 
 const faqs = [
   {
-    question: "What is the best Project Zomboid map area for beginners?",
+    question: "Is this a full interactive Project Zomboid map?",
     answer:
-      "Rosewood is usually the safest first recommendation because it is compact, readable and supports practical early base planning.",
+      "No. This is a Project Zomboid Build 42 map guide and planning hub. The site has an interactive map entry page, but this page does not provide a full tile-based map tool.",
   },
   {
-    question: "How should I use Project Zomboid maps for survival planning?",
+    question: "Is this map guide for Build 42?",
     answer:
-      "Use the map to compare routes, base candidates, loot targets and escape options before committing to long travel.",
+      "Yes. The page is organized around Build 42 and B42 map planning, while avoiding unverified coordinates, exact borders or unsupported POI claims.",
   },
   {
-    question: "Is Louisville good for new players?",
+    question: "Which town should I check first?",
     answer:
-      "Louisville has strong loot potential, but it is better for experienced players because the pressure and navigation risk are much higher.",
+      "Rosewood is the safest first check for most new players. Riverside is another cautious option, while Muldraugh, West Point and Louisville ask for more planning.",
+  },
+  {
+    question: "Where can I compare base locations?",
+    answer:
+      "Use the Best Base Locations guide to compare base candidates by safety, resources, difficulty and long-term survival value.",
+  },
+  {
+    question: "Where can I compare location difficulty?",
+    answer:
+      "Use the Map Difficulty Ranking page when you want a focused comparison of area difficulty and recommended player experience.",
   },
 ];
 
 const relatedGuides = [
   {
-    title: "Rosewood Location Guide",
-    description: "Review Rosewood difficulty, base options and early survival value.",
-    href: "/locations/rosewood",
+    title: "Interactive Map Entry",
+    description:
+      "Open the current map entry page for future filters and planned interactive map tooling.",
+    href: "/maps/interactive-map/",
   },
   {
-    title: "Riverside Location Guide",
-    description: "Compare a calmer town option for cautious map planning.",
-    href: "/locations/riverside",
-  },
-  {
-    title: "Louisville Location Guide",
-    description: "Review advanced city pressure, loot potential and route risk.",
-    href: "/locations/louisville",
+    title: "Map Difficulty Ranking",
+    description: "Compare major map areas by difficulty and recommended player type.",
+    href: "/maps/difficulty-ranking/",
   },
   {
     title: "Best Starting Location",
-    description: "Choose where to begin before planning longer map routes.",
-    href: "/guides/best-starting-location",
+    description: "Choose the best starting town before committing to a wider map route.",
+    href: "/guides/best-starting-location/",
   },
   {
     title: "Best Base Locations",
@@ -187,26 +291,44 @@ const relatedGuides = [
   {
     title: "Best Loot Locations",
     description: "Plan loot routes by risk, reward and distance from safety.",
-    href: "/guides/best-loot-locations",
+    href: "/guides/best-loot-locations/",
+  },
+  {
+    title: "Build 42 Guide",
+    description: "Review broader Build 42 survival changes without leaving the database structure.",
+    href: "/build-42/",
+  },
+];
+
+const officialSources = [
+  {
+    title: "Official Build 42.20 Overview",
+    description: "The Indie Stone overview for Build 42.20 map and system changes.",
+    href: "https://projectzomboid.com/blog/features-overview-build-42-20/",
+  },
+  {
+    title: "42.20: The Big Glow Up",
+    description: "The Indie Stone notes on Knox Country expansion and reworked locales.",
+    href: "https://projectzomboid.com/blog/news/2026/07/42-20-the-big-glow-up/",
   },
 ];
 ---
 
 <BaseLayout
-  title="Project Zomboid Map Guide"
-  description="Use this Project Zomboid map guide to compare locations, starting areas, major cities, difficulty rankings and recommended survival routes."
+  title="Project Zomboid Build 42 Map Guide"
+  description="Use this Project Zomboid Build 42 map guide to compare towns, starting locations, routes and survival planning notes without relying on a full interactive map."
   ogType="article"
   faqs={faqs}
 >
   <section class="border-b border-zsd-line bg-zsd-black/45">
     <PageContainer class="py-12 sm:py-16">
-      <p class="text-sm font-semibold text-zsd-orange">Map Guide</p>
+      <p class="text-sm font-semibold text-zsd-orange">Build 42 Map Guide</p>
       <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
-        Project Zomboid Map Guide
+        Project Zomboid Build 42 Map Guide
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
-        Compare Project Zomboid maps, towns and route choices by difficulty, survival value and long-term
-        planning potential.
+        Compare Project Zomboid Build 42 map areas, towns and route choices before choosing where to
+        start, where to build and how far to travel.
       </p>
     </PageContainer>
   </section>
@@ -216,48 +338,68 @@ const relatedGuides = [
       <div class="max-w-3xl">
         <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
         <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Use the map as a survival decision tool
+          Use the B42 map as a survival planning layer
         </h2>
         <p class="mt-4 text-base leading-7 text-zsd-muted">
-          A Project Zomboid map is most useful when it helps answer practical questions: where to start, where
-          to base, where to loot and when a route is too risky. This page connects map areas to the database
-          guides already tracked on the site.
+          This Project Zomboid Build 42 map guide is a decision hub for towns, routes, locations and
+          survival planning. It is not a full interactive map and it does not try to replace tile-by-tile
+          map tools. Use it to decide which area deserves a deeper look before committing a run.
+        </p>
+        <p class="mt-4 text-sm leading-6 text-zsd-muted">
+          Players may search for the Project Zomboid map B42, Project Zomboid B42 map or PZ map B42.
+          This page treats those names as the same Build 42 map planning intent.
         </p>
       </div>
     </section>
 
     <section class="mt-12" aria-labelledby="overview-title">
-      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
-        <div>
-          <p class="text-sm font-semibold text-zsd-orange">Project Zomboid Map Overview</p>
-          <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            From towns to routes to survival plans
-          </h2>
-          <p class="mt-4 text-sm leading-6 text-zsd-muted">
-            The database currently focuses on high-value map decisions: beginner-friendly towns, major city
-            risk, base potential and loot route planning. Future map pages can expand from this same structure
-            without changing the site architecture.
-          </p>
-        </div>
-        <StatsTable rows={overviewStats} />
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Build 42 Map Overview</p>
+        <h2 id="overview-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          What can be said safely about the Build 42 map
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {build42Overview.map((item) => <Card {...item} eyebrow="Verified Scope" />)}
+      </div>
+      <div class="mt-5 grid gap-4 md:grid-cols-2">
+        {officialSources.map((source) => <Card {...source} label="Open source" eyebrow="Official Reference" />)}
       </div>
     </section>
 
-    <section class="mt-12" aria-labelledby="regions-title">
+    <section class="mt-12" aria-labelledby="planning-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">What Changed in Build 42 Map Planning</p>
+          <h2 id="planning-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Plan with current-build caution
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Official Build 42.20 material points to a broader and more detailed Knox Country, with several
+            existing locales refreshed. For players, the practical change is planning discipline: compare
+            towns, keep routes recoverable and treat Build 42 map details as subject to update until your
+            current game version is clear.
+          </p>
+        </div>
+        <StatsTable rows={planningChanges} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="areas-title">
       <div class="mb-6">
-        <p class="text-sm font-semibold text-zsd-orange">Map Regions Comparison</p>
-        <h2 id="regions-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Compare tracked regions
+        <p class="text-sm font-semibold text-zsd-orange">Major Areas Comparison</p>
+        <h2 id="areas-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Compare towns by planning role
         </h2>
       </div>
-      <RankingTable columns={regionColumns} rows={regionRows} titleLabel="Region" />
+      <RankingTable columns={areaColumns} rows={areaRows} titleLabel="Area" />
     </section>
 
     <section class="mt-12" aria-labelledby="starting-title">
       <div class="mb-6">
-        <p class="text-sm font-semibold text-zsd-orange">Best Starting Areas</p>
+        <p class="text-sm font-semibold text-zsd-orange">Map Starting Areas</p>
         <h2 id="starting-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Where to begin the run
+          Choose a town by how you want the run to feel
         </h2>
       </div>
       <div class="grid gap-4 lg:grid-cols-3">
@@ -267,66 +409,85 @@ const relatedGuides = [
 
     <section class="mt-12" aria-labelledby="cities-title">
       <div class="mb-6">
-        <p class="text-sm font-semibold text-zsd-orange">Major Cities</p>
+        <p class="text-sm font-semibold text-zsd-orange">Major Cities and Highlight Areas</p>
         <h2 id="cities-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Key map areas in the current database
+          High-value places to plan around
         </h2>
       </div>
       <div class="grid gap-4 md:grid-cols-3">
-        {majorCities.map((city) => <Card {...city} label="Open location" />)}
+        {highlightAreas.map((area) => <Card {...area} />)}
       </div>
     </section>
 
-    <section class="mt-12" aria-labelledby="navigation-title">
+    {
+      mapNotes.map((note) => (
+        <section class="mt-12" aria-labelledby={note.id}>
+          <div class="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
+            <div>
+              <p class="text-sm font-semibold text-zsd-orange">{note.eyebrow}</p>
+              <h2 id={note.id} class="mt-2 text-2xl font-semibold text-zsd-ash">
+                {note.title}
+              </h2>
+              <p class="mt-4 text-sm leading-6 text-zsd-muted">{note.description}</p>
+            </div>
+            <div class="grid gap-3">
+              {note.links.map((link) => (
+                <a
+                  href={link.href}
+                  class="border border-zsd-line bg-zsd-panel/80 p-4 text-sm font-semibold text-zsd-green-soft transition hover:border-zsd-green hover:text-zsd-orange"
+                >
+                  {link.title}
+                  <span aria-hidden="true" class="ml-2">-&gt;</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="mt-12" aria-labelledby="support-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Map Difficulty, Bases and Build 42</p>
+        <h2 id="support-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Keep each search intent on the right page
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {supportModules.map((module) => <Card {...module} />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="database-title">
       <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
         <div>
-          <p class="text-sm font-semibold text-zsd-orange">Location Navigation</p>
-          <h2 id="navigation-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Move from map search to survival action
+          <p class="text-sm font-semibold text-zsd-orange">Location Database Coverage</p>
+          <h2 id="database-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Current map-linked records
           </h2>
           <p class="mt-4 text-sm leading-6 text-zsd-muted">
-            Use location pages for town-level context, guide pages for decisions and the interactive map hub
-            for future map tools such as search, base filters and route planning.
+            The current database tracks {locations.length} major location records. Each record should own
+            its specific town search intent, while this page owns the broader Project Zomboid map Build 42
+            planning intent.
           </p>
         </div>
-        <StatsTable rows={navigationRows} />
-      </div>
-    </section>
-
-    <section class="mt-12" aria-labelledby="difficulty-title">
-      <div class="mb-6">
-        <p class="text-sm font-semibold text-zsd-orange">Map Difficulty Ranking</p>
-        <h2 id="difficulty-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Compare map difficulty before traveling
-        </h2>
-      </div>
-      <RankingTable columns={difficultyColumns} rows={difficultyRows} titleLabel="Map Area" />
-      <div class="mt-5">
-        <Card
-          title="Open Full Map Difficulty Ranking"
-          description="Use the dedicated ranking page to compare difficulty, player fit and main survival challenges."
-          href="/maps/difficulty-ranking"
-          label="View ranking"
+        <StatsTable
+          rows={[
+            { label: "Map hub", value: "Build 42 town and route planning" },
+            { label: "Location pages", value: "Specific town and POI intent" },
+            { label: "Difficulty page", value: "Area challenge comparison" },
+            { label: "Interactive page", value: "Future tool entry, not this hub" },
+          ]}
         />
-      </div>
-    </section>
-
-    <section class="mt-12" aria-labelledby="routes-title">
-      <div class="mb-6">
-        <p class="text-sm font-semibold text-zsd-orange">Recommended Routes</p>
-        <h2 id="routes-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
-          Turn map knowledge into repeatable plans
-        </h2>
-      </div>
-      <div class="grid gap-4 lg:grid-cols-3">
-        {recommendedRoutes.map((route) => <Card {...route} />)}
       </div>
     </section>
 
     <section class="mt-12" aria-labelledby="faq-title">
       <div class="mb-6">
         <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
-        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Project Zomboid map questions</h2>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Project Zomboid Build 42 map questions
+        </h2>
       </div>
       <div class="grid gap-4">
         {
