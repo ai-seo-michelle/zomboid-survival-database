@@ -23,7 +23,7 @@ const modules: HomeModule[] = [
     kind: "single",
     title: "Interactive Map",
     description: "Find Project Zomboid locations, resources and survival routes.",
-    href: "/maps/interactive-map",
+    href: "/maps/interactive-map/",
     label: "Open map hub",
   },
   {
@@ -39,7 +39,7 @@ const modules: HomeModule[] = [
     description: "Start with two high-interest location guides built for quick survival planning.",
     links: [
       { label: "Rosewood", href: "/locations/rosewood/" },
-      { label: "Louisville", href: "/locations/louisville" },
+      { label: "Louisville", href: "/locations/louisville/" },
     ],
   },
   {
@@ -47,7 +47,7 @@ const modules: HomeModule[] = [
     title: "Survival Guides",
     description: "Use practical guide pages for base decisions and Build 42 planning.",
     links: [
-      { label: "Best Base Locations", href: "/guides/best-base-locations/" },
+      { label: "Best Base Locations", href: "/survival/best-base-locations/" },
       { label: "Build 42 Guide", href: "/build-42/" },
     ],
   },
@@ -67,17 +67,17 @@ const survivalGuides = [
   {
     title: "Best Base Locations",
     description: "Compare the safest and most practical base locations for long-term survival.",
-    href: "/guides/best-base-locations/",
+    href: "/survival/best-base-locations/",
   },
   {
     title: "Generator Guide",
     description: "Learn how to find, connect and maintain generators after electricity loss.",
-    href: "/guides/generator",
+    href: "/guides/generator/",
   },
   {
     title: "Farming Guide",
     description: "Build a sustainable food source for long-term survival.",
-    href: "/guides/farming",
+    href: "/guides/farming/",
   },
   {
     title: "Build 42 Guide",
@@ -100,7 +100,7 @@ const popularLocations = [
   {
     title: "Louisville",
     description: "High-risk city area with strong loot potential and advanced route planning.",
-    href: "/locations/louisville",
+    href: "/locations/louisville/",
   },
 ];
 ---
@@ -131,7 +131,7 @@ const popularLocations = [
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
-            href="/maps/interactive-map"
+            href="/maps/interactive-map/"
             class="inline-flex justify-center rounded border border-zsd-orange bg-zsd-orange px-5 py-3 text-sm font-bold text-zsd-black transition hover:bg-zsd-orange/90"
           >
             Explore Map

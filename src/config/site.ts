@@ -6,10 +6,10 @@ export const siteConfig = {
   url: import.meta.env.PUBLIC_SITE_URL || "https://zomboidsurvival.com",
   ogImage: "/og-image.png",
   navItems: [
-    { label: "Interactive Map", href: "/maps/interactive-map" },
+    { label: "Interactive Map", href: "/maps/interactive-map/" },
     { label: "Difficulty Ranking", href: "/maps/difficulty-ranking/" },
-    { label: "Locations", href: "/locations" },
-    { label: "Survival Guides", href: "/guides/best-base-locations/" },
+    { label: "Locations", href: "/locations/" },
+    { label: "Survival Guides", href: "/survival/best-base-locations/" },
     { label: "Build 42", href: "/build-42/" },
   ],
 };

@@ -164,7 +164,7 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
+        href: "/survival/best-base-locations/",
         description: "Compare Rosewood base options with the wider base ranking.",
       },
       {
@@ -325,7 +325,7 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
+        href: "/survival/best-base-locations/",
         description: "Compare Riverside base options with safer and harder base candidates.",
       },
       {
@@ -465,22 +465,22 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Best Starting Location",
-        href: "/guides/best-starting-location",
+        href: "/guides/best-starting-location/",
         description: "See whether West Point fits your next starting plan.",
       },
       {
         title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
+        href: "/survival/best-base-locations/",
         description: "Compare West Point base options with safer candidates.",
       },
       {
         title: "Best Loot Locations",
-        href: "/guides/best-loot-locations",
+        href: "/guides/best-loot-locations/",
         description: "Plan West Point loot routes by risk and reward.",
       },
       {
         title: "Louisville Location Guide",
-        href: "/locations/louisville",
+        href: "/locations/louisville/",
         description: "Compare West Point pressure with Louisville city survival.",
       },
     ],
@@ -599,17 +599,17 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Best Starting Location",
-        href: "/guides/best-starting-location",
+        href: "/guides/best-starting-location/",
         description: "See how Muldraugh fits into starting location planning.",
       },
       {
         title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
+        href: "/survival/best-base-locations/",
         description: "Compare Muldraugh base options with safer long-term bases.",
       },
       {
         title: "Best Loot Locations",
-        href: "/guides/best-loot-locations",
+        href: "/guides/best-loot-locations/",
         description: "Plan Muldraugh loot routes by supply value and risk.",
       },
       {
@@ -619,12 +619,12 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "West Point Location Guide",
-        href: "/locations/west-point",
+        href: "/locations/west-point/",
         description: "Compare Muldraugh with a harder route-control challenge.",
       },
       {
         title: "Louisville Location Guide",
-        href: "/locations/louisville",
+        href: "/locations/louisville/",
         description: "Compare Muldraugh with a much higher-pressure city destination.",
       },
     ],
@@ -676,7 +676,7 @@ export const locations: LocationRecord[] = [
     relatedGuides: [
       {
         title: "Interactive Map",
-        href: "/maps/interactive-map",
+        href: "/maps/interactive-map/",
         description: "Plan routes and future map filters.",
       },
       {
@@ -691,7 +691,7 @@ export const locations: LocationRecord[] = [
       },
       {
         title: "Best Base Locations",
-        href: "/guides/best-base-locations/",
+        href: "/survival/best-base-locations/",
         description: "Compare base candidates by safety and resources.",
       },
     ],
@@ -712,7 +712,7 @@ export const baseLocationRankings = locations
       ...base,
       location: location.name,
       locationSlug: location.slug,
-      guideLink: `/locations/${location.slug}`,
+      guideLink: `/locations/${location.slug}/`,
     })),
   )
   .sort((a, b) => a.rank - b.rank);

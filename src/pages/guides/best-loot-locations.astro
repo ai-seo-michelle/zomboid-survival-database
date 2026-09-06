@@ -20,7 +20,7 @@ const lootLocations = [
   {
     rank: 2,
     name: "Louisville Urban Routes",
-    href: "/locations/louisville",
+    href: "/locations/louisville/",
     bestFor: "High-value city loot",
     risk: "High",
     lootFocus: "Weapons, tools, supplies",
@@ -49,6 +49,17 @@ const lootLocations = [
     recommendedFor: "Beginners",
     description:
       "Riverside is useful for players who want slower route planning and steady supplies before longer map travel.",
+  },
+  {
+    rank: 5,
+    name: "West Point Weapon Routes",
+    href: "/locations/west-point/",
+    bestFor: "Prepared weapon runs",
+    risk: "High",
+    lootFocus: "Weapons, tools, route-value loot",
+    recommendedFor: "Experienced Players",
+    description:
+      "West Point has strong loot potential, but players should treat weapon-focused runs as planned objectives with clear exits.",
   },
 ];
 
@@ -87,6 +98,69 @@ const comparisonCards = lootLocations.map((location) => ({
   ],
 }));
 
+const quickPicks = [
+  {
+    title: "Best Overall",
+    description:
+      "Rosewood Fire Station is the strongest current balance pick because it supports early tools, base setup and controlled return routes.",
+    href: "/locations/rosewood-fire-station/",
+    stats: [
+      { label: "Pick", value: "Rosewood Fire Station" },
+      { label: "Best Stage", value: "Early to mid game" },
+    ],
+  },
+  {
+    title: "Best Early Game",
+    description:
+      "Rosewood Town Routes are easier to repeat while a new player is still building food, medical basics and safe movement habits.",
+    href: "/locations/rosewood/",
+    stats: [
+      { label: "Pick", value: "Rosewood Town Routes" },
+      { label: "Best Stage", value: "First supply loops" },
+    ],
+  },
+  {
+    title: "Best for Weapons",
+    description:
+      "West Point weapon routes are better treated as targeted runs for prepared players, not casual first-day looting.",
+    href: "/locations/west-point-gun-store/",
+    stats: [
+      { label: "Pick", value: "West Point routes" },
+      { label: "Best Stage", value: "Prepared runs" },
+    ],
+  },
+  {
+    title: "Best for Food",
+    description:
+      "Riverside Commercial Routes fit cautious food and supply planning when you want slower pressure than dense city routes.",
+    href: "/locations/riverside/",
+    stats: [
+      { label: "Pick", value: "Riverside routes" },
+      { label: "Best Stage", value: "Stable expansion" },
+    ],
+  },
+  {
+    title: "Best for Medical Basics",
+    description:
+      "Rosewood routes are the safer first choice for basic supplies because they keep the return path short and easier to recover.",
+    href: "/locations/rosewood/",
+    stats: [
+      { label: "Pick", value: "Rosewood routes" },
+      { label: "Best Stage", value: "Early survival" },
+    ],
+  },
+  {
+    title: "High Risk / High Reward",
+    description:
+      "Louisville Urban Routes offer the highest reward profile in this guide, but they need transport, stamina and escape planning.",
+    href: "/locations/louisville/",
+    stats: [
+      { label: "Pick", value: "Louisville routes" },
+      { label: "Best Stage", value: "Advanced trips" },
+    ],
+  },
+];
+
 const lootCategories = [
   {
     title: "Weapons",
@@ -108,6 +182,21 @@ const lootCategories = [
     description:
       "Medical loot is best collected before risky travel, so injuries do not turn a good route into a failed run.",
   },
+  {
+    title: "Vehicles",
+    description:
+      "Vehicle access matters because a good loot route needs a safe return plan as much as it needs valuable supplies.",
+  },
+  {
+    title: "Books / Skill Resources",
+    description:
+      "Skill resources are most useful when they support the next base goal instead of filling storage before basics are secured.",
+  },
+  {
+    title: "Early-Game Essentials",
+    description:
+      "Food, water containers, simple tools and medical basics should come before ambitious high-risk loot objectives.",
+  },
 ];
 
 const riskRewardRows = [
@@ -115,6 +204,13 @@ const riskRewardRows = [
   { label: "Medium risk", value: "Riverside commercial routes and longer road movement" },
   { label: "High reward", value: "Louisville routes when the player has transport and exits" },
   { label: "Best balance", value: "Rosewood Fire Station for early tools and base momentum" },
+];
+
+const townLootRows = [
+  { label: "Rosewood", value: "Best for safer early essentials and Rosewood Fire Station utility" },
+  { label: "Riverside", value: "Best for slower commercial supply routes and cautious expansion" },
+  { label: "West Point", value: "Best for prepared weapon-focused routes with higher pressure" },
+  { label: "Louisville", value: "Best for high-value city loot once transport and exits are planned" },
 ];
 
 const strategySteps = [
@@ -140,18 +236,28 @@ const faqs = [
     answer:
       "Louisville can be valuable, but it is not ideal for a first route unless the player already has transport, escape planning and enough supplies.",
   },
+  {
+    question: "What is the best early-game loot spot?",
+    answer:
+      "For most new players, Rosewood routes and Rosewood Fire Station are better early targets than high-pressure city loot because the return path is easier to manage.",
+  },
+  {
+    question: "Should I loot weapons first?",
+    answer:
+      "Only if the route is controlled. Weapons are useful, but food, tools, medical basics and a safe return path usually matter more in the first phase of a run.",
+  },
 ];
 
 const relatedGuides = [
   {
     title: "Best Starting Location",
     description: "Choose a beginner-friendly town before planning loot routes.",
-    href: "/guides/best-starting-location",
+    href: "/guides/best-starting-location/",
   },
   {
     title: "Louisville Location Guide",
     description: "Review high-risk city survival notes and route planning.",
-    href: "/locations/louisville",
+    href: "/locations/louisville/",
   },
   {
     title: "Rosewood Fire Station Base",
@@ -159,16 +265,47 @@ const relatedGuides = [
     href: "/locations/rosewood-fire-station/",
   },
   {
+    title: "Rosewood Fire Station Loot",
+    description: "Open the focused loot page for fire station gear, route and entry planning.",
+    href: "/locations/rosewood-fire-station-loot/",
+  },
+  {
+    title: "Rosewood Location Guide",
+    description: "Use Rosewood's town guide to connect early loot routes with safer base planning.",
+    href: "/locations/rosewood/",
+  },
+  {
+    title: "Riverside Map Guide",
+    description: "Compare slower Riverside loot routes and cautious town planning.",
+    href: "/locations/riverside/",
+  },
+  {
+    title: "West Point Map Guide",
+    description: "Review higher-pressure West Point routes before targeting weapon-focused loot.",
+    href: "/locations/west-point/",
+  },
+  {
     title: "Best Base Locations",
     description: "Compare base candidates by safety, resources and long-term value.",
-    href: "/guides/best-base-locations/",
+    href: "/survival/best-base-locations/",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use the Build 42 map hub to plan loot routes between towns.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Interactive Map",
+    description: "Use the map entry hub for route planning and future location filters.",
+    href: "/maps/interactive-map/",
   },
 ];
 ---
 
 <BaseLayout
-  title="Best Loot Locations in Project Zomboid"
-  description="Compare the best loot locations in Project Zomboid by weapons, food, tools, medical supplies, risk and survival route value."
+  title="Best Loot Locations in Project Zomboid | Weapons, Food & Tools"
+  description="Find the best Project Zomboid loot spots for weapons, food, tools, medical supplies and early survival routes, with risk notes for Build 42 planning."
+  canonicalPath="/guides/best-loot-locations/"
   ogType="article"
   faqs={faqs}
 >
@@ -179,7 +316,8 @@ const relatedGuides = [
         Best Loot Locations in Project Zomboid
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
-        A database-style guide for comparing loot routes by supply value, player experience and risk level.
+        A database-style guide for comparing loot routes by supply value, player experience, risk level and
+        Build 42 survival planning.
       </p>
     </PageContainer>
   </section>
@@ -195,6 +333,27 @@ const relatedGuides = [
           The best loot location is not always the place with the biggest reward. Good routes balance supplies,
           distance, escape options and whether the run helps your base become safer.
         </p>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          If you need a fast answer, start with safer Rosewood routes or Rosewood Fire Station for early tools
+          and essentials. Move toward Riverside when you want slower supply runs, West Point when you are ready
+          for weapon-focused objectives and Louisville only when the reward is worth the extra route pressure.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="quick-picks-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Best Loot Locations Quick Picks</p>
+        <h2 id="quick-picks-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Where to loot first by survival need
+        </h2>
+        <p class="mt-3 max-w-3xl text-sm leading-6 text-zsd-muted">
+          Use these picks as decision shortcuts. They summarize the current guide instead of replacing the full
+          ranking table or the focused location pages.
+        </p>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {quickPicks.map((pick) => <Card {...pick} label="View Guide" eyebrow="Quick Pick" />)}
       </div>
     </section>
 
@@ -232,6 +391,23 @@ const relatedGuides = [
       </div>
     </section>
 
+    <section class="mt-12" aria-labelledby="town-loot-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Best Loot by Town</p>
+          <h2 id="town-loot-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Match the route to the town pressure
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Town choice changes the risk of every loot run. Rosewood and Riverside are better for controlled
+            early routes, while West Point and Louisville fit players who already have a base, transport and a
+            way to leave before the route collapses.
+          </p>
+        </div>
+        <StatsTable rows={townLootRows} />
+      </div>
+    </section>
+
     <section class="mt-12" aria-labelledby="risk-reward-title">
       <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
         <div>
@@ -246,6 +422,20 @@ const relatedGuides = [
           </p>
         </div>
         <StatsTable rows={riskRewardRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="build-42-title">
+      <div class="border border-zsd-line bg-zsd-panel/80 p-6">
+        <p class="text-sm font-semibold text-zsd-orange">Build 42 Notes</p>
+        <h2 id="build-42-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Keep loot plans flexible across current builds
+        </h2>
+        <p class="mt-4 text-sm leading-6 text-zsd-muted">
+          This page avoids exact spawn promises because loot settings, save conditions and current Build 42
+          updates can change how a route feels. Use the ranking as a planning layer: choose the town, decide the
+          supply type and leave room to change route when pressure or inventory limits make the run unsafe.
+        </p>
       </div>
     </section>
 

@@ -36,6 +36,69 @@ const criteria = [
   { label: "Expansion", value: "Whether the base can support longer survival plans" },
 ];
 
+const quickPicks = [
+  {
+    title: "Best Overall",
+    description:
+      "Rosewood Fire Station is the current dataset pick when you want one base candidate that balances safety, utility and a forgiving early route plan.",
+    href: "/locations/rosewood-fire-station/",
+    meta: [
+      { label: "Base", value: "Rosewood Fire Station" },
+      { label: "Best fit", value: "Balanced survival plan" },
+    ],
+  },
+  {
+    title: "Best for Beginners",
+    description:
+      "Rosewood is the safest first town in this ranking, with compact routes and base options that help new players recover from mistakes.",
+    href: "/locations/rosewood/",
+    meta: [
+      { label: "Area", value: "Rosewood" },
+      { label: "Best fit", value: "New player starts" },
+    ],
+  },
+  {
+    title: "Best for Loot",
+    description:
+      "Louisville has the strongest loot ceiling in the current database, but it only works well when the player can manage high city pressure.",
+    href: "/locations/louisville/",
+    meta: [
+      { label: "Area", value: "Louisville" },
+      { label: "Best fit", value: "Prepared loot runs" },
+    ],
+  },
+  {
+    title: "Best for Defense",
+    description:
+      "Rosewood Fire Station remains the clearest defensive pick here because it pairs practical building utility with an easier surrounding town.",
+    href: "/locations/rosewood-fire-station/",
+    meta: [
+      { label: "Base", value: "Rosewood Fire Station" },
+      { label: "Best fit", value: "Controlled setup" },
+    ],
+  },
+  {
+    title: "Best for Long-Term Survival",
+    description:
+      "Riverside is a strong calmer option for players who want steady routes and a base plan that can grow before longer map travel.",
+    href: "/locations/riverside/",
+    meta: [
+      { label: "Area", value: "Riverside" },
+      { label: "Best fit", value: "Stable progression" },
+    ],
+  },
+  {
+    title: "Best Challenge Pick",
+    description:
+      "West Point is better for experienced players who want stronger route pressure and are comfortable scouting before committing to a base.",
+    href: "/locations/west-point/",
+    meta: [
+      { label: "Area", value: "West Point" },
+      { label: "Best fit", value: "Veteran planning" },
+    ],
+  },
+];
+
 const faqs = [
   {
     question: "What is the best beginner base in Project Zomboid?",
@@ -52,6 +115,16 @@ const faqs = [
     answer:
       "Build 42 can affect survival planning over time, so this ranking is structured as data that can be updated without rebuilding the page design.",
   },
+  {
+    question: "Is Rosewood Fire Station the best base location?",
+    answer:
+      "It is the top current pick in this database because it is beginner-friendly, practical and easier to plan around than high-pressure city bases.",
+  },
+  {
+    question: "Which base location is best for loot?",
+    answer:
+      "Louisville has the highest loot potential in the current base data, but it is also harder to use safely. New players should usually stabilize in Rosewood or Riverside first.",
+  },
 ];
 
 const relatedGuides = [
@@ -61,14 +134,44 @@ const relatedGuides = [
     href: "/locations/rosewood/",
   },
   {
+    title: "Rosewood Fire Station Base",
+    description: "Open the focused base page for defense notes, loot routes and early strategy.",
+    href: "/locations/rosewood-fire-station/",
+  },
+  {
+    title: "Riverside Map Guide",
+    description: "Compare Riverside base planning with safer town routes and long-term options.",
+    href: "/locations/riverside/",
+  },
+  {
+    title: "West Point Map Guide",
+    description: "Review a harder town where base planning depends on tighter route control.",
+    href: "/locations/west-point/",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare loot routes before choosing a base that supports repeat supply runs.",
+    href: "/guides/best-loot-locations/",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use the Build 42 map hub to compare towns, routes and survival planning notes.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Map Difficulty Ranking",
+    description: "Check difficulty before committing to a base in a harder town or city.",
+    href: "/maps/difficulty-ranking/",
+  },
+  {
     title: "Location Database",
     description: "Browse all tracked Project Zomboid locations.",
-    href: "/locations",
+    href: "/locations/",
   },
   {
     title: "Interactive Map",
     description: "Use the map hub for future route planning and location filters.",
-    href: "/maps/interactive-map",
+    href: "/maps/interactive-map/",
   },
 ];
 ---
@@ -76,6 +179,7 @@ const relatedGuides = [
 <BaseLayout
   title="Best Base Locations in Project Zomboid (Build 42)"
   description="Compare the best base locations in Project Zomboid Build 42 by safety, resources, difficulty and recommended play style."
+  canonicalPath="/survival/best-base-locations/"
   ogType="article"
   faqs={faqs}
 >
@@ -86,8 +190,8 @@ const relatedGuides = [
         Best Base Locations in Project Zomboid (Build 42)
       </h1>
       <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
-        A database-style guide for choosing base locations by security, resources, difficulty and long-term
-        survival value.
+        A database-style guide for choosing Project Zomboid base locations by security, resources, difficulty
+        and long-term survival value in Build 42.
       </p>
     </PageContainer>
   </section>
@@ -103,6 +207,39 @@ const relatedGuides = [
           The best base is not only the safest building. It also needs reliable routes, recoverable loot,
           manageable zombie pressure and enough room to support the next stage of the run.
         </p>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          This ranking treats each base as a decision point instead of a wiki entry. Rosewood Fire Station is
+          useful when you want a forgiving first base, Riverside supports slower long-term planning, West Point
+          rewards careful route control and Louisville should be treated as a high-pressure objective for prepared
+          players. Use the quick picks below when you already know what kind of run you want, then use the ranking
+          table and location cards to compare the tradeoffs.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="quick-picks-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Quick Picks</p>
+        <h2 id="quick-picks-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Best bases by survival need
+        </h2>
+        <p class="mt-3 max-w-3xl text-sm leading-6 text-zsd-muted">
+          These picks summarize the current database rather than claiming a single perfect answer for every save.
+          Use them to choose a direction before opening the detailed location guides.
+        </p>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        {
+          quickPicks.map((pick) => (
+            <LocationCard
+              title={pick.title}
+              description={pick.description}
+              href={pick.href}
+              label="View Guide"
+              meta={pick.meta}
+            />
+          ))
+        }
       </div>
     </section>
 
@@ -154,7 +291,8 @@ const relatedGuides = [
           </h2>
           <p class="mt-4 text-sm leading-6 text-zsd-muted">
             Rankings are meant to support decisions, not replace player judgment. A base can be strong for
-            beginners, long-term survival, fast looting or high-risk city play.
+            beginners, long-term survival, fast looting or high-risk city play. The current Build 42 structure keeps
+            each score tied to location data so future updates can change the database without changing the page URL.
           </p>
         </div>
         <StatsTable rows={criteria} />

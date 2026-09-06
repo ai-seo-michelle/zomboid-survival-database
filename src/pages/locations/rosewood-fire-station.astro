@@ -43,6 +43,31 @@ const resourceNotes = [
   "Emergency-service routes can help players build a simple early survival plan around repeatable targets.",
 ];
 
+const baseDecisionRows = [
+  { label: "Best For", value: "Beginners who want a stable Rosewood base" },
+  { label: "Why It Works", value: "Practical space, storage planning, vehicle access and short local routes" },
+  { label: "Main Weakness", value: "Rosewood has less late-game loot depth than larger cities" },
+  { label: "Plan Around", value: "Noise control, water, storage, clear entrances and backup escape routes" },
+];
+
+const baseDecisionCards = [
+  {
+    title: "Loot and nearby resources",
+    description:
+      "Use the fire station as a base first, then connect short Rosewood loot runs for food, tools and medical basics without turning every trip into a full-town clear.",
+  },
+  {
+    title: "Vehicle access and escape routes",
+    description:
+      "Keep road access open and avoid blocking your own exits. A good Rosewood Fire Station base plan should always include a retreat path before longer supply runs.",
+  },
+  {
+    title: "Water, storage and long-term use",
+    description:
+      "Treat water planning and organized storage as early priorities. The building works best when it becomes a controlled supply hub instead of a noisy loot pile.",
+  },
+];
+
 const strategySteps = [
   "Secure the building first and avoid clearing more of Rosewood than you can safely manage.",
   "Create a short supply route between the base, nearby houses and key town buildings.",
@@ -79,23 +104,53 @@ const faqs = [
     answer:
       "For many beginner runs, Rosewood and the fire station area are easier to learn than high-pressure city starts.",
   },
+  {
+    question: "Does Rosewood Fire Station work as a Build 42 base?",
+    answer:
+      "Yes, as a planning choice. Build 42 can change survival details over time, but the fire station still fits the role of a readable Rosewood base candidate.",
+  },
+  {
+    question: "Is this page about the base or the loot route?",
+    answer:
+      "This page focuses on the fire station as a base decision. Loot-specific planning belongs on the Rosewood Fire Station loot guide.",
+  },
 ];
 
 const relatedGuides = [
   {
-    title: "Rosewood Map Guide",
-    description: "Review Rosewood map planning, POIs, base options, resources and route notes.",
+    title: "Rosewood Location Guide",
+    description: "Review Rosewood difficulty, base options, resources and survival notes.",
     href: "/locations/rosewood/",
   },
   {
     title: "Best Starting Location",
     description: "Compare beginner-friendly towns before choosing your next spawn.",
-    href: "/guides/best-starting-location",
+    href: "/guides/best-starting-location/",
   },
   {
     title: "Best Base Locations",
     description: "Compare base candidates by safety, resources and long-term survival value.",
-    href: "/guides/best-base-locations/",
+    href: "/survival/best-base-locations/",
+  },
+  {
+    title: "Rosewood Fire Station Loot",
+    description: "Use the focused loot page for firefighter gear, weapon potential and safe entry planning.",
+    href: "/locations/rosewood-fire-station-loot/",
+  },
+  {
+    title: "Best Loot Locations",
+    description: "Compare loot routes before choosing how far to travel from the fire station.",
+    href: "/guides/best-loot-locations/",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use the Build 42 map hub to compare Rosewood routes with other towns.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Map Difficulty Ranking",
+    description: "Compare Rosewood with harder towns before choosing your next base challenge.",
+    href: "/maps/difficulty-ranking/",
   },
 ];
 ---
@@ -103,6 +158,7 @@ const relatedGuides = [
 <BaseLayout
   title="Rosewood Fire Station Base Project Zomboid Guide"
   description="Plan a Rosewood Fire Station base in Project Zomboid with defense notes, loot routes, early strategy, pros and cons."
+  canonicalPath="/locations/rosewood-fire-station/"
   ogType="article"
   faqs={faqs}
 >
@@ -136,6 +192,42 @@ const relatedGuides = [
             Rosewood Fire Station is a popular base choice because it gives players a practical building to
             secure while keeping nearby routes simple enough for early planning. It is best used as a controlled
             safehouse, supply hub and staging point before wider map travel.
+          </p>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            This page focuses on the fire station as a single Rosewood location: why it works as a base, what
+            weaknesses to plan around, how loot and vehicles fit into the decision and when to compare it against
+            other base candidates. For a town-level view, use the Rosewood guide; for loot-only planning, use the
+            dedicated fire station loot page.
+          </p>
+        </section>
+
+        <section class="mt-10" aria-labelledby="base-decision-title">
+          <p class="text-sm font-semibold text-zsd-orange">Rosewood Fire Station as a Base</p>
+          <h2 id="base-decision-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Quick decision before you commit
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Rosewood Fire Station is strongest when you want a forgiving base that can teach route control,
+            storage discipline and staged loot runs. It should not be treated as a perfect answer for every save:
+            players still need water planning, noise control and a clear way out if the area becomes too active.
+          </p>
+          <div class="mt-5">
+            <StatsTable rows={baseDecisionRows} />
+          </div>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {baseDecisionCards.map((item) => <Card title={item.title} description={item.description} />)}
+          </div>
+        </section>
+
+        <section class="mt-10" aria-labelledby="build-42-title">
+          <p class="text-sm font-semibold text-zsd-orange">Build 42 Notes</p>
+          <h2 id="build-42-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Use it as a stable Rosewood planning anchor
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            For Build 42 planning, Rosewood Fire Station is best understood as a reliable base framework rather
+            than a fixed checklist of loot or mechanics. Check the current save, secure the approach and use the
+            broader map guide when deciding whether to stay in Rosewood or branch into harder areas.
           </p>
         </section>
 
@@ -212,9 +304,10 @@ const relatedGuides = [
           <p class="text-sm font-semibold text-zsd-orange">Internal Routes</p>
           <h2 id="route-links-title" class="mt-2 text-xl font-semibold text-zsd-ash">Planning links</h2>
           <div class="mt-4 grid gap-3">
-            <Card title="Rosewood Map Guide" href="/locations/rosewood/" label="Open guide" />
-            <Card title="Starting Location Guide" href="/guides/best-starting-location" label="Open guide" />
-            <Card title="Base Ranking" href="/guides/best-base-locations/" label="Open guide" />
+            <Card title="Rosewood Guide" href="/locations/rosewood/" label="Open guide" />
+            <Card title="Fire Station Loot" href="/locations/rosewood-fire-station-loot/" label="Open guide" />
+            <Card title="Starting Location Guide" href="/guides/best-starting-location/" label="Open guide" />
+            <Card title="Base Ranking" href="/survival/best-base-locations/" label="Open guide" />
           </div>
         </section>
       </aside>

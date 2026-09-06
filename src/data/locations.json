@@ -16,7 +16,7 @@
     "relatedGuides": [
       {
         "title": "Interactive Map",
-        "href": "/maps/interactive-map"
+        "href": "/maps/interactive-map/"
       },
       {
         "title": "Map Difficulty Ranking",
@@ -24,7 +24,7 @@
       },
       {
         "title": "Best Base Locations",
-        "href": "/guides/best-base-locations/"
+        "href": "/survival/best-base-locations/"
       }
     ]
   },
@@ -45,7 +45,7 @@
     "relatedGuides": [
       {
         "title": "Interactive Map",
-        "href": "/maps/interactive-map"
+        "href": "/maps/interactive-map/"
       },
       {
         "title": "Map Difficulty Ranking",
@@ -53,7 +53,7 @@
       },
       {
         "title": "Best Base Locations",
-        "href": "/guides/best-base-locations/"
+        "href": "/survival/best-base-locations/"
       }
     ]
   }

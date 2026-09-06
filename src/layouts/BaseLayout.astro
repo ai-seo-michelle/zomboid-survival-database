@@ -33,7 +33,7 @@ const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
 const canonicalUrl =
   canonicalPath === null ? null : new URL(canonicalPath ?? Astro.url.pathname, siteConfig.url).toString();
 const ogImageUrl = new URL(siteConfig.ogImage, siteConfig.url).toString();
-const isGuidePage = Astro.url.pathname.startsWith("/guides/");
+const isGuidePage = ogType === "article";
 const breadcrumbSchema = noindex
   ? null
   : buildBreadcrumbSchema({

@@ -42,7 +42,7 @@ const rankingRows = startingLocations.map((entry) => {
 
   return {
     title: location?.name ?? entry.slug,
-    href: `/locations/${entry.slug}`,
+    href: `/locations/${entry.slug}/`,
     values: {
       rank: `#${entry.rank}`,
       difficulty: location?.difficulty ?? "Unknown",
@@ -59,7 +59,7 @@ const comparisonCards = startingLocations.map((entry) => {
   return {
     title: location?.name ?? entry.slug,
     description: location?.description ?? "Location data is being prepared.",
-    href: `/locations/${entry.slug}`,
+    href: `/locations/${entry.slug}/`,
     label: "View Location Guide",
     eyebrow: "Location Comparison",
     badge: `#${entry.rank}`,
@@ -101,7 +101,7 @@ const relatedGuides = [
   {
     title: "Best Base Locations",
     description: "Compare base candidates by safety, resources and long-term survival value.",
-    href: "/guides/best-base-locations/",
+    href: "/survival/best-base-locations/",
   },
   {
     title: "Rosewood Base Guide",
