@@ -1,0 +1,313 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import RankingTable from "../../components/RankingTable.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Best Negative Traits in Project Zomboid Build 42";
+const description =
+  "Compare the best negative traits in Project Zomboid Build 42 by drawback, value, player fit and risk before building your survivor.";
+
+const traitRows = [
+  {
+    title: "High Thirst",
+    href: "#high-thirst",
+    values: {
+      tier: "Best negative traits",
+      effect: "More water management",
+      why: "Easy to plan around with bottles, sinks and a stable base routine",
+      fit: "Base planners and cautious route players",
+      caution: "Bad if you ignore water before long trips",
+    },
+  },
+  {
+    title: "Slow Reader",
+    href: "#slow-reader",
+    values: {
+      tier: "Best negative traits",
+      effect: "Longer reading time",
+      why: "Low danger when reading happens in a secured safehouse",
+      fit: "Single-player or patient groups",
+      caution: "Painful when server time keeps moving",
+    },
+  },
+  {
+    title: "Weak Stomach",
+    href: "#weak-stomach",
+    values: {
+      tier: "Best negative traits",
+      effect: "Riskier bad food decisions",
+      why: "Manageable if you avoid unsafe food and do not loot in panic",
+      fit: "Careful food planners",
+      caution: "Punishes careless eating hard",
+    },
+  },
+  {
+    title: "Smoker",
+    href: "#smoker",
+    values: {
+      tier: "Good choices",
+      effect: "Adds a recurring supply need",
+      why: "Worth considering when your routes can support the habit",
+      fit: "Loot-focused players",
+      caution: "Turns cigarettes and fire sources into required supplies",
+    },
+  },
+  {
+    title: "Short Sighted",
+    href: "#short-sighted",
+    values: {
+      tier: "Good choices",
+      effect: "Weaker visual awareness",
+      why: "Can be managed by slower scouting and safer route discipline",
+      fit: "Quiet looters and base-first players",
+      caution: "Worse for fast movement and risky exits",
+    },
+  },
+  {
+    title: "Slow Healer",
+    href: "#slow-healer",
+    values: {
+      tier: "Situational",
+      effect: "Injuries recover more slowly",
+      why: "Only acceptable if your play style avoids frequent injuries",
+      fit: "Experienced stealth players",
+      caution: "Very punishing after mistakes",
+    },
+  },
+  {
+    title: "Clumsy",
+    href: "#clumsy",
+    values: {
+      tier: "Traits to avoid",
+      effect: "Makes movement mistakes more costly",
+      why: "Rarely worth it for new players learning route control",
+      fit: "Challenge runs only",
+      caution: "Can turn simple escapes into problems",
+    },
+  },
+  {
+    title: "Deaf",
+    href: "#deaf",
+    values: {
+      tier: "Traits to avoid",
+      effect: "Removes an important safety layer",
+      why: "The points rarely justify the loss of awareness",
+      fit: "Special challenge runs",
+      caution: "Very high risk for most survivors",
+    },
+  },
+];
+
+const traitColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "effect", label: "Negative Effect" },
+  { key: "why", label: "Why It Can Work" },
+  { key: "fit", label: "Best For" },
+  { key: "caution", label: "Cost" },
+];
+
+const traitGroups = [
+  {
+    title: "Best negative traits",
+    description:
+      "These drawbacks are easiest to convert into useful build points because they can be managed with routine, safehouses and careful routes.",
+    cards: traitRows.filter((trait) => trait.values.tier === "Best negative traits"),
+  },
+  {
+    title: "Good choices",
+    description:
+      "These can be strong in the right run, but they need a clear plan and should not be treated as free points.",
+    cards: traitRows.filter((trait) => trait.values.tier === "Good choices"),
+  },
+  {
+    title: "Situational",
+    description:
+      "These belong in experienced builds where the player already knows how to avoid the specific weakness.",
+    cards: traitRows.filter((trait) => trait.values.tier === "Situational"),
+  },
+  {
+    title: "Traits to avoid",
+    description:
+      "These negatives can reshape the whole run. New players should usually skip them unless they are doing a challenge build.",
+    cards: traitRows.filter((trait) => trait.values.tier === "Traits to avoid"),
+  },
+];
+
+const decisionRows = [
+  { label: "Best beginner pick", value: "High Thirst" },
+  { label: "Safest low-pressure pick", value: "Slow Reader" },
+  { label: "Best for careful food players", value: "Weak Stomach" },
+  { label: "Most supply-dependent pick", value: "Smoker" },
+  { label: "Avoid for new players", value: "Deaf and Clumsy" },
+  { label: "Build 42 rule", value: "Check current trait values before min-maxing" },
+];
+
+const faqs = [
+  {
+    question: "What are the best negative traits in Project Zomboid Build 42?",
+    answer:
+      "High Thirst, Slow Reader and Weak Stomach are the safest starting recommendations on this page because their drawbacks can be managed with planning rather than constant combat skill.",
+  },
+  {
+    question: "Are negative trait point values listed here?",
+    answer:
+      "No. This page avoids exact point values because Build 42 balance, servers and mods can change trait details. Use it as a decision guide, then confirm exact values in your game.",
+  },
+  {
+    question: "Should beginners take many negative traits?",
+    answer:
+      "No. Beginners should take only a few manageable drawbacks. A simple build that survives is stronger than a point-heavy build with too many daily problems.",
+  },
+  {
+    question: "Is Smoker a good negative trait?",
+    answer:
+      "Smoker can be good if your routes support the required supplies, but it is not free. It adds another supply habit to every long-term run.",
+  },
+  {
+    question: "Which negative traits should I avoid?",
+    answer:
+      "Avoid traits that remove awareness, movement safety or recovery margin unless you specifically want a challenge run.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Best Traits",
+    description: "Compare positive and negative traits in the broader survivor build guide.",
+    href: "/guides/best-traits/",
+  },
+  {
+    title: "Best Occupations",
+    description: "Pair your negative traits with an occupation that supports the same survival plan.",
+    href: "/guides/best-occupations/",
+  },
+  {
+    title: "Build 42 Guide",
+    description: "Return to the Build 42 hub for version-level survival planning.",
+    href: "/build-42/",
+  },
+  {
+    title: "Best Starting Location",
+    description: "Pick a starting town that makes your drawbacks easier to manage.",
+    href: "/guides/best-starting-location/",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Use a stable base to control water, reading time, food and recovery pressure.",
+    href: "/survival/best-base-locations/",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqs={faqs}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Build 42 Trait Ranking</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Best Negative Traits in Project Zomboid Build 42
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Pick negative traits for Build 42 by asking one question: can you manage the drawback every day without
+        making normal survival decisions worse? This page ranks practical negative traits as build decisions,
+        not as a trait encyclopedia.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="intro-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Introduction</p>
+          <h2 id="intro-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Worthwhile negative traits are manageable, not harmless
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            The best negative traits in Project Zomboid are the ones that create a predictable routine instead of
+            a constant emergency. Build 42 planning should stay flexible, so this ranking avoids exact point values
+            and focuses on what the drawback asks from the player.
+          </p>
+        </div>
+        <StatsTable rows={decisionRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="ranking-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Negative Traits Ranking</p>
+        <h2 id="ranking-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ranked by drawback, value and player fit
+        </h2>
+      </div>
+      <RankingTable columns={traitColumns} rows={traitRows} titleLabel="Trait" />
+    </section>
+
+    {
+      traitGroups.map((group) => (
+        <section class="mt-12" aria-labelledby={group.title.toLowerCase().replaceAll(" ", "-")}>
+          <div class="mb-6">
+            <p class="text-sm font-semibold text-zsd-orange">Trait Tier</p>
+            <h2 id={group.title.toLowerCase().replaceAll(" ", "-")} class="mt-2 text-2xl font-semibold text-zsd-ash">
+              {group.title}
+            </h2>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-zsd-muted">{group.description}</p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            {group.cards.map((trait) => (
+              <Card
+                title={trait.title}
+                description={`${trait.values.effect}. ${trait.values.why}. Best for: ${trait.values.fit}. Cost: ${trait.values.caution}.`}
+                eyebrow={trait.values.tier}
+              />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="mt-12" aria-labelledby="build-42-notes">
+      <div class="border border-zsd-line bg-zsd-panel/80 p-6">
+        <p class="text-sm font-semibold text-zsd-orange">Build 42 Notes</p>
+        <h2 id="build-42-notes" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Confirm exact values in your current build
+        </h2>
+        <p class="mt-4 text-sm leading-6 text-zsd-muted">
+          Trait balance can change across updates, multiplayer rules and modded servers. Use this Build 42 guide
+          to decide which drawbacks fit your survival plan, then confirm the current in-game wording and point
+          values before finalizing the character.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Negative trait questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {faqs.map((item) => (
+          <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+            <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+            <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue survivor build planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

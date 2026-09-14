@@ -84,7 +84,7 @@ const stats = [
             {isMapHub ? `${location.name} Map Overview` : `${location.name} Overview`}
           </p>
           <h2 id="location-overview" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            {isMapHub ? `${location.name} map planning notes` : "Why this location works"}
+            {location.mapOverviewHeading ?? (isMapHub ? `${location.name} map planning notes` : "Why this location works")}
           </h2>
           <p class="mt-4 text-base leading-7 text-zsd-muted">{overviewCopy}</p>
         </section>
@@ -126,7 +126,7 @@ const stats = [
             <section class="mt-10" aria-labelledby="points-of-interest">
               <p class="text-sm font-semibold text-zsd-orange">Key Areas / POIs</p>
               <h2 id="points-of-interest" class="mt-2 text-2xl font-semibold text-zsd-ash">
-                Start with the major {location.name} decision points
+                {location.pointsOfInterestHeading ?? `Start with the major ${location.name} decision points`}
               </h2>
               <div class="mt-5 grid gap-4 md:grid-cols-2">
                 {location.pointsOfInterest.map((poi) => (
@@ -140,7 +140,8 @@ const stats = [
         <section class="mt-10" aria-labelledby="best-base-spots">
           <p class="text-sm font-semibold text-zsd-orange">{isMapHub ? "Base Planning" : "Best Base Spots"}</p>
           <h2 id="best-base-spots" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            {isMapHub ? `How bases fit into the ${location.name} map` : `Base candidates in ${location.name}`}
+            {location.basePlanningHeading ??
+              (isMapHub ? `How bases fit into the ${location.name} map` : `Base candidates in ${location.name}`)}
           </h2>
           {
             location.basePlanning && location.basePlanning.length > 0 && (
@@ -177,7 +178,7 @@ const stats = [
             {isMapHub ? "Loot & Resource Planning" : "Loot & Resources"}
           </p>
           <h2 id="loot-resources" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            Resource planning notes
+            {location.lootAndResourcesHeading ?? "Resource planning notes"}
           </h2>
           <div class="mt-5 grid gap-3">
             {
@@ -195,7 +196,8 @@ const stats = [
             {location.routePlanning ? "Route / Access Planning" : "Survival Strategy"}
           </p>
           <h2 id="survival-strategy" class="mt-2 text-2xl font-semibold text-zsd-ash">
-            {location.routePlanning ? `How to move through ${location.name}` : `How to approach ${location.name}`}
+            {location.routePlanningHeading ??
+              (location.routePlanning ? `How to move through ${location.name}` : `How to approach ${location.name}`)}
           </h2>
           <div class="mt-5 grid gap-3">
             {

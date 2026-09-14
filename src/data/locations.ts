@@ -12,13 +12,13 @@ export const locations: LocationRecord[] = [
     lootRating: 4,
     riskRating: 2,
     description:
-      "Use this Project Zomboid Rosewood map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+      "Use this Project Zomboid Rosewood map guide to plan Build 42 routes, points of interest, loot locations, base options and survival decisions.",
     introduction:
-      "Rosewood is the town-level hub for planning a safer Project Zomboid run. This page focuses on map-level decisions: where to start, which POIs matter, how to link short routes and when to open the focused Fire Station or Police Station guides.",
+      "Rosewood is the town-level hub for planning a safer Project Zomboid run. This page focuses on map-level decisions: how to orient yourself, which points of interest matter, how to link short loot routes and when to open the focused Fire Station or Police Station guides.",
     overview:
       "Rosewood is a compact starting town in Project Zomboid with practical base options, clear road access and manageable early pressure.",
     mapOverview:
-      "The Rosewood map works best as a short-route planning area. Its residential blocks, emergency-service buildings and road exits sit close enough together that players can plan one objective at a time instead of crossing a large city for every supply run.",
+      "The Rosewood map works best as a short-route planning area. Treat the town as a compact loop of residential supplies, emergency-service POIs, main-road stops and exits that can be checked one objective at a time instead of crossing a larger city for every supply run.",
     build42Notes: [
       "Build 42 planning should be treated as current-build planning. Use Rosewood's known town structure as a starting point, but verify exact building layouts and route pressure in your current save.",
       "Official Build 42 notes include updates to existing map areas, including Rosewood, so older habits should be checked against the current build before committing to a base or loot loop.",
@@ -32,6 +32,11 @@ export const locations: LocationRecord[] = [
     ],
     keyLocationsLabel: "Key Areas / POIs",
     keyLocationsHeading: "Rosewood areas to compare",
+    mapOverviewHeading: "Rosewood map orientation for Build 42 route planning",
+    pointsOfInterestHeading: "Rosewood points of interest for bases, loot and route decisions",
+    basePlanningHeading: "Rosewood best base locations and safehouse planning",
+    lootAndResourcesHeading: "Rosewood loot locations and resource routes",
+    routePlanningHeading: "Rosewood access routes and map movement",
     pointsOfInterest: [
       {
         title: "Rosewood Fire Station",
@@ -50,6 +55,16 @@ export const locations: LocationRecord[] = [
         href: "/locations/rosewood-fire-station-loot/",
         description:
           "Check the loot-focused page when you need firefighter gear, utility supplies and a short station route.",
+      },
+      {
+        title: "Residential Supply Loops",
+        description:
+          "Use nearby homes for food, containers and early tools before pushing into higher-value POIs.",
+      },
+      {
+        title: "Main Road Stops",
+        description:
+          "Treat the commercial strip as a planned route segment with a return path, not a place to wander while tired.",
       },
     ],
     bestBases: [
@@ -87,11 +102,13 @@ export const locations: LocationRecord[] = [
     basePlanning: [
       "Treat Rosewood bases as part of the town map, not as isolated buildings. A strong base still needs repeatable routes, nearby supplies and a clear way out.",
       "The Fire Station deserves its own base guide, while this hub keeps the broader Rosewood base decision connected to map movement and town pressure.",
+      "For best base location planning, compare the Fire Station's defensive value against quieter residential edges and the travel time to loot stops.",
     ],
     lootAndResources: [
       "Emergency-service POIs give Rosewood useful early loot targets without forcing a long city route.",
       "Residential blocks provide food, basic tools and storage opportunities for safer recovery runs.",
       "Rosewood loot planning works best when each stop has an exit path back to the base or vehicle route.",
+      "The strongest Rosewood loot route is usually the route you can repeat safely, not the route with the most buildings in one trip.",
     ],
     routePlanning: [
       "Plan Rosewood routes around short loops: scout, enter one area, collect priority supplies and return before fatigue builds.",
@@ -145,6 +162,21 @@ export const locations: LocationRecord[] = [
         answer:
           "Use Rosewood as a current-build planning area: check routes in your save, avoid relying on old exact layouts and keep each loot or base decision recoverable.",
       },
+      {
+        question: "What are the most important Rosewood points of interest?",
+        answer:
+          "Start with the Fire Station, Police Station, residential blocks and main-road supply stops. This page keeps the town-level overview separate from each focused POI guide.",
+      },
+      {
+        question: "Where are the best Rosewood base locations?",
+        answer:
+          "The Fire Station is the strongest focused base candidate on this site, while residential edges can work for slower, lower-pressure safehouse planning.",
+      },
+      {
+        question: "How should I plan Rosewood loot locations?",
+        answer:
+          "Plan Rosewood loot by short repeatable loops: secure basic residential supplies first, then move toward emergency-service POIs when the route back is safe.",
+      },
     ],
     relatedGuides: [
       {
@@ -189,9 +221,9 @@ export const locations: LocationRecord[] = [
       },
     ],
     seo: {
-      title: "Project Zomboid Rosewood Map Guide | Build 42",
+      title: "Project Zomboid Rosewood Map Guide | Build 42 POIs, Bases & Loot",
       description:
-        "Use this Project Zomboid Rosewood map guide to plan routes, key locations, loot stops, base options and survival decisions in Build 42.",
+        "Use this Project Zomboid Rosewood map guide to plan Build 42 routes, points of interest, loot locations, base options and survival decisions.",
       h1: "Project Zomboid Rosewood Map Guide",
     },
   },

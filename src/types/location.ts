@@ -48,6 +48,11 @@ export type LocationRecord = {
   keyLocations: string[];
   keyLocationsLabel?: string;
   keyLocationsHeading?: string;
+  mapOverviewHeading?: string;
+  pointsOfInterestHeading?: string;
+  basePlanningHeading?: string;
+  lootAndResourcesHeading?: string;
+  routePlanningHeading?: string;
   pointsOfInterest?: PointOfInterest[];
   bestBases: BestBase[];
   basePlanning?: string[];

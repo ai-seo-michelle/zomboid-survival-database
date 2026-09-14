@@ -1,0 +1,234 @@
+---
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "How to Climb Ladders in Project Zomboid";
+const description =
+  "Learn whether you can climb ladders in Project Zomboid, how Build 42 changes ladder expectations and when ladder mods are required.";
+
+const quickAnswerRows = [
+  { label: "Short Answer", value: "Do not assume every ladder is climbable" },
+  { label: "Vanilla Game", value: "Only interact when the game exposes an action" },
+  { label: "Build 42", value: "Check current-build behavior before planning around ladders" },
+  { label: "Mods", value: "Controls and rules depend on the mod" },
+];
+
+const modeCards = [
+  {
+    title: "Vanilla Game",
+    description:
+      "If a ladder graphic has no interaction prompt or action in your current vanilla game, treat it as map scenery rather than a reliable escape route.",
+  },
+  {
+    title: "Build 42",
+    description:
+      "Build 42 can change how players read the map, but this page does not assume every ladder-looking object is a climbable path.",
+  },
+  {
+    title: "Ladder Mods",
+    description:
+      "Mods may add climbable ladders, placed ladders or custom controls. Follow the specific mod page and test before trusting a route.",
+  },
+];
+
+const checkSteps = [
+  {
+    title: "Walk up to the ladder",
+    description:
+      "Stand close enough to test interaction, but keep an exit open in case the ladder is only scenery.",
+  },
+  {
+    title: "Look for an action",
+    description:
+      "Use the interaction prompt, context menu or control shown by your current game or mod. There is no universal mod-proof instruction.",
+  },
+  {
+    title: "Test in safety",
+    description:
+      "Try ladder behavior in a controlled area before using it as a zombie escape route or loot shortcut.",
+  },
+  {
+    title: "Plan a backup route",
+    description:
+      "Even if a ladder works in your setup, avoid building a survival plan around a single vertical escape.",
+  },
+];
+
+const build42Notes = [
+  {
+    title: "Do not treat visuals as proof",
+    description:
+      "A visible ladder, fire escape or vertical object does not automatically mean the player can climb it in the current setup.",
+  },
+  {
+    title: "Check current version behavior",
+    description:
+      "Because Build 42 is an active update line, test ladder behavior in your current build before using it for route planning.",
+  },
+  {
+    title: "Mods can change the answer",
+    description:
+      "If a mod adds ladder climbing, the correct operation depends on that mod's controls, placement rules and compatibility.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Can you climb ladders in Project Zomboid?",
+    answer:
+      "Only if your current game setup exposes a real interaction for that ladder. Do not assume every ladder graphic in vanilla Project Zomboid is climbable.",
+  },
+  {
+    question: "How do ladders work in Build 42?",
+    answer:
+      "Treat Build 42 ladder behavior as something to verify in your current version. This page does not claim every ladder-looking object became a standard climbable route.",
+  },
+  {
+    question: "Do you need a mod to climb ladders?",
+    answer:
+      "If vanilla does not provide an interaction for the ladder you are looking at, a mod may be required. The exact controls and limits depend on the mod.",
+  },
+  {
+    question: "What key climbs ladders in Project Zomboid?",
+    answer:
+      "Use the action shown by your current game or mod. Keybinds and interaction methods can vary, so this page avoids giving a universal command.",
+  },
+  {
+    question: "Should I use ladders as an escape route?",
+    answer:
+      "Only after testing the exact route safely. Always keep a second exit because ladder behavior may differ between vanilla, Build 42 updates and mods.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Build 42 Guide",
+    description: "Review current-build planning before trusting any version-sensitive route mechanic.",
+    href: "/build-42/",
+  },
+  {
+    title: "Build 42 Map Guide",
+    description: "Use the map hub to plan routes without relying on unverified ladder shortcuts.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Best Base Locations",
+    description: "Pick bases around reliable exits, route control and practical long-term safety.",
+    href: "/survival/best-base-locations/",
+  },
+  {
+    title: "Rosewood Map Guide",
+    description: "Plan a beginner-friendly town route using POIs, base options and repeatable exits.",
+    href: "/locations/rosewood/",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqs={faqs}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Practical Mechanics Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        How to Climb Ladders in Project Zomboid
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Quick answer: do not assume every ladder in Project Zomboid can be climbed. In vanilla and Build 42,
+        use a ladder only when your current game exposes a real interaction. If a mod adds ladder climbing,
+        follow that mod's controls and test the route first.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="quick-answer-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Direct Answer</p>
+          <h2 id="quick-answer-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Ladder climbing depends on vanilla, Build 42 and mods
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            If you are standing beside a ladder and nothing in the interface lets you climb, treat that ladder as
+            non-interactive for your current setup. The safest rule is simple: test the exact ladder before using
+            it for loot routes, rooftop access or zombie escapes.
+          </p>
+        </div>
+        <StatsTable rows={quickAnswerRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="mode-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Vanilla vs Build 42 vs Mods</p>
+        <h2 id="mode-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Know which setup you are playing
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {modeCards.map((card) => <Card {...card} eyebrow="Ladder Behavior" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="steps-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">How to Check a Ladder</p>
+        <h2 id="steps-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Test interaction before trusting the route
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {checkSteps.map((step, index) => (
+          <Card
+            title={step.title}
+            description={step.description}
+            eyebrow="Checklist"
+            badge={`Step ${index + 1}`}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="build-42-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Build 42 Notes</p>
+        <h2 id="build-42-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Use current-build caution
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {build42Notes.map((note) => <Card {...note} eyebrow="Build 42" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Ladder questions
+        </h2>
+      </div>
+      <div class="grid gap-4">
+        {faqs.map((item) => (
+          <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+            <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+            <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Continue route planning
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>
