@@ -1,0 +1,268 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+
+const title = "Project Zomboid First Person Mod Guide (2026)";
+const description =
+  "Learn whether Project Zomboid supports first-person play, how PZ3D works, what Build 42 support means and which mod limits to check before installing.";
+
+const statusRows = [
+  { label: "Native first person", value: "No standard vanilla mode" },
+  { label: "Current mod route", value: "PZ3D / 3D camera framework" },
+  { label: "Workshop status", value: "Very early WIP" },
+  { label: "Listed support", value: "Build 42.20.4, single-player only" },
+];
+
+const installSteps = [
+  {
+    title: "Check the Workshop page first",
+    description:
+      "Read the current PZ3D page and required items before installing. Compatibility, dependencies and setup notes can change.",
+  },
+  {
+    title: "Subscribe to PZ3D and required items",
+    description:
+      "The Workshop listing currently shows ZombieBuddy as a required item. Use the listed dependency instead of guessing from old videos.",
+  },
+  {
+    title: "Use a new test save",
+    description:
+      "The mod author recommends testing PZ3D on a new save. Do not risk a long-running survivor until you understand the behavior.",
+  },
+  {
+    title: "Enable 3D mode in game",
+    description:
+      "The Workshop notes currently describe Insert as the default toggle, with the option available under Options > Mods > PZ3D.",
+  },
+];
+
+const comparisonRows = [
+  { label: "First person", value: "A modded camera-level play style" },
+  { label: "Third person", value: "Usually another modded camera concept" },
+  { label: "3D / PZ3D", value: "A framework for a lowered 3D camera view" },
+  { label: "Vanilla", value: "Official isometric survival RPG presentation" },
+];
+
+const limitationCards = [
+  {
+    title: "Single-player only listing",
+    description:
+      "The current PZ3D Workshop description lists Project Zomboid 42.20.4 and single-player only. Do not assume multiplayer support.",
+  },
+  {
+    title: "Work-in-progress behavior",
+    description:
+      "Bugs, unfinished content and camera interaction issues should be expected because the author labels the project as very early WIP.",
+  },
+  {
+    title: "Dependency and security prompts",
+    description:
+      "PZ3D can involve ZombieBuddy setup notes. Follow the current Workshop instructions and avoid copying old launch options blindly.",
+  },
+];
+
+const faqItems = [
+  {
+    question: "Does Project Zomboid have native first person?",
+    answer:
+      "No standard vanilla first-person mode is listed for Project Zomboid. The official game is built around an isometric survival view, while first-person play currently depends on mods such as PZ3D.",
+  },
+  {
+    question: "What is the Project Zomboid first person mod?",
+    answer:
+      "The main current search result is PZ3D, a Steam Workshop mod/framework that aims to bring the camera down from isometric view to the character while preserving vanilla mechanics from that perspective.",
+  },
+  {
+    question: "Does PZ3D work with Build 42?",
+    answer:
+      "The current Workshop page lists Project Zomboid 42.20.4 and single-player only. Treat broader Build 42 support as something to verify on the mod page before installing.",
+  },
+  {
+    question: "Is PZ3D the same as third person?",
+    answer:
+      "Not exactly. PZ3D is described as a framework that lowers the camera toward the character for a 3D perspective. Third-person camera projects can be related in player interest, but they are not automatically the same mod or control setup.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Build 42 Guide",
+    description: "Check the current Build 42 hub before testing version-sensitive mods.",
+    href: "/build-42/",
+  },
+  {
+    title: "How to Climb Ladders",
+    description: "Review another mechanics guide that separates vanilla, Build 42 and mods.",
+    href: "/guides/how-to-climb-ladders/",
+  },
+  {
+    title: "Build 43 Status",
+    description: "Follow future-version status without treating community predictions as official dates.",
+    href: "/guides/project-zomboid-build-43/",
+  },
+  {
+    title: "Project Zomboid Map Guide",
+    description: "Use the map hub for route planning when camera or 3D mods change how you read the world.",
+    href: "/guides/project-zomboid-map/",
+  },
+];
+
+const sources = [
+  {
+    title: "PZ3D Steam Workshop",
+    description: "Primary mod source for current PZ3D status, dependency notes, Build 42.20.4 listing and controls.",
+    href: "https://steamcommunity.com/sharedfiles/filedetails/?id=3807334881",
+  },
+  {
+    title: "Project Zomboid Official Game Page",
+    description: "Official description of Project Zomboid as an isometric survival RPG.",
+    href: "https://projectzomboid.com/blog/the-game/",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqs={faqItems}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Mod Compatibility Guide</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid First Person Mod Guide
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Project Zomboid does not currently behave like a native first-person survival game. Players who want
+        first-person or 3D-style play are looking at mods, especially PZ3D, and should treat compatibility as
+        version-sensitive.
+      </p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="quick-answer-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Direct Answer</p>
+          <h2 id="quick-answer-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Can you play Project Zomboid in first person?
+          </h2>
+          <div class="mt-4 space-y-4 text-base leading-7 text-zsd-muted">
+            <p>
+              In vanilla Project Zomboid, do not expect a standard first-person mode. The official game is built
+              around an isometric survival view, so first-person play is currently a modded experience rather than
+              a normal graphics option.
+            </p>
+            <p>
+              The main current answer is <strong class="text-zsd-ash">PZ3D</strong>, a Steam Workshop mod described
+              by its author as a framework that brings the camera down from isometric view toward the character.
+              The Workshop page currently lists it for Project Zomboid 42.20.4, single-player only, and very early
+              work in progress.
+            </p>
+          </div>
+        </div>
+        <StatsTable rows={statusRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="install-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">How to Install</p>
+        <h2 id="install-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          How to install and test the first-person mod
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {installSteps.map((step, index) => (
+          <Card title={step.title} description={step.description} eyebrow="Setup" badge={`Step ${index + 1}`} />
+        ))}
+      </div>
+      <p class="mt-5 text-sm leading-6 text-zsd-muted">
+        If the Workshop page mentions launch options, security prompts or dependency setup, use the current mod page
+        as the source of truth. Old videos and forum snippets can become outdated quickly for WIP framework mods.
+      </p>
+    </section>
+
+    <section class="mt-12" aria-labelledby="pz3d-title">
+      <div class="grid gap-6 border border-zsd-line bg-zsd-panel/80 p-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Project Zomboid 3D / PZ3D Explained</p>
+          <h2 id="pz3d-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            First person, third person and PZ3D are modded camera concepts
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            Searches for Project Zomboid 3D, PZ3D, first person and third person often point at the same player
+            desire: changing how the world is viewed. PZ3D is not an official 3D remake. It is a Workshop framework
+            trying to make normal Project Zomboid mechanics work from a different camera perspective.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="build-42-title">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold text-zsd-orange">Build 42 Compatibility</p>
+        <h2 id="build-42-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Does the First Person Mod work with Build 42?
+        </h2>
+        <p class="mt-4 text-base leading-7 text-zsd-muted">
+          The PZ3D Workshop listing currently says Project Zomboid 42.20.4 and single-player only. That is narrower
+          than saying it supports every Build 42 branch, every multiplayer setup or every future patch. Check the
+          current Workshop description before updating your save or switching branches.
+        </p>
+        <p class="mt-4 text-sm leading-6 text-zsd-muted">
+          For broader version planning, use the <a class="text-zsd-green-soft hover:text-zsd-orange" href="/build-42/">Build 42 guide</a>
+          {" "}and the <a class="text-zsd-green-soft hover:text-zsd-orange" href="/guides/project-zomboid-build-43/">Build 43 status page</a>{" "}
+          rather than assuming a mod will automatically follow every update.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="limits-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Known Issues / Limitations</p>
+        <h2 id="limits-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          What to check before using PZ3D seriously
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {limitationCards.map((card) => <Card {...card} eyebrow="Compatibility" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">First-person and PZ3D questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {faqItems.map((item) => (
+          <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+            <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+            <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="sources-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Primary Sources</p>
+        <h2 id="sources-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Sources checked for this guide</h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {sources.map((source) => <Card {...source} label="Open source" eyebrow="Source" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Continue version and route planning</h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>

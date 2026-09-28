@@ -1,0 +1,300 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import StatsTable from "../../components/StatsTable.astro";
+
+const title = "Project Zomboid Build 43: Release Date, Features & Latest News";
+const description =
+  "Track Project Zomboid Build 43 release-date status, confirmed official notes, planned NPC work and latest Build 42 context without treating speculation as fact.";
+const lastUpdated = "September 28, 2026";
+
+const statusRows = [
+  { label: "Current status", value: "Future build, not released" },
+  { label: "Official release date", value: "No official release date announced" },
+  { label: "Latest official context", value: "Build 42.21 Unstable testing" },
+  { label: "Main confirmed direction", value: "First NPC-focused build stage" },
+  { label: "Last updated", value: lastUpdated },
+];
+
+const confirmedItems = [
+  {
+    title: "Build 43 is tied to NPC development",
+    description:
+      "The Indie Stone has described Build 43 as the first version of NPCs, with NPC work continuing alongside other update work.",
+  },
+  {
+    title: "Build 42 remains the active update context",
+    description:
+      "The latest official news checked for this page is still about Build 42.21 Unstable, not a Build 43 release branch.",
+  },
+  {
+    title: "Plans can change before release",
+    description:
+      "Official NPC posts frame first-stage NPC work as planned and subject to practical delivery decisions.",
+  },
+];
+
+const plannedItems = [
+  {
+    title: "NPC systems and survivor behavior",
+    description:
+      "Older official planning posts discuss survivor AI, group behavior, jobs, combat support and off-screen narrative systems as NPC goals.",
+  },
+  {
+    title: "Narrative and meta-world systems",
+    description:
+      "The Indie Stone has discussed storylets, NPC movement through known buildings and roads, and generated survivor backstories.",
+  },
+  {
+    title: "Stage-one scope still needs caution",
+    description:
+      "The first NPC build may not contain every long-term NPC idea. Treat individual features as planned until shown in current official release notes.",
+  },
+];
+
+const speculationItems = [
+  {
+    title: "Exact release month",
+    description:
+      "No official Build 43 release date has been announced, so any exact month or countdown should be treated as community speculation.",
+  },
+  {
+    title: "Final feature list",
+    description:
+      "Community lists can mix old plans, developer experiments and guesses. This page only treats official posts as source material.",
+  },
+  {
+    title: "Full NPC simulation at launch",
+    description:
+      "Official writing has described staged delivery, so assuming the complete NPC vision arrives in one update would be unsafe.",
+  },
+];
+
+const comparisonRows = [
+  { label: "Build 42", value: "Current major update line and support context" },
+  { label: "Build 42.21", value: "Unstable testing update as of latest official news checked" },
+  { label: "Build 43", value: "Future NPC-focused milestone with no public release date" },
+  { label: "Use this page for", value: "Status, official notes and speculation boundaries" },
+];
+
+const faqItems = [
+  {
+    question: "When is Project Zomboid Build 43 coming out?",
+    answer:
+      "No official release date has been announced for Project Zomboid Build 43. Any exact date should be treated as speculation unless The Indie Stone publishes it through official channels.",
+  },
+  {
+    question: "What is confirmed for Build 43?",
+    answer:
+      "The strongest official direction is that Build 43 is tied to the first NPC-focused stage. The exact feature list and release timing remain unconfirmed.",
+  },
+  {
+    question: "Will Build 43 add human NPCs?",
+    answer:
+      "Official posts have described Build 43 as the first version of NPCs, but the first-stage scope can change. Do not assume every long-term NPC idea will arrive at once.",
+  },
+  {
+    question: "Is Build 43 available now?",
+    answer:
+      "No. The latest official context checked for this page is still Build 42.21 Unstable testing, not a public Build 43 release.",
+  },
+];
+
+const relatedGuides = [
+  {
+    title: "Build 42 Guide",
+    description: "Use the current Build 42 hub for the live update line and survival planning context.",
+    href: "/build-42/",
+  },
+  {
+    title: "Build 42 Map Guide",
+    description: "Plan current maps and routes without waiting for future-build speculation.",
+    href: "/guides/project-zomboid-map/",
+  },
+  {
+    title: "Best Negative Traits in Build 42",
+    description: "Compare current Build 42 trait decisions while Build 43 remains unreleased.",
+    href: "/build-42/best-negative-traits/",
+  },
+  {
+    title: "First Person Mod Guide",
+    description: "Separate current mod compatibility from official future-build expectations.",
+    href: "/guides/project-zomboid-first-person-mod/",
+  },
+];
+
+const sources = [
+  {
+    title: "The Indie Stone - 2022 and Beyond",
+    description: "Official post linking Build 43 to the first NPC-focused stage and staged future work.",
+    href: "https://projectzomboid.com/blog/news/2022/01/2022-and-beyond/",
+  },
+  {
+    title: "The Indie Stone - The Zuckerverse",
+    description: "Official NPC planning post with major caveats about scope and delivery.",
+    href: "https://projectzomboid.com/blog/news/2022/03/the-zuckerverse/",
+  },
+  {
+    title: "Build 42.21 Unstable News",
+    description: "Latest official update checked for current status context as of this page update.",
+    href: "https://projectzomboid.com/blog/news/2026/09/re-population-of-the-dead-build-42-21-unstable-released/",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqs={faqItems}>
+  <section class="border-b border-zsd-line bg-zsd-black/45">
+    <PageContainer class="py-12 sm:py-16">
+      <p class="text-sm font-semibold text-zsd-orange">Build 43 Status Hub</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-bold text-zsd-ash sm:text-5xl">
+        Project Zomboid Build 43: Release Date, Features & Latest News
+      </h1>
+      <p class="mt-5 max-w-3xl text-base leading-7 text-zsd-muted">
+        Track the current official status of Project Zomboid Build 43, what The Indie Stone has actually
+        confirmed, which NPC features are still planned, and which release-date claims remain speculation.
+      </p>
+      <p class="mt-4 text-sm font-semibold text-zsd-green-soft">Last Updated: {lastUpdated}</p>
+    </PageContainer>
+  </section>
+
+  <PageContainer as="section" class="py-12 sm:py-16">
+    <section aria-labelledby="status-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_460px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Build 43 Status</p>
+          <h2 id="status-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            No official Project Zomboid Build 43 release date has been announced
+          </h2>
+          <div class="mt-4 space-y-4 text-base leading-7 text-zsd-muted">
+            <p>
+              Build 43 is the next major search topic after Build 42, but it is not a released branch. The latest
+              official update checked for this page is Build 42.21 Unstable, which The Indie Stone describes as an
+              incremental post-Build 42 testing update.
+            </p>
+            <p>
+              The safest current summary is: Build 43 is officially associated with the first NPC-focused stage,
+              but The Indie Stone has not announced a public release date or final feature list.
+            </p>
+          </div>
+        </div>
+        <StatsTable rows={statusRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="release-title">
+      <div class="grid gap-6 border border-zsd-line bg-zsd-panel/80 p-6 lg:grid-cols-[1fr_360px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Release Date</p>
+          <h2 id="release-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Project Zomboid Build 43 release date
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-zsd-muted">
+            No official release date has been announced. If a video, Reddit thread or forum post gives a precise
+            Build 43 date without linking to an official Project Zomboid announcement, treat it as speculation.
+            This page should be updated only when official news changes that status.
+          </p>
+        </div>
+        <div class="border border-zsd-line bg-zsd-black/35 p-5">
+          <p class="text-xs font-semibold uppercase text-zsd-muted">Current answer</p>
+          <p class="mt-2 text-xl font-semibold text-zsd-ash">No official release date</p>
+          <p class="mt-3 text-sm leading-6 text-zsd-muted">
+            Current official activity checked here remains in the Build 42 update line.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="confirmed-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Confirmed</p>
+        <h2 id="confirmed-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          What is officially confirmed for Build 43?
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {confirmedItems.map((item) => <Card {...item} eyebrow="Official" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="features-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Expected / Planned</p>
+        <h2 id="features-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Build 43 features discussed by official posts
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {plannedItems.map((item) => <Card {...item} eyebrow="Planned" />)}
+      </div>
+      <p class="mt-5 text-sm leading-6 text-zsd-muted">
+        These are planning directions from official posts, not a locked patch-note list. The first Build 43 release
+        could narrow or stage the scope.
+      </p>
+    </section>
+
+    <section class="mt-12" aria-labelledby="comparison-title">
+      <div class="grid gap-6 lg:grid-cols-[1fr_420px] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold text-zsd-orange">Build 42 vs Build 43</p>
+          <h2 id="comparison-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+            Do not mix current Build 42 changes with future Build 43 claims
+          </h2>
+          <p class="mt-4 text-base leading-7 text-zsd-muted">
+            Build 42 is the current content and support context for live survival planning. Build 43 is the future
+            NPC-focused milestone. For current map, trait and base decisions, use Build 42 pages; for future NPC
+            release status, keep checking official Build 43 updates.
+          </p>
+        </div>
+        <StatsTable rows={comparisonRows} />
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="speculation-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Speculation Boundaries</p>
+        <h2 id="speculation-title" class="mt-2 text-2xl font-semibold text-zsd-ash">What is still not confirmed</h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {speculationItems.map((item) => <Card {...item} eyebrow="Unconfirmed" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="faq-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">FAQ</p>
+        <h2 id="faq-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Build 43 questions</h2>
+      </div>
+      <div class="grid gap-4">
+        {faqItems.map((item) => (
+          <article class="border border-zsd-line bg-zsd-panel/80 p-5">
+            <h3 class="text-lg font-semibold text-zsd-ash">{item.question}</h3>
+            <p class="mt-3 text-sm leading-6 text-zsd-muted">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="sources-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Primary Sources</p>
+        <h2 id="sources-title" class="mt-2 text-2xl font-semibold text-zsd-ash">
+          Sources checked for Build 43 status
+        </h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        {sources.map((source) => <Card {...source} label="Open source" eyebrow="Source" />)}
+      </div>
+    </section>
+
+    <section class="mt-12" aria-labelledby="related-title">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-zsd-orange">Related Guides</p>
+        <h2 id="related-title" class="mt-2 text-2xl font-semibold text-zsd-ash">Continue current-build planning</h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {relatedGuides.map((guide) => <Card {...guide} label="Open guide" />)}
+      </div>
+    </section>
+  </PageContainer>
+</BaseLayout>
